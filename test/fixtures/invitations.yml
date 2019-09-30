@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  accepted: false
+  organizer: false
+  user: one
+  event: one
+
+two:
+  accepted: false
+  organizer: false
+  user: two
+  event: two
