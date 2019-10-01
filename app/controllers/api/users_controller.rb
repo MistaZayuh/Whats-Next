@@ -1,5 +1,6 @@
 class Api::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy ]
+  
   def index
     render json: User.all
   end
@@ -18,6 +19,13 @@ class Api::UsersController < ApplicationController
 
   def destroy
     @user.destroy
+  end
+
+  def events_index
+    @events = [] 
+    @invitations = Invitation.where( :user_id => current_user.id )
+    @invitations.each { |i| @events << Event.where( :id => i.event_id ) }
+    render json: @events
   end
 
   private
