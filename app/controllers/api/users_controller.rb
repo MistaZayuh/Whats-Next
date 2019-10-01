@@ -9,10 +9,10 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    if @user.save(user_params)
-      render json: @user
+    if current_user.update(user_params)
+      render json: current_user
     else
-      render json: @user.errors, status: 422
+      render json: current_user.errors, status: 422
     end
   end
 
