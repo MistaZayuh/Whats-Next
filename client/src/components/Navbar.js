@@ -12,7 +12,7 @@ class NavBar extends React.Component {
     
     if (user) {
       return (
-        <Menu.Menu style={{ paddingRight: "10px", paddingTop: "3px" }} position='right'>
+        <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px" }} position='right'>
           <Header as='h4'>
             <Image  src={ user.image } roundedCircle />
             <Header.Content>
@@ -54,9 +54,9 @@ class NavBar extends React.Component {
   render() {
     return (
       <div>
-        <Menu pointing secondary>
+        <Menu secondary>
           <Link to='/'>
-            <Image style={{width: "75px", height: "60px", paddingLeft: "10px" }} src={logo} />
+            <Image style={{width: "100px", height: "80px", paddingLeft: "25px" }} src={logo} />
           </Link>
             { this.rightNavItems() }
         </Menu>
