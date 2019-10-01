@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :invitations
     end
+    get "user/events", to: "users#events_index"
   end
   
   namespace :api do

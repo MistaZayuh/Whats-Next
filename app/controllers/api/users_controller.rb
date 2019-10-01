@@ -20,6 +20,10 @@ class Api::UsersController < ApplicationController
     @user.destroy
   end
 
+  def events_index
+    render json: current_user.invitations.events
+  end
+
   private
     def set_user
       @user = User.find(params[:id])
