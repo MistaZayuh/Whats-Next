@@ -3,9 +3,12 @@ import { Header, Card,  } from "react-bootstrap";
 import { Link, } from "react-router-dom";
 import building from "../images/building.jpeg"
 import styled from "styled-components";
+import axios from "axios";
 
 class WhatsNext extends React.Component {
+	state = { events: [], timeLeft: null, };
 
+<<<<<<< HEAD
   render() {
     return (
       <div style={{ display: "flex", justifyContent: "space-around" }}>
@@ -25,6 +28,38 @@ class WhatsNext extends React.Component {
       </div>
     );
   };
+=======
+	componentDidMount() {
+		axios.get("/api/events_index")
+		    .then( res => {
+		        this.setState({ events: res.data})
+		    })
+		    .catch( err => {
+		        console.log(err)
+		    })
+	};
+
+	render() {
+			return (
+					<div style={{display: "flex", justifyContent: "space-around"}}>
+							<Link>
+							<Card style={{ width: "600px", height: "250px" }} className="bg-dark text-white">
+									<MyCardImage  src={building} alt="event location" />
+									<Card.ImgOverlay>
+											<Card.Title>THIS AWESOME EVENT</Card.Title>
+											<Card.Text>
+													#this section will be the description of the event.
+												</Card.Text>
+											<Card.Text>#eventDate</Card.Text>
+											<Card.Text></Card.Text>
+									</Card.ImgOverlay>
+
+							</Card>
+							</Link>
+					</div>
+			);
+	};
+>>>>>>> 57b147503841cea12ea1c4ab07ecd0ad8f325e87
 };
 
 const MyCardImage = styled(Card.Img)`

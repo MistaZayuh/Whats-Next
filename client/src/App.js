@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './components/Home';
 import NoMatch from './components/NoMatch';
-import Navbar from './components/Navbar';
+import NavBar from './components/NavBar';
 import UserForm from "./components/UserForm";
 import Login from './components/Login';
 import EventForm from "./components/EventForm";
@@ -13,12 +13,12 @@ import { Container, } from "semantic-ui-react";
 
 const App = () => (
   <>
-    <Navbar />
+    <NavBar />
     <FetchUser>
       <Container>
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
-          <ProtectedRoute exact path="/event/new" component={EventForm} />
+          <ProtectedRoute exact path="/events/new" component={EventForm} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/users/:id/edit" component={UserForm} />
