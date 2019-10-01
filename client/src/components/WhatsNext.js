@@ -1,5 +1,4 @@
 import React from "react";
-// import { Button, } from "semantic-ui-react";
 import { Header, Card,  } from "react-bootstrap";
 import { Link, } from "react-router-dom";
 import building from "../images/building.jpeg"
@@ -30,6 +29,7 @@ class WhatsNext extends React.Component {
 
 const MyCardImage = styled(Card.Img)`
     width: 650px;
+    height: 250px;
     filter: blur(2.5px) brightness(60%);
 `;
 

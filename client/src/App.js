@@ -1,9 +1,10 @@
 import React from 'react';
 import Home from './components/Home';
 import NoMatch from './components/NoMatch';
-import NavBar from './components/Navbar';
+import NavBar from './components/NavBar';
 import UserForm from "./components/UserForm";
 import Login from './components/Login';
+import EventForm from "./components/EventForm";
 import Register from './components/Register';
 import FetchUser from './components/FetchUser';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -17,6 +18,7 @@ const App = () => (
       <Container>
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/new" component={EventForm} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/users/:id/edit" component={UserForm} />
