@@ -8,27 +8,6 @@ import axios from "axios";
 class WhatsNext extends React.Component {
 	state = { events: [], timeLeft: null, };
 
-<<<<<<< HEAD
-  render() {
-    return (
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <Link>
-          <Card style={{ width: "600px", height: "250px" }} className="bg-dark text-white">
-            <MyCardImage src={building} alt="event location" />
-            <Card.ImgOverlay>
-              <Card.Title>THIS AWESOME EVENT</Card.Title>
-              <Card.Text>
-                #this section will be the description of the event.
-                         </Card.Text>
-              <Card.Text>#eventDate</Card.Text>
-            </Card.ImgOverlay>
-
-          </Card>
-        </Link>
-      </div>
-    );
-  };
-=======
 	componentDidMount() {
 		axios.get("/api/events_index")
 		    .then( res => {
@@ -59,7 +38,6 @@ class WhatsNext extends React.Component {
 					</div>
 			);
 	};
->>>>>>> 57b147503841cea12ea1c4ab07ecd0ad8f325e87
 };
 
 const MyCardImage = styled(Card.Img)`
