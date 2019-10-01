@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import Dropzone from 'react-dropzone';
 import { AuthConsumer, } from "../providers/AuthProvider";
 import { Form, Header, Button, } from "semantic-ui-react";
 import { Image, } from "react-bootstrap";
