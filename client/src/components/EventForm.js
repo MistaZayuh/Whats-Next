@@ -20,9 +20,9 @@ class EventForm extends React.Component {
         this.props.add(res.data);
         this.setState({ date: "", name: "", location: "", description: "", open: true })
       });
-      .then(
-        
-      )
+      // .then(
+
+      // )
   };
 
   handleCheckChange = (e, { name, checked }) => {

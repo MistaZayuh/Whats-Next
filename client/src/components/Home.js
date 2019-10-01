@@ -1,23 +1,21 @@
 import React from 'react';
-import { Header, } from 'semantic-ui-react';
-import EventForm from "./EventForm";
+import WhatsNext from "./WhatsNext";
+import { Header, Container, } from 'semantic-ui-react';
 
-
-class Home extends React.Component {
-
-  render() {
-    return (
-
-
-
-      <>
-        <Header as="h3" textAlign="center">Devise Auth App</Header>
-        <div>
-
-        </div>
-      </>
-    )
-  }
-}
+const Home = () => (
+  <>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  
+  
+  <p style={{ paddingLeft: "255px"}}>What's Next?</p>
+  
+  <WhatsNext />
+  </>
+)
 
 export default Home;
