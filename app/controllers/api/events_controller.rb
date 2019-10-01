@@ -9,8 +9,8 @@ class Api::EventsController < ApplicationController
   end
 
   def create
-    event = Event.new
-    if event.save(event_params)
+    event = Event.new(event_params)
+    if event.save
       render json: event
     else
       render json: event.errors, status: 422
