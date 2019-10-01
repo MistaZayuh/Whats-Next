@@ -15,7 +15,7 @@ const Home = () => (
   <p style={{ paddingLeft: "255px", color: "gray"}}>What's Next?</p>
   
   <WhatsNext />
-  <br/>
+  
   <br/>
   <p style={{ paddingLeft: "255px", color: "gray"}}>Upcoming Events.</p>
   <Upcoming />

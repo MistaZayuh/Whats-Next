@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
+import Dropzone from 'react-dropzone';
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Form, Header, Image, } from "semantic-ui-react";
+import { Form, Header, Button, } from "semantic-ui-react";
+import { Image, } from "react-bootstrap";
 
 class UserForm extends React.Component {
   state = { name: "", nickname: "", image: "", };
@@ -13,7 +15,7 @@ class UserForm extends React.Component {
     };
     axios.get(`/api/users/${user.id}`)
       .then(res => {
-        this.setState({ name: res.data.name, nickname: res.data.nickname, })
+        this.setState({ name: res.data.name, nickname: res.data.nickname, image: res.data.image })
       })
       .catch(err => console.log(err))
   };
@@ -27,7 +29,8 @@ class UserForm extends React.Component {
     const { auth: { user: { id, } }, history, } = this.props;
     axios.put(`/api/users/${id}`, this.state)
       .then(res => {
-        history.push(`/users/${id}`)
+        debugger
+        history.push(`/`)
       })
       .catch(err => {
         console.log(err)
@@ -37,7 +40,10 @@ class UserForm extends React.Component {
   render() {
     return (
       <div>
-        <Header as="h1" textAlign="center">Edit Profile</Header>
+        <br/>
+
+        <Header as="h1" >{ this.props.auth.user.name } { this.props.auth.user.nickname }</Header>
+          <Image style={{width: "15%", height: "15%", border: "solid, black, 1px,"}} roundedCircle src={this.state.image} />
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
             label="Name"
@@ -55,10 +61,18 @@ class UserForm extends React.Component {
             onChange={this.handleChange}
             value={this.state.nickname}
           />
-          <Form.Button color="blue">Submit</Form.Button>
-          <Form.Group>
-            <Image src="https://image.flaticon.com/icons/svg/145/145867.svg" />
-            <Form.Radio
+           <Form.Input
+            label="Your Profile Image"
+            name="image"
+            placeholder="Upload an image"
+            required
+            onChange={this.handleChange}
+            value={this.state.image}
+          />
+          <br/>
+          {/* <Form.Group>
+            <Image src="https://image.flaticon.com/icons/svg/145/145867.svg" /> */}
+            {/* <Form.Radio
               name="image"
               value='https://image.flaticon.com/icons/svg/145/145867.svg'
               onChange={this.handleChange}
@@ -93,8 +107,21 @@ class UserForm extends React.Component {
               value='https://image.flaticon.com/icons/svg/145/145864.svg'
               onChange={this.handleChange}
             />
-          </Form.Group>
+          </Form.Group> */}
+        <Form.Button color="blue">Submit</Form.Button>
         </Form>
+        <br/>
+        {/* <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+          {({ getRootProps, getInputProps }) => (
+            <section>
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                <Button inverted color="blue">Upload Image</Button>
+              </div>
+            </section>
+          )}
+        </Dropzone>
+        <br/>*/}
       </div>
     );
   };
@@ -109,3 +136,7 @@ const ConnectedUserForm = (props) => (
 )
 
 export default ConnectedUserForm;
+
+
+
+
