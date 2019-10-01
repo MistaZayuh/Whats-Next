@@ -57,6 +57,7 @@ class EventForm extends React.Component {
           <DateTimeInput
             label="Date/Time"
             name="date"
+            inline
             required
             placeholder="Date"
             value={this.state.date}
