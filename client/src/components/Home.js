@@ -14,7 +14,6 @@ class Home extends React.Component {
         <Header as="h3" textAlign="center">Devise Auth App</Header>
         <div>
 
-        <EventForm />
         </div>
       </>
     )
