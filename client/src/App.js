@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './components/Home';
 import NoMatch from './components/NoMatch';
 import Navbar from './components/Navbar';
+import UserForm from "./components/UserForm";
 import Login from './components/Login';
 import Register from './components/Register';
 import FetchUser from './components/FetchUser';
@@ -18,6 +19,7 @@ const App = () => (
           <ProtectedRoute exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/users/:id/edit" component={UserForm} />
           <Route component={NoMatch} />
         </Switch>
       </Container>
