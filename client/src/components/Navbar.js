@@ -2,7 +2,8 @@ import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
 import { Menu, Icon, Dropdown, Header, } from 'semantic-ui-react'
 import { Link, withRouter, } from 'react-router-dom'
-import { Nav, Navbar, Button, Form, FormControl, } from "react-bootstrap";
+import logo from "../images/logo.png"
+import { Nav, Navbar, Image, } from "react-bootstrap";
 
 class NavBar extends React.Component {
   
@@ -11,11 +12,11 @@ class NavBar extends React.Component {
     
     if (user) {
       return (
-        <Menu.Menu style={{ padding: "10px" }} position='right'>
+        <Menu.Menu style={{ paddingRight: "10px", paddingTop: "3px" }} position='right'>
           <Header as='h4'>
-            <Icon name='user secret' />
+            <Image  src={ user.image } roundedCircle />
             <Header.Content>
-              { user.name }
+              { user.name } { user.nickname }
               <Dropdown>
                 <Dropdown.Menu>
                   <Dropdown.Item href="/event/new" text='Add New Event' icon="add" />
@@ -35,14 +36,14 @@ class NavBar extends React.Component {
             <Menu.Item
               id='login'
               name='login'
-              active={location.pathname === '/login'}
+              // active={location.pathname === '/login'}
             />
           </Link>
           <Link to='/register'>
             <Menu.Item
               id='register'
               name='register'
-              active={location.pathname === '/register'}
+              // active={location.pathname === '/register'}
             />
           </Link>
         </Menu.Menu>
@@ -55,11 +56,7 @@ class NavBar extends React.Component {
       <div>
         <Menu pointing secondary>
           <Link to='/'>
-            <Menu.Item
-              name='LOGO'
-              id='home'
-              active={this.props.location.pathname === '/'}
-            />
+            <Image style={{width: "75px", height: "60px", paddingLeft: "10px" }} src={logo} />
           </Link>
             { this.rightNavItems() }
         </Menu>
