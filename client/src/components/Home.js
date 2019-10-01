@@ -1,8 +1,21 @@
 import React from 'react';
-import { Header, } from 'semantic-ui-react';
+import WhatsNext from "./WhatsNext";
+import { Header, Container, } from 'semantic-ui-react';
 
 const Home = () => (
-  <Header as="h3" textAlign="center">Devise Auth App</Header>
+  <>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  
+  
+  <p style={{ paddingLeft: "255px"}}>What's Next?</p>
+  
+  <WhatsNext />
+  </>
 )
 
 export default Home;
