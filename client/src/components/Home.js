@@ -2,19 +2,22 @@ import React from 'react';
 import { Header, } from 'semantic-ui-react';
 import EventForm from "./EventForm";
 
+
 class Home extends React.Component {
 
-  render(){
-    return(
+  render() {
+    return (
 
-      
-      
+
+
       <>
-  <Header as="h3" textAlign="center">Devise Auth App</Header>
+        <Header as="h3" textAlign="center">Devise Auth App</Header>
+        <div>
 
-  <EventForm />
-  </>
-      )
+        <EventForm />
+        </div>
+      </>
+    )
   }
 }
 
