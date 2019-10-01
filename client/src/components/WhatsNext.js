@@ -3,19 +3,17 @@ import { Header, Card,  } from "react-bootstrap";
 import { Link, } from "react-router-dom";
 import building from "../images/building.jpeg"
 import styled from "styled-components";
-import Axios from "axios";
+import axios from "axios";
 
 class WhatsNext extends React.Component {
-	state = { event: [], timeLeft: null, };
+	state = { events: [], timeLeft: null, };
 
 	componentDidMount() {
-		Axios.get(`/api/user/events`)
+		axios.get("/api/events_index")
 		    .then( res => {
-		        debugger
-		        this.setState({ event: res.data})
+		        this.setState({ events: res.data})
 		    })
 		    .catch( err => {
-		        debugger
 		        console.log(err)
 		    })
 	};

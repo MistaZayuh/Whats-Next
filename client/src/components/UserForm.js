@@ -27,11 +27,9 @@ class UserForm extends React.Component {
     const { auth: { user: { id, } }, history, } = this.props;
     axios.put(`/api/users/${id}`, this.state)
       .then(res => {
-        debugger
         history.push(`/users/${id}`)
       })
       .catch(err => {
-        debugger
         console.log(err)
       })
   };
