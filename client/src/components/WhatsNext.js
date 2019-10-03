@@ -11,9 +11,8 @@ class WhatsNext extends React.Component {
 	componentDidMount() {
 		axios.get("/api/events_index")
 		    .then( res => {
-					debugger
 					this.setState({events: [res.data]})
-						this.calculateTime();
+					this.calculateTime();
 		    })
 		    .catch( err => {
 		        console.log(err)
@@ -21,11 +20,11 @@ class WhatsNext extends React.Component {
 	};
 
 	calculateTime = () => {
-		debugger
+		// debugger
 		// var ddmmyyy = nextnext.date.toLocaleDate();
 		// var time = next.date.toLocaleTime();
 		// this.setState({timeLeft: ddmmyyy + " " + time})
-		debugger
+		// debugger
 	}
 
 	render() {
