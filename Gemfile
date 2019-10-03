@@ -8,13 +8,13 @@ gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 3.11"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.1.0", require: false
-# Adds user authentication
 gem "devise_token_auth", "~> 1.0.0"
+gem 'cloudinary'
 
 group :development, :test do
   # Call 'pry' anywhere in the code to stop execution and get a debugger console
   gem "pry"
-  # Generates test data
+  gem 'dotenv-rails'
   gem "faker", :git => "https://github.com/stympy/faker.git", :branch => "master"
 end
 
