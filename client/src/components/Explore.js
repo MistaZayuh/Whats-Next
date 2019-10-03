@@ -7,16 +7,35 @@ import { Card, } from "react-bootstrap";
 import { Container, Header, Segment, } from "semantic-ui-react";
 
 class Explore extends React.Component {
-  state = { events: [], };
+  state = { events: [], filtered: [], search: "", };
 
   componentDidMount() {
     Axios.get("/api/events")
       .then(res => {
-        this.setState({ events: res.data })
+        this.setState({ events: res.data, filtered: res.data, })
       })
       .catch(err => {
         console.log(err)
       })
+  }
+
+  handleChange(e) {
+    this.setState({ search: e.target.value})
+    let currentList = [];
+    let newList = [];
+    if (e.target.value !== "") {
+      currentList = this.state.events;
+      newList = currentList.filter(item => {
+        const lc = item.name.toString().toLowerCase();
+        const filter = e.target.value.toLowerCase();
+        return lc.includes(filter);
+      });
+    } else {
+      newList = this.state.events;
+    }
+    this.setState({
+      filtered: newList
+    });
   }
 
 
@@ -24,24 +43,33 @@ class Explore extends React.Component {
     return (
       <Container>
         <Header as="h1">Find new events!</Header>
-        <Segment>Search Bar</Segment>
+        <Segment>
+          <input
+            placeholder="Seach..."
+            value={this.state.search}
+            name="search"
+            onChange={(event) => this.handleChange(event)}
+            data={this.state.events}
+            callback={record => console.log(record)}
+          />
+        </Segment>
         <Container>
           {/* <Card.Group> */}
-            {this.state.events.map(e => (
-              <div key={e.id} style={{ paddingLeft: "248px" }}>
-                <Link>
-                  <Card style={{ width: "200px", height: "100px" }} className="bg-dark text-white">
-                    <MyCardImage src={party} alt="event location" />
-                    <Card.ImgOverlay>
-                      <Card.Title>{e.name}</Card.Title>
-                      <br />
-                      <Card.Text>{e.date}</Card.Text>
-                    </Card.ImgOverlay>
-                  </Card>
-                </Link>
-              </div>
-            ))
-            }
+          {this.state.filtered.map(e => (
+            <div key={e.id} style={{ paddingLeft: "248px" }}>
+              <Link>
+                <Card style={{ width: "200px", height: "100px" }} className="bg-dark text-white">
+                  <MyCardImage src={party} alt="event location" />
+                  <Card.ImgOverlay>
+                    <Card.Title>{e.name}</Card.Title>
+                    <br />
+                    <Card.Text>{e.date}</Card.Text>
+                  </Card.ImgOverlay>
+                </Card>
+              </Link>
+            </div>
+          ))
+          }
           {/* </Card.Group> */}
         </Container>
       </Container>
