@@ -49,8 +49,6 @@ class Explore extends React.Component {
             value={this.state.search}
             name="search"
             onChange={(event) => this.handleChange(event)}
-            data={this.state.events}
-            callback={record => console.log(record)}
           />
         </Segment>
         <Container>
