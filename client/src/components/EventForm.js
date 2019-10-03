@@ -1,12 +1,34 @@
 import React from "react";
 import axios from "axios";
-import { Form, TextArea, Checkbox } from "semantic-ui-react";
+import { Form, TextArea, Checkbox, Header } from "semantic-ui-react";
 import { DateTimeInput } from "semantic-ui-calendar-react";
+import { AuthConsumer } from "../providers/AuthProvider";
 
 
 
 class EventForm extends React.Component {
   state = { date: "", name: "", location: "", description: "", open: true };
+
+  componentDidMount() {
+    
+    if (this.props.location.pathname !== "/events/new") {
+      axios.get(`/api/events/${this.props.match.params.id}`)
+      .then(res => {             
+          this.setState({ 
+            name: res.data.name,
+            location: res.data.location,
+            date: res.data.date,
+            description: res.data.description,
+            open: res.data.open,
+           })
+        })
+        .catch(err => {
+          debugger
+          console.log(err)
+        })
+    }
+  }
+  
 
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value });
@@ -15,22 +37,35 @@ class EventForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { router } = this.props
-    axios.post("/api/events", this.state )
+     if (this.props.location.pathname === "/events/new") {
+      axios.post("/api/events", this.state )
       .then(res => {
+        
         this.props.history.push("/")
-      });
+      })
+    } else {
+      axios.put(`/api/events/${this.props.match.params.id}`, this.state)
+      .then(res => {
+        
+        this.props.history.push(`/events/${this.props.match.params.id}`)
+      })
+    }
+      
   };
 
   handleCheckChange = (e, { name, checked }) => {
     this.setState({ [name]: !!checked })
-  }
+  };
 
   render() {
     return (
 
       <>
+      {this.props.location.pathname === "/events/new" ?
+        <Header as="h1" textAlign="center">New Event</Header> 
+          :
+        <Header as="h1" textAlign="center">Edit Event</Header>} 
         <br />
-        {/* <Header as="h1" textAlign="center">New Event</Header> */}
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths="equal">
             <Form.Input
@@ -79,10 +114,18 @@ class EventForm extends React.Component {
           />
           <Form.Button primary>Submit</Form.Button>
         </Form>
+        <br />
       </>
     )
-  }
-}
+  };
+};
 
+const ConnectedEventForm = (props) => (
+  <AuthConsumer>
+    {auth =>
+    <EventForm {...props} auth={auth} /> 
+    }
+  </AuthConsumer>
+)
 
-export default EventForm;
+export default ConnectedEventForm;

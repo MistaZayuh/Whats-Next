@@ -18,7 +18,7 @@ class Api::EventsController < ApplicationController
   end
 
   def update
-    if @event.save(event_params)
+    if @event.update(event_params)
       render json: @event
     else
       render json: @event.errors, status: 422
