@@ -33,6 +33,14 @@ class EventView extends React.Component {
       </div> 
       <br />
       <div>
+        
+          <Header as="h3">
+            {this.state.event.location}
+          </Header>
+        
+      </div>
+      <br />
+      <div>
 
         <Container text >
           <p>

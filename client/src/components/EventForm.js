@@ -36,18 +36,17 @@ class EventForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { router } = this.props
-     if (this.props.location.pathname === "/events/new") {
+    const { location, match, history } = this.props
+     if (location.pathname === "/events/new") {
       axios.post("/api/events", this.state )
       .then(res => {
-        
-        this.props.history.push("/")
+        history.push(`/events/${res.data.id}`)
       })
     } else {
-      axios.put(`/api/events/${this.props.match.params.id}`, this.state)
+      axios.put(`/api/events/${match.params.id}`, this.state)
       .then(res => {
         
-        this.props.history.push(`/events/${this.props.match.params.id}`)
+        history.push(`/events/${match.params.id}`)
       })
     }
       
