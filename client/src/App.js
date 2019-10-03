@@ -21,16 +21,11 @@ const App = () => (
       <Container>
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
-<<<<<<< HEAD
-          <ProtectedRoute exact path="/events/new" component={EventForm} />
-          <ProtectedRoute exact path="/events/:id/edit" component={EventForm} />
-          <ProtectedRoute exact path="/events/:id" component={EventView} />
-=======
->>>>>>> 36806eca34112fc2673f15e943fc3947024f782c
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <ProtectedRoute exact path="/explore" component={Explore} />
           <ProtectedRoute exact path="/events/new" component={EventForm} />
+          <ProtectedRoute exact path="/events/:id" component={EventView} />
           <ProtectedRoute exact path="/events/:id/edit" component={EventForm} />
           <ProtectedRoute exact path="/users/:id" component={UserProfile} />
           <ProtectedRoute exact path="/users/:id/edit" component={UserForm} />
