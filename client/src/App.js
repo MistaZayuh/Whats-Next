@@ -4,6 +4,7 @@ import NoMatch from './components/NoMatch';
 import NavBar from './components/Navbar';
 import UserForm from "./components/UserForm";
 import Login from './components/Login';
+import Explore from "./components/Explore";
 import EventForm from "./components/EventForm";
 import Register from './components/Register';
 import FetchUser from './components/FetchUser';

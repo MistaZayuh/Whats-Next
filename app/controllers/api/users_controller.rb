@@ -22,10 +22,11 @@ class Api::UsersController < ApplicationController
   end
 
   def events_index
-    @events = [] 
+    @events = []
     @invitations = Invitation.where( :user_id => current_user.id )
     @invitations.each { |i| @events << Event.where( :id => i.event_id ) }
     render json: @events
+    
   end
 
   private
