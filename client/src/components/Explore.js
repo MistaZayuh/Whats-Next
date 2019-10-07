@@ -51,7 +51,7 @@ class Explore extends React.Component {
             onChange={(event) => this.handleChange(event)}
           />
         </Segment>
-        <Container>
+        <Container display="flex">
           {/* <Card.Group> */}
           {this.state.filtered.map(e => (
             <div key={e.id} style={{ paddingLeft: "248px" }}>

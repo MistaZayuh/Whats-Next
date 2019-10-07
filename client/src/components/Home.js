@@ -2,13 +2,20 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios";
 import WhatsNext from "./WhatsNext";
 import Upcoming from "./Upcoming";
+import Moment from "moment"
 import { Header, Container, } from 'semantic-ui-react';
 
 class Home extends React.Component {
-  state = { events: [], time: "", date: "", };
+  state = { events: [], nextEvent: {}, time: "", date: "", };
 
   componentDidMount() {
     this.ticker = setInterval( () => this.tick(), 1000)
+    axios.get("/api/events_index")
+      .then(res => {
+        debugger
+        this.setState({ events: res.data})
+      })
+      .catch(err => console.log(err))
   };
 
   tick = () => {
