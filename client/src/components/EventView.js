@@ -14,17 +14,15 @@ class EventView extends React.Component {
       .then(res => {
         this.setState({ event: res.data })
         var eventInfo = res.data
-        debugger
         axios.get(`/api/specific_event_users?specificeventid=${eventInfo.id}`)
           .then(res => {
-            debugger
+            this.setState({ eventUsers: res.data})
           })
           .catch(err => {
-            debugger
+            console.log(err)
           })
       })
       .catch(err => {
-        debugger
         console.log(err)
       })
   }

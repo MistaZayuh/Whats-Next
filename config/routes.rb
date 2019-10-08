@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :events do
       resources :invitations
     end
-    get "specific_event_users", to: "users#specific_event_users"
+    get "specific_event_users", to: "events#specific_event_users"
   end
   
 
