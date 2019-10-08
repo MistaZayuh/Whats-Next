@@ -21,8 +21,13 @@ class Api::UsersController < ApplicationController
     @user.destroy
   end
 
-  def events_index
-    render json: User.events_index
+  def all_user_events
+    render json: User.all_user_events
+  end
+ 
+  def specific_user_events  
+    # events =  User.current_user_events(params[:currentuserid])
+    render json: User.specific_user_events(params[:specificuserid])
   end
 
   private

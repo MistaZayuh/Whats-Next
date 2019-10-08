@@ -2,24 +2,21 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios";
 import WhatsNext from "./WhatsNext";
 import Upcoming from "./Upcoming";
-import Moment from "moment"
+import {AuthConsumer} from "../providers/AuthProvider"
 import { Header, Container, } from 'semantic-ui-react';
 
 class Home extends React.Component {
-  state = { events: [], nextEvent: {}, time: "", date: "", };
+  state = { events: [], nextEvent: {}, };
 
   componentDidMount() {
-    this.ticker = setInterval( () => this.tick(), 1000)
-    axios.get("/api/events_index")
+    const {auth: {user}} = this.props
+    axios.get(`/api/specific_user_events?specificuserid=${user.id}`)
       .then(res => {
-        debugger
-        this.setState({ events: res.data})
+        this.setState({ events: res.data, nextEvent: res.data[0], })
       })
-      .catch(err => console.log(err))
-  };
-
-  tick = () => {
-    this.setState({ time: new Date().toLocaleTimeString(), date: new Date().toLocaleDateString(), })
+      .catch(err => { 
+        console.log(err)
+      })
   };
 
   render() {
@@ -27,8 +24,7 @@ class Home extends React.Component {
       <>
         <br />
         <p style={{ paddingLeft: "255px", color: "gray" }}>What's Next?</p>
-        <p>{ this.state.date }  {this.state.time}</p>
-        <WhatsNext props={{...this.state}} />
+        <WhatsNext nextEvent={this.state.nextEvent} />
         <br />
         <p style={{ paddingLeft: "255px", color: "gray" }}>Upcoming Events.</p>
         <Upcoming />
@@ -37,5 +33,13 @@ class Home extends React.Component {
   };
 };
 
+const ConnectedHome = (props) => (
+  <AuthConsumer>
+    {auth =>
+    <Home {...props} auth={auth} /> 
+    }
+  </AuthConsumer>
+)
 
-export default Home;
+
+export default ConnectedHome;
