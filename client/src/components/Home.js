@@ -5,7 +5,6 @@ import Upcoming from "./Upcoming";
 import { Link, } from "react-router-dom";
 import { AuthConsumer } from "../providers/AuthProvider";
 import { Header, Container, } from 'semantic-ui-react';
-import Search from "./Search";
 
 class Home extends React.Component {
   state = { events: null, nextEvent: {}, };

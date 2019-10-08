@@ -22,14 +22,12 @@ class WhatsNext extends React.Component {
 	};
 
 	calcTime = () => {
-		// debugger
 		// var eventDate = moment(this.props.nextEvent.date).format("LLLL")
 		// var now = moment().format("LLLL")
 		// var year = ""
 		// var month = ""
 		// var week = ""
 		// var day = eventDate.diff(now, "days")
-		// debugger
 		// var hour = ""
 		// var min = ""
 		// var sec = ""

@@ -19,7 +19,7 @@ class NavBar extends React.Component {
   searchEvent = (e, search) => {
     e.preventDeafult()
 
-    axios.get(`api/events?column=${this.state.colum}&searc=${search}`)
+    axios.get(`api/events?column=${this.state.column}&search=${search}`)
       .then(res => {
         this.setState({ events: res.data })
       })
@@ -38,7 +38,7 @@ class NavBar extends React.Component {
           <Header as='h4'>
             <Menu.Item>
               <Header as="h4">
-              <Icon link="/events/new" name="search" />
+              <Icon name="search" />
               </Header>
               <Button color="blue" onClick={ () => this.setState({showEventModal: true})}>Create New Event</Button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
