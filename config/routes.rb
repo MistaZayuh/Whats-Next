@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     end
     get "all_user_events", to: "users#all_user_events"
     get "specific_user_events", to: "users#specific_user_events"
+    get "accepted_user_events", to: "users#accepted_user_events"
+    
   end
   
   namespace :api do

@@ -14,11 +14,9 @@ class WhatsNext extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.nextEvent !== this.props.nextEvent ) {
-			debugger
 			this.setState({ event: this.props.nextEvent })
 		} 
 		if (prevState.event !== this.state.event) {
-			debugger
 			// this.calcTime()
 		}
 	};
