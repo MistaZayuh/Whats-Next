@@ -15,7 +15,6 @@ group :development, :test do
   # Call 'pry' anywhere in the code to stop execution and get a debugger console
   gem "pry-rails"
   # Generates test data
->>>>>>> c3c1c0952665db8635a5f328f76f6c276cf1dc3c
   gem "faker", :git => "https://github.com/stympy/faker.git", :branch => "master"
 end
 
