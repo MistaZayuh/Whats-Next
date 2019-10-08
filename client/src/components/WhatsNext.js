@@ -14,24 +14,20 @@ class WhatsNext extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.nextEvent !== this.props.nextEvent ) {
-			debugger
 			this.setState({ event: this.props.nextEvent })
 		} 
 		if (prevState.event !== this.state.event) {
-			debugger
 			// this.calcTime()
 		}
 	};
 
 	calcTime = () => {
-		// debugger
 		// var eventDate = moment(this.props.nextEvent.date).format("LLLL")
 		// var now = moment().format("LLLL")
 		// var year = ""
 		// var month = ""
 		// var week = ""
 		// var day = eventDate.diff(now, "days")
-		// debugger
 		// var hour = ""
 		// var min = ""
 		// var sec = ""

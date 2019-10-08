@@ -60,7 +60,7 @@ class UserForm extends React.Component {
             value={this.state.nickname}
           />
            <Form.Input
-            label="Your Profile Image"
+            label="Your Profile Image URL"
             name="image"
             placeholder="Upload an image"
             required
@@ -68,58 +68,9 @@ class UserForm extends React.Component {
             value={this.state.image}
           />
           <br/>
-          {/* <Form.Group>
-            <Image src="https://image.flaticon.com/icons/svg/145/145867.svg" /> */}
-            {/* <Form.Radio
-              name="image"
-              value='https://image.flaticon.com/icons/svg/145/145867.svg'
-              onChange={this.handleChange}
-            />
-            <Image src="https://image.flaticon.com/icons/svg/145/145852.svg" />
-            <Form.Radio
-              name="image"
-              value='https://image.flaticon.com/icons/svg/145/145852.svg'
-              onChange={this.handleChange}
-            />
-            <Image src="https://image.flaticon.com/icons/svg/145/145859.svg" />
-            <Form.Radio
-              name="image"
-              value='https://image.flaticon.com/icons/svg/145/145859.svg'
-              onChange={this.handleChange}
-            />
-            <Image src="https://image.flaticon.com/icons/svg/145/145862.svg" />
-            <Form.Radio
-              name="image"
-              value='https://image.flaticon.com/icons/svg/145/145862.svg'
-              onChange={this.handleChange}
-            />
-            <Image src="https://image.flaticon.com/icons/svg/145/145866.svg" />
-            <Form.Radio
-              name="image"
-              value='https://image.flaticon.com/icons/svg/145/145866.svg'
-              onChange={this.handleChange}
-            />
-            <Image src="https://image.flaticon.com/icons/svg/145/145864.svg" />
-            <Form.Radio
-              name="image"
-              value='https://image.flaticon.com/icons/svg/145/145864.svg'
-              onChange={this.handleChange}
-            />
-          </Form.Group> */}
         <Form.Button color="blue">Submit</Form.Button>
         </Form>
         <br/>
-        {/* <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-          {({ getRootProps, getInputProps }) => (
-            <section>
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <Button inverted color="blue">Upload Image</Button>
-              </div>
-            </section>
-          )}
-        </Dropzone>
-        <br/>*/}
       </div>
     );
   };
