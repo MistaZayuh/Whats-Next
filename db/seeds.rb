@@ -1,7 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+100.times do
+  date = rand(Date.civil(2019, 1, 1)..Date.civil(2020, 12, 31))
+  event = Event.create(
+    name: Faker::Company.name,
+    location: Faker::Address.street_name,
+    created_at: date,
+    updated_at: date,
+    )
+end
+
+puts "100 Events Seeded"
