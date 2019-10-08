@@ -26,7 +26,6 @@ class Api::UsersController < ApplicationController
   end
  
   def specific_user_events  
-    # events =  User.current_user_events(params[:currentuserid])
     render json: User.specific_user_events(params[:specificuserid])
   end
 

@@ -29,6 +29,10 @@ class Api::EventsController < ApplicationController
     @event.destroy
   end
 
+  def specific_event_users 
+    render json: Event.specific_event_users(params[:specificeventid])
+  end
+
   private
     def set_event
       @event = Event.find(params[:id])
