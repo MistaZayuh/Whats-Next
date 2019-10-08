@@ -1,27 +1,40 @@
 import React from "react";
 import axios from "axios";
+import { withRouter, } from "react-router-dom";
 import { Form, TextArea, Checkbox, } from "semantic-ui-react";
 import { Modal, Button, } from "react-bootstrap";
+import { AuthConsumer } from "../providers/AuthProvider";
 
 class EventFormModal extends React.Component {
     state = { date: "", name: "", location: "", description: "", open: true };
-
-  handleChange = (e, { name, value }) => {
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { router } = this.props
-    axios.post("/api/events", this.state )
-      .then(res => {
-        this.props.history.push("/")
-      });
-  };
-
-  handleCheckChange = (e, { name, checked }) => {
-    this.setState({ [name]: !!checked })
-  }
+    
+  
+    handleChange = (e, { name, value }) => {
+      this.setState({ [name]: value });
+    };
+  
+    handleSubmit = (e) => {
+      e.preventDefault();
+      const { location, match, history } = this.props
+      //  if (location.pathname === "/events/new") {
+        axios.post("/api/events", this.state )
+        .then(res => {
+          debugger
+          history.push(`/events/${res.data.id}`)
+        })
+      // } else {
+        // axios.put(`/api/events/${match.params.id}`, this.state)
+        // .then(res => {
+          
+        //   history.push(`/events/${match.params.id}`)
+        // })
+      // }
+        
+    };
+  
+    handleCheckChange = (e, { name, checked }) => {
+      this.setState({ [name]: !!checked })
+    };
 
   render() {
     return (
@@ -78,7 +91,7 @@ class EventFormModal extends React.Component {
                 checked={this.state.open}
                 onChange={this.handleCheckChange}
               />
-  <Form.Button primary>Submit</Form.Button>
+  <Form.Button onClick={this.props.onHide} primary>Submit</Form.Button>
 
             </Form>
           </Modal.Body>
@@ -93,4 +106,12 @@ class EventFormModal extends React.Component {
   };
 };
 
-export default EventFormModal;
+const ConnectedEventFormModal = (props) => (
+  <AuthConsumer>
+    {auth =>
+    <EventFormModal {...props} auth={auth} /> 
+    }
+  </AuthConsumer>
+)
+
+export default withRouter(ConnectedEventFormModal);

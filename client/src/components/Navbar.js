@@ -38,7 +38,7 @@ class NavBar extends React.Component {
           <Header as='h4'>
             <Menu.Item>
               <Header as="h4">
-              <Icon link="/events/new" name="search" />
+              <Icon name="search" />
               </Header>
               <Button color="blue" onClick={ () => this.setState({showEventModal: true})}>Create New Event</Button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
