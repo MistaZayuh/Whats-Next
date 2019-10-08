@@ -7,8 +7,8 @@ import { Link, } from "react-router-dom";
 import { Card, } from "react-bootstrap";
 import { Container, Table, Header, Segment, } from "semantic-ui-react";
 
-class Explore extends React.Component {
-  state = { events: [], filtered: [], search: "", time: "", date: "", };
+// class Explore extends React.Component {
+//   state = { events: [], filtered: [], search: "", time: "", date: "", };
 
   // componentDidMount() {
   //   Axios.get("/api/events")
@@ -40,44 +40,43 @@ class Explore extends React.Component {
   //   });
   // }
 
-  listEvents = () => {
-    return this.state.events.map(event => {
-      return (
-        <Table.Row>
-          <Table.Cell>{event.event_name}</Table.Cell>
-        </Table.Row>
-      )
-    })
-  }
-  searchEvent = (e, search) => {
-    e.preventDefault()
+  // listEvents = () => {
+  //   return this.state.events.map(event => {
+  //     return (
+  //       <Table.Row>
+  //         <Table.Cell>{event.event_name}</Table.Cell>
+  //       </Table.Row>
+  //     )
+  //   })
+  // }
+  // searchEvent = (e, search) => {
+  //   e.preventDefault()
 
-    Axios.get(`api/events?column=${this.state.column}&search=${search}`)
-      .then(res => {
-        this.setState({ events: res.data })
-        debugger
-      })
-      .catch(err => {debugger})
-  }
+  //   Axios.get(`api/events?column=${this.state.column}&search=${search}`)
+  //     .then(res => {
+  //       this.setState({ events: res.data })
+  //     })
+  //     .catch(err => {})
+  // }
 
 
-  render() {
-    return (
-      <Container>
-        <Header as="h1">Find new events!</Header>
-        <div>
-          <Search searchEvent={this.searchEvent} Icon="search" />
-          <Table celled>
-            <Table.Header>
-              <Table.Row>
-                <Table.Header>Event Name</Table.Header>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {this.listEvents()}
-            </Table.Body>
-          </Table>
-        </div>
+  // render() {
+  //   return (
+  //     <Container>
+  //       <Header as="h1">Find new events!</Header>
+  //       <div>
+  //         <Search searchEvent={this.searchEvent} Icon="search" />
+  //         <Table celled>
+  //           <Table.Header>
+  //             <Table.Row>
+  //               <Table.Header>Event Name</Table.Header>
+  //             </Table.Row>
+  //           </Table.Header>
+  //           <Table.Body>
+  //             {this.listEvents()}
+  //           </Table.Body>
+  //         </Table>
+  //       </div>
         {/* <Segment>
           <input
             placeholder="Seach..."
@@ -101,14 +100,14 @@ class Explore extends React.Component {
             //     </Card>
             //   </Link>
             // </div> */}
-          ))
-          }
+          // ))
+          // }
           {/* </Card.Group> */}
         {/* </Container> */}
-      </Container>
-    );
-  };
-};
+      // </Container>
+    // );
+  // };
+// };
 
 const MyCardImage = styled(Card.Img)`
     width: 200px;
