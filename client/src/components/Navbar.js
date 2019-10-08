@@ -19,7 +19,7 @@ class NavBar extends React.Component {
   searchEvent = (e, search) => {
     e.preventDeafult()
 
-    axios.get(`api/events?column=${this.state.colum}&searc=${search}`)
+    axios.get(`api/events?column=${this.state.column}&search=${search}`)
       .then(res => {
         this.setState({ events: res.data })
       })
