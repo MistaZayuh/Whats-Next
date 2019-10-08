@@ -7,7 +7,13 @@ import { Link, } from "react-router-dom";
 import { Card, } from "react-bootstrap";
 import { Container, Table, Header, Segment, } from "semantic-ui-react";
 
-// class Explore extends React.Component {
+class Explore extends React.Component {
+  render() {
+    return(
+      <div>EXPLORE PAGE</div>
+    ) 
+  }
+}
 //   state = { events: [], filtered: [], search: "", time: "", date: "", };
 
   // componentDidMount() {
@@ -58,6 +64,8 @@ import { Container, Table, Header, Segment, } from "semantic-ui-react";
   //     })
   //     .catch(err => {})
   // }
+
+
 
 
   // render() {
