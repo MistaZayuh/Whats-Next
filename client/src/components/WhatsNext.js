@@ -1,36 +1,71 @@
 import React from "react";
-import { Header, Card,  } from "react-bootstrap";
+import { Header, Card, Container  } from "react-bootstrap";
 import { Link, } from "react-router-dom";
+import moment from "moment"
 import building from "../images/building.jpeg"
 import styled from "styled-components";
 import axios from "axios";
 
 class WhatsNext extends React.Component {
-	state = { events: [], timeLeft: null, };
+	constructor(props) {
+		super(props);
+		this.state = { event: null, years: "", months: "", weeks: "", days: "", hours: "", minutes: "", seconds: "", };
+	 };
 
-	componentDidMount() {
-		axios.get("/api/events_index")
-		    .then( res => {
-		        this.setState({ events: res.data})
-		    })
-		    .catch( err => {
-		        console.log(err)
-		    })
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.nextEvent !== this.props.nextEvent ) {
+			debugger
+			this.setState({ event: this.props.nextEvent })
+		} 
+		if (prevState.event !== this.state.event) {
+			debugger
+			// this.calcTime()
+		}
+	};
+
+	calcTime = () => {
+		// debugger
+		// var eventDate = moment(this.props.nextEvent.date).format("LLLL")
+		// var now = moment().format("LLLL")
+		// var year = ""
+		// var month = ""
+		// var week = ""
+		// var day = eventDate.diff(now, "days")
+		// debugger
+		// var hour = ""
+		// var min = ""
+		// var sec = ""
+		// this.setState({
+		// 	years: year,
+		// 	months: month,
+		// 	weeks: week,
+		// 	// days: day,
+		// 	hours: hour,
+		// 	minutes: min,
+		// 	seconds: sec,
+		// })
 	};
 
 	render() {
 			return (
 					<div style={{display: "flex", justifyContent: "space-around"}}>
-							<Link>
+							<Link to={`/events/${this.props.nextEvent.id}`}>
 							<Card style={{ width: "600px", height: "250px" }} className="bg-dark text-white">
-									<MyCardImage  src={building} alt="event location" />
+									<MyCardImage  src={this.props.nextEvent.image || building} alt="nextEvent location" />
 									<Card.ImgOverlay>
-											<Card.Title>THIS AWESOME EVENT</Card.Title>
+											<Card.Title>{this.props.nextEvent.name}</Card.Title>
 											<Card.Text>
-													#this section will be the description of the event.
+													{this.props.nextEvent.description}
 												</Card.Text>
-											<Card.Text>#eventDate</Card.Text>
-											<Card.Text></Card.Text>
+											<Card.Text>{moment(this.props.nextEvent.date).format('MMMM Do YYYY, h:mm:ss a') }</Card.Text>
+											<Container>
+												<div>
+													{ this.state.days } days
+												</div>
+												<div>
+													{ this.state.hours } Hours
+												</div>
+											</Container>
 									</Card.ImgOverlay>
 
 							</Card>
