@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
   
   namespace :api do
-    resources :events do
+    resources :events, only: :update do
       resources :invitations
     end
     get "specific_event_users", to: "users#specific_event_users"
