@@ -2,10 +2,21 @@ import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
 import { Menu, Icon, Dropdown, Header, } from 'semantic-ui-react'
 import { Link, withRouter, } from 'react-router-dom'
-import logo from "../images/logo.png"
+import Search from "./Search";
+import axios from 'axios';
+import logo from "../images/logo.png";
 import { Nav, Navbar, Image, } from "react-bootstrap";
 
 class NavBar extends React.Component {
+
+  searchEvent = (e, search) => {
+    e.preventDeafult()
+
+    axios.get(`api/events?column=${this.state.colum}&searc=${search}`)
+      .then(res => {
+        this.setState({ events: res.data })
+      })
+  }
   
   rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = this.props;
@@ -13,6 +24,9 @@ class NavBar extends React.Component {
     if (user) {
       return (
         <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px" }} position='right'>
+          <Menu.Item>
+            <Search searchEvent={this.searchEvent} Icon="search"/>
+          </Menu.Item>
           <Header as='h4'>
             <Image  src={ user.image } roundedCircle />
             <Header.Content>
