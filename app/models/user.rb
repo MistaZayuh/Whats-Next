@@ -40,4 +40,5 @@ class User < ActiveRecord::Base
 
     ActiveRecord::Base.connection.exec_query(query)
   end
+  
 end

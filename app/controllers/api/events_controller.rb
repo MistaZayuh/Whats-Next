@@ -1,7 +1,7 @@
 class Api::EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
   def index
-    render json: Event.all
+    render json: Event.event_search(params[:column], params[:search])
   end
 
   def show
@@ -27,6 +27,10 @@ class Api::EventsController < ApplicationController
 
   def destroy
     @event.destroy
+  end
+
+  def specific_event_users 
+    render json: Event.specific_event_users(params[:specificeventid])
   end
 
   private

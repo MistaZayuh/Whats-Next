@@ -5,13 +5,24 @@ import { Link, withRouter, } from 'react-router-dom'
 import logo from "../images/logo.png"
 import { Nav, Navbar, Image, Modal, } from "react-bootstrap";
 import EventFormModal from "./EventFormModal";
+import axios from 'axios';
+import Search from "./Search";
 
 
 class NavBar extends React.Component {
   state = { showEventModal: false, };
 
   eventModalClose =() => {
-    debugger
+  }
+
+
+  searchEvent = (e, search) => {
+    e.preventDeafult()
+
+    axios.get(`api/events?column=${this.state.colum}&searc=${search}`)
+      .then(res => {
+        this.setState({ events: res.data })
+      })
   }
   
   rightNavItems = () => {
@@ -21,6 +32,9 @@ class NavBar extends React.Component {
       return (
         
         <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px" }} position='right'>
+          <Menu.Item>
+            <Search searchEvent={this.searchEvent} Icon="search"/>
+          </Menu.Item>
           <Header as='h4'>
             <Menu.Item>
               <Header as="h4">

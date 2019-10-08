@@ -78,7 +78,7 @@ class EventFormModal extends React.Component {
                 checked={this.state.open}
                 onChange={this.handleCheckChange}
               />
-
+  <Form.Button primary>Submit</Form.Button>
 
             </Form>
           </Modal.Body>
