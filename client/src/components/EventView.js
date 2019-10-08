@@ -6,7 +6,7 @@ import {Header, Image, Button, Container} from "semantic-ui-react";
 
 
 class EventView extends React.Component {
-  state = { event: {} }
+  state = { event: {}, }
 
   componentDidMount() {
     const {id} = this.props.match.params
@@ -15,39 +15,74 @@ class EventView extends React.Component {
         this.setState({ event: res.data})
       })
   }
+  
+  deleteEvent = (id) => {
+    const {history} = this.props
+    axios.delete(`/api/events/${id}`)
+      .then( res => {
+        debugger
+        history.push("/api/events")
+      })
+      .catch( err => {
+        console.log(err)
+      })
+  };
 
   render() {
     return(
       <> 
-      <div >
+      <br />
+      <Container >
         {/* <Image src="/client/src/images/building.jpeg" fluid /> */}
-        <Header as="h1" textAlign="left">{this.state.event.name}</Header>
-        <Header sub textAlign="left">{this.state.event.date}</Header>
+        <Header 
+          
+          as="h1" 
+          size="huge"
+          textAlign="left">
+          {this.state.event.name}
+        </Header>
+        <Header
+          sub
+          size="large"
+          textAlign="left">
+          {this.state.event.date}
+          </Header>
         
-      </div>  
       <br />
       <div>
-          <Button as={Link} to={`/events/${this.state.event.id}/edit`}  >
+          <Button as={Link} to={`/events/${this.state.event.id}/edit`}  size="small" floated="right">
           Edit Event
           </Button>
       </div> 
+      </Container>  
       <br />
-      <div>
+      <br />
+      <br />
+      <Container>
         
-          <Header as="h3">
+          <Header as="h3" floated='right'>
             {this.state.event.location}
           </Header>
         
-      </div>
-      <br />
-      <div>
+      </Container>
 
-        <Container text >
+      <br />
+      <br />
+     
+
+        <Container text textAlign="right" >
+          <p>
+            Description:
+          </p>
           <p>
             {this.state.event.description}
           </p>
         </Container>
-      </div>
+      <br />
+        <Container textAlign="center">
+          <Button  onClick={this.deleteEvent} inverted color="red">Delete Event</Button>
+        </Container>
+   
      
       </>
     )
