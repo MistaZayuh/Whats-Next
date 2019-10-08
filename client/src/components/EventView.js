@@ -16,14 +16,15 @@ class EventView extends React.Component {
       })
   }
   
-  deleteEvent = (id) => {
-    const {history} = this.props
-    axios.delete(`/api/events/${id}`)
+  deleteEvent = () => {
+    const {history, match: {params}} = this.props
+    axios.delete(`/api/events/${params.id}`)
       .then( res => {
-        debugger
-        history.push("/api/events")
+        
+        history.push("/")
       })
       .catch( err => {
+       
         console.log(err)
       })
   };
@@ -48,13 +49,19 @@ class EventView extends React.Component {
           {this.state.event.date}
           </Header>
         
+          </Container>  
       <br />
-      <div>
-          <Button as={Link} to={`/events/${this.state.event.id}/edit`}  size="small" floated="right">
+     
+        <Container textAlign="right">
+          <Button 
+            as={Link} 
+            to={`/events/${this.state.event.id}/edit`}  
+            size="small" 
+            >
           Edit Event
           </Button>
-      </div> 
-      </Container>  
+        </Container>
+     
       <br />
       <br />
       <br />
@@ -71,6 +78,8 @@ class EventView extends React.Component {
      
 
         <Container text textAlign="right" >
+          <p>Location:</p>
+          <p> {this.state.event.location} </p>
           <p>
             Description:
           </p>
@@ -80,7 +89,7 @@ class EventView extends React.Component {
         </Container>
       <br />
         <Container textAlign="center">
-          <Button  onClick={this.deleteEvent} inverted color="red">Delete Event</Button>
+          <Button  onClick={() => this.deleteEvent()} inverted color="red">Delete Event</Button>
         </Container>
    
      

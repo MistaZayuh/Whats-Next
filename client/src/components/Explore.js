@@ -55,9 +55,9 @@ class Explore extends React.Component {
     Axios.get(`api/events?column=${this.state.column}&search=${search}`)
       .then(res => {
         this.setState({ events: res.data })
-        debugger
+        
       })
-      .catch(err => {debugger})
+      .catch(err => {})
   }
 
 
