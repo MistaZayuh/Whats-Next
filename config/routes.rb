@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   
   namespace :api do
-    resources :events do
+    resources :events, only: :update do
       resources :invitations
     end
   end

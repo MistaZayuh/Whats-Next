@@ -1,31 +1,44 @@
 import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Menu, Icon, Dropdown, Header, } from 'semantic-ui-react'
+import { Menu, Icon, Dropdown, Header, Button, } from 'semantic-ui-react'
 import { Link, withRouter, } from 'react-router-dom'
 import logo from "../images/logo.png"
-import { Nav, Navbar, Image, } from "react-bootstrap";
+import { Nav, Navbar, Image, Modal, } from "react-bootstrap";
+import EventFormModal from "./EventFormModal";
+
 
 class NavBar extends React.Component {
+  state = { showEventModal: false, };
+
+  eventModalClose =() => {
+    debugger
+  }
   
   rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = this.props;
     
-    if (user) {
+        if (user) {
       return (
+        
         <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px" }} position='right'>
           <Header as='h4'>
+            <Menu.Item>
+              <Header as="h4">
+              <Icon link="/events/new" name="search" />
+              </Header>
+              <Button color="blue" onClick={ () => this.setState({showEventModal: true})}>Create New Event</Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <Image  src={ user.image } roundedCircle />
             <Header.Content>
-              { user.name } { user.nickname }
               <Dropdown>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="/event/new" text='Add New Event' icon="add" />
-                  <Dropdown.Item href="/users/:id" text='Account' icon="arrow right" />
-                  <Dropdown.Item text='Notifications' icon="bell outline" />
+                  <Dropdown.Item href="/users/:id" text='Account' />
+                  {/* <Dropdown.Item text='Notifications' icon="bell outline" /> */}
                   <Dropdown.Item text='Logout' onClick={ () => handleLogout(this.props.history) } />
                 </Dropdown.Menu>
               </Dropdown>
             </Header.Content>
+            </Menu.Item>
           </Header>
         </Menu.Menu>
       )
@@ -52,18 +65,28 @@ class NavBar extends React.Component {
   }
   
   render() {
+    let eventModalClose = () => this.setState({ showEventModal: false, })
     return (
-      <div>
+      <>
         <Menu secondary>
           <Link to='/'>
             <Image style={{width: "100px", height: "80px", paddingLeft: "25px" }} src={logo} />
           </Link>
             { this.rightNavItems() }
         </Menu>
-      </div>
+        <EventFormModal
+        show={this.state.showEventModal}
+        onHide={eventModalClose}
+         />
+         </>
     )
   }
 }
+
+
+
+
+
 
 export class ConnectedNavBar extends React.Component {
   render() {
@@ -76,5 +99,7 @@ export class ConnectedNavBar extends React.Component {
     )
   }
 }
+
+
 
 export default withRouter(ConnectedNavBar);

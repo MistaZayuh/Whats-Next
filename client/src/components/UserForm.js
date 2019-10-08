@@ -40,8 +40,8 @@ class UserForm extends React.Component {
       <div>
         <br/>
 
-        {/* <Header as="h1" >{ this.props.auth.user.name } { this.props.auth.user.nickname }</Header> */}
-          {/* <Image style={{width: "15%", height: "15%", border: "solid, black, 1px,"}} roundedCircle src={this.state.image} /> */}
+        <Header as="h1" >{ this.props.auth.user.name } { this.props.auth.user.nickname }</Header>
+          <Image style={{width: "15%", height: "15%", border: "solid, black, 1px,"}} roundedCircle src={this.state.image} />
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
             label="Name"
@@ -60,7 +60,7 @@ class UserForm extends React.Component {
             value={this.state.nickname}
           />
            <Form.Input
-            label="Your Profile Image"
+            label="Your Profile Image URL"
             name="image"
             placeholder="Upload an image"
             required
@@ -71,7 +71,6 @@ class UserForm extends React.Component {
         <Form.Button color="blue">Submit</Form.Button>
         </Form>
         <br/>
-       
       </div>
     );
   };
