@@ -4,9 +4,19 @@ import WhatsNext from "./WhatsNext";
 import Upcoming from "./Upcoming";
 import {AuthConsumer} from "../providers/AuthProvider"
 import { Header, Container, } from 'semantic-ui-react';
+import Search from "./Search";
 
 class Home extends React.Component {
   state = { events: [], nextEvent: {}, };
+
+  searchEvent = (e, search) => {
+    e.preventDeafult()
+
+    axios.get(`api/events?column=${this.state.colum}&searc=${search}`)
+      .then(res => {
+        this.setState({ events: res.data })
+      })
+  }
 
   componentDidMount() {
     const {auth: {user}} = this.props
