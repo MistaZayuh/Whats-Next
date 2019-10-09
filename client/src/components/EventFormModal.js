@@ -3,6 +3,7 @@ import axios from "axios";
 import { withRouter, } from "react-router-dom";
 import { Form, TextArea, Checkbox, } from "semantic-ui-react";
 import { Modal, Button, } from "react-bootstrap";
+import { DateTimeInput } from "semantic-ui-calendar-react";
 import { AuthConsumer } from "../providers/AuthProvider";
 
 class EventFormModal extends React.Component {
@@ -54,18 +55,18 @@ class EventFormModal extends React.Component {
                 value={this.state.location}
                 onChange={this.handleChange}
               />
-              <Form.Input
+              <p><strong>Date/Time</strong></p>
+              <DateTimeInput
                 label="Date/Time"
                 name="date"
                 inline
                 required
                 placeholder="Date"
-                type="date"
                 value={this.state.date}
                 iconPosition="left"
                 onChange={this.handleChange}
               />
-              <br />
+
               <Form.Field
                 label="Description"
                 placeholder="Description"
@@ -83,7 +84,7 @@ class EventFormModal extends React.Component {
                 checked={this.state.open}
                 onChange={this.handleCheckChange}
               />
-  <Form.Button onClick={this.props.onHide} primary>Submit</Form.Button>
+              <Form.Button inverted onClick={this.props.onHide} primary>Submit</Form.Button>
 
             </Form>
           </Modal.Body>
@@ -101,7 +102,7 @@ class EventFormModal extends React.Component {
 const ConnectedEventFormModal = (props) => (
   <AuthConsumer>
     {auth =>
-    <EventFormModal {...props} auth={auth} /> 
+      <EventFormModal {...props} auth={auth} />
     }
   </AuthConsumer>
 )

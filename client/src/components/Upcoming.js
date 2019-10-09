@@ -8,7 +8,9 @@ import styled from "styled-components";
 
 const Upcoming = ({event}) => (
 	<div style={{ paddingLeft: "248px" }}>
-		<Link>
+		<Link to={`/events/${event.id}`}>
+			
+
 			<Card style={{ width: "200px", height: "100px" }} className="bg-dark text-white">
 				<MyCardImage src={event.image || party} alt="event location" />
 				<Card.ImgOverlay>
@@ -18,6 +20,7 @@ const Upcoming = ({event}) => (
 				</Card.ImgOverlay>
 
 			</Card>
+			
 		</Link>
 	</div>
 )

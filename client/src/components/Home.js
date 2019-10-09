@@ -5,6 +5,7 @@ import Upcoming from "./Upcoming";
 import { Link, } from "react-router-dom";
 import { AuthConsumer } from "../providers/AuthProvider";
 import { Header, Container, } from 'semantic-ui-react';
+import { Card } from 'react-bootstrap';
 
 class Home extends React.Component {
   state = { events: null, nextEvent: {}, };
@@ -44,7 +45,10 @@ class Home extends React.Component {
             <WhatsNext nextEvent={this.state.nextEvent} />
             <br />
             <p style={{ paddingLeft: "255px", color: "gray" }}>Upcoming Events.</p>
+            {/* <Card.Group> */}
+
             {this.renderUpcoming()}
+            {/* </Card.Group> */}
           </Container>
           :
           <Container>

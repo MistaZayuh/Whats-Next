@@ -1,9 +1,12 @@
 import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import building from "../images/building.jpeg";
+import party from "../images/party.jpg";
 import styled from "styled-components";
-import { Header, Image, Button, Container } from "semantic-ui-react";
-
+import { Carousel, } from "react-bootstrap";
+import { Grid, Segment, Button, Container } from "semantic-ui-react";
+import "../styles/EventView.css";
 
 class EventView extends React.Component {
   state = { event: {}, eventUsers: [] };
@@ -16,7 +19,7 @@ class EventView extends React.Component {
         var eventInfo = res.data
         axios.get(`/api/specific_event_users?specificeventid=${eventInfo.id}`)
           .then(res => {
-            this.setState({ eventUsers: res.data})
+            this.setState({ eventUsers: res.data })
           })
           .catch(err => {
             console.log(err)
@@ -26,88 +29,107 @@ class EventView extends React.Component {
         console.log(err)
       })
   }
-  
+
   deleteEvent = () => {
-    const {history, match: {params}} = this.props
+    const { history, match: { params } } = this.props
     axios.delete(`/api/events/${params.id}`)
-      .then( res => {
-        
+      .then(res => {
+
         history.push("/")
       })
-      .catch( err => {
-       
+      .catch(err => {
+
         console.log(err)
       })
   };
 
   render() {
-    return(
-      <> 
-      <br />
-      <Container >
-        {/* <Image src="/client/src/images/building.jpeg" fluid /> */}
-        <Header 
+    return (
+      <>
+
+
+              <div>
+                <div className='opacity-test'>
+                <img src={building} className='background-image-events'/>
+                </div>
+            
+
+        <Container>
+        
+          <div className="banner-event-name" >
+            <h1
+            className="event-name"
+              >
+              {this.state.event.name}
+            </h1>
+          </div>
+
+          <div className="banner-event-date">
+            <p
+            className="event-date">
+              {this.state.event.date}
+            </p>
+          </div>
           
-          as="h1" 
-          size="huge"
-          textAlign="left">
-          {this.state.event.name}
-        </Header>
-        <Header
-          sub
-          size="large"
-          textAlign="left">
-          {this.state.event.date}
-          </Header>
-        
-          </Container>  
-      <br />
-     
-        <Container textAlign="right">
-          <Button 
-            as={Link} 
-            to={`/events/${this.state.event.id}/edit`}  
-            size="small" 
-            >
-          Edit Event
-          </Button>
-        </Container>
-     
-      <br />
-      <br />
-      {/* <br />
-      <Container textAlign="right">
-        
-          <Header as="h3" >
-            {this.state.event.location}
-          </Header>
-        
-      </Container> */}
 
-      <br />
-      <br />
-     
+          <div>
+            <Button
+            color="blue" 
+            className="join-event-button">
+              Join Event
+              </Button>
+          </div>
+        </Container>
+          </div>
+        <br />
 
-        <Container text textAlign="right" >
-          <p>Location:</p>
-          <p> {this.state.event.location} </p>
-          <p>
-            Description:
-          </p>
-          <p>
-            {this.state.event.description}
-          </p>
-        </Container>
+        <br />
+      
+      <div>
+      <Container style={{ padding: '5em 0em' }}>
+        <Grid columns={2}>
+          <Grid.Column >Create Post</Grid.Column>
+          
+          <Grid.Column width={4} >
+            <Segment  basic>{this.state.event.description}</Segment>
+            <Segment.Group >
+              <Segment>Going -</Segment>
+              <Segment.Group>
+                <Segment>Person 1</Segment>
+                <Segment>Person 2</Segment>
+                <Segment>Person 3</Segment>
+              </Segment.Group>
+            </Segment.Group>
+            <Segment basic >
+              <Button  
+                onClick={() => this.deleteEvent()} 
+                inverted color="red"
+                size="small"
+                >
+                Delete Event
+              </Button>
+              <Button 
+                as={Link} 
+                to={`/events/${this.state.event.id}/edit`}   
+                inverted color="blue" 
+                size="small"
+                >
+                Edit Event
+              </Button>
+            </Segment>
+          </Grid.Column>
+        </Grid>
+      </Container>
+      </div>
       <br />
-        <Container textAlign="center">
-          <Button  onClick={() => this.deleteEvent()} inverted color="red">Delete Event</Button>
-        </Container>
-   
-     
+
+
       </>
     )
   }
 };
+
+
 
 
 
