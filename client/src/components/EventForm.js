@@ -7,39 +7,40 @@ import { AuthConsumer } from "../providers/AuthProvider";
 
 
 class EventForm extends React.Component {
-  state = { date: "", name: "", location: "", description: "", open: true };
+  state = { date: "", name: "", location: "", description: "", };
 
   componentDidMount() {
-    
+    const { match: {params}, auth: {user}} = this.props;         
     if (this.props.location.pathname !== "/events/new") {
-      axios.get(`/api/events/${this.props.match.params.id}`)
-      .then(res => {             
+      axios.get(`/api/events/${params.id}`)
+      .then(res => {
           this.setState({ 
             name: res.data.name,
             location: res.data.location,
             date: res.data.date,
             description: res.data.description,
             open: res.data.open,
-           })
+          })
         })
         .catch(err => {
           console.log(err)
         })
+      }
     }
-  }
-  
-
-  handleChange = (e, { name, value }) => {
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { location, match, history } = this.props
-     if (location.pathname === "/events/new") {
-      axios.post("/api/events", this.state )
-      .then(res => {
-        history.push(`/events/${res.data.id}`)
+    
+    
+    handleChange = (e, { name, value }) => {
+      this.setState({ [name]: value });
+    };
+    
+    handleSubmit = (e) => {
+      e.preventDefault();
+      const { location, match, history, auth: {user} } = this.props
+      if (location.pathname === "/events/new") {
+        axios.post("/api/events", this.state )
+        .then(res => {
+          axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
+          history.push(`/events/${res.data.id}`)
       })
     } else {
       axios.put(`/api/events/${match.params.id}`, this.state)

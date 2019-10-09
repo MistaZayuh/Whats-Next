@@ -15,20 +15,13 @@ class EventFormModal extends React.Component {
   
     handleSubmit = (e) => {
       e.preventDefault();
-      const { location, history } = this.props
-      //  if (location.pathname === "/events/new") {
+      const { location, history, auth: {user} } = this.props
         axios.post("/api/events", this.state )
         .then(res => {
+          axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
           history.push(`/events/${res.data.id}`)
         })
-      // } else {
-        // axios.put(`/api/events/${match.params.id}`, this.state)
-        // .then(res => {
-          
-        //   history.push(`/events/${match.params.id}`)
-        // })
-      // }
-        
+
     };
   
     handleCheckChange = (e, { name, checked }) => {
