@@ -3,6 +3,7 @@ import axios from "axios";
 import { withRouter, } from "react-router-dom";
 import { Form, TextArea, Checkbox, } from "semantic-ui-react";
 import { Modal, Button, } from "react-bootstrap";
+import { DateTimeInput } from "semantic-ui-calendar-react";
 import { AuthConsumer } from "../providers/AuthProvider";
 import {DateTimeInput} from "semantic-ui-calendar-react";
 
@@ -16,20 +17,13 @@ class EventFormModal extends React.Component {
   
     handleSubmit = (e) => {
       e.preventDefault();
-      const { location, history } = this.props
-      //  if (location.pathname === "/events/new") {
+      const { location, history, auth: {user} } = this.props
         axios.post("/api/events", this.state )
         .then(res => {
+          axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
           history.push(`/events/${res.data.id}`)
         })
-      // } else {
-        // axios.put(`/api/events/${match.params.id}`, this.state)
-        // .then(res => {
-          
-        //   history.push(`/events/${match.params.id}`)
-        // })
-      // }
-        
+
     };
   
     handleCheckChange = (e, { name, checked }) => {
@@ -62,6 +56,7 @@ class EventFormModal extends React.Component {
                 value={this.state.location}
                 onChange={this.handleChange}
               />
+              <p><strong>Date/Time</strong></p>
               <DateTimeInput
                 label="Date/Time"
                 name="date"
@@ -72,7 +67,7 @@ class EventFormModal extends React.Component {
                 iconPosition="left"
                 onChange={this.handleChange}
               />
-              <br />
+
               <Form.Field
                 label="Description"
                 placeholder="Description"
@@ -90,7 +85,7 @@ class EventFormModal extends React.Component {
                 checked={this.state.open}
                 onChange={this.handleCheckChange}
               />
-  <Form.Button onClick={this.props.onHide} primary>Submit</Form.Button>
+              <Form.Button inverted onClick={this.props.onHide} primary>Submit</Form.Button>
 
             </Form>
           </Modal.Body>
@@ -108,7 +103,7 @@ class EventFormModal extends React.Component {
 const ConnectedEventFormModal = (props) => (
   <AuthConsumer>
     {auth =>
-    <EventFormModal {...props} auth={auth} /> 
+      <EventFormModal {...props} auth={auth} />
     }
   </AuthConsumer>
 )
