@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Header, Image, Button, Container, Grid } from "semantic-ui-react";
+import { Header, Image, Button, Container, Grid, Segment, SegmentGroup } from "semantic-ui-react";
 
 
 class EventView extends React.Component {
@@ -68,19 +68,53 @@ class EventView extends React.Component {
      
       <br />
       <br />
-      <Grid celled>
-        <Grid.Row>
-          <Grid.Column width={10}>
-            <Header>Create Post</Header>
+      
+      <div>
+      <Container style={{ padding: '5em 0em' }}>
+        <Grid columns={2}>
+
+          <Grid.Column >Create Post</Grid.Column>
+
+          
+
+          <Grid.Column width={4} >
+            <Segment  basic>{this.state.event.description}</Segment>
+            <Segment.Group >
+              <Segment>Going -</Segment>
+              <Segment.Group>
+                <Segment>Person 1</Segment>
+                <Segment>Person 2</Segment>
+                <Segment>Person 3</Segment>
+              </Segment.Group>
+            </Segment.Group>
+
+            <Segment basic >
+              <Button  
+                onClick={() => this.deleteEvent()} 
+                inverted color="red"
+                size="small"
+                >
+                Delete Event
+              </Button>
+              <Button 
+                as={Link} 
+                to={`/events/${this.state.event.id}/edit`}   
+                inverted color="blue" 
+                size="small"
+                >
+                Edit Event
+              </Button>
+            </Segment>
           </Grid.Column>
-        </Grid.Row>
-      </Grid>
+        </Grid>
+      </Container>
+      </div>
 
       <br />
       <br />
      
 
-        <Container text textAlign="right" >
+        {/* <Container text textAlign="right" >
           <p>Location:</p>
           <p> {this.state.event.location} </p>
           <p>
@@ -89,8 +123,8 @@ class EventView extends React.Component {
           <p>
             {this.state.event.description}
           </p>
-        </Container>
-      <br />
+        </Container> */}
+      {/* <br />
         <Container textAlign="center">
           <Button  onClick={() => this.deleteEvent()} inverted color="red">Delete Event</Button>
           <Button 
@@ -103,7 +137,8 @@ class EventView extends React.Component {
           <Button>
             Join Event
           </Button>
-        </Container>
+        </Container> */}
+        <br />
    
      
       </>
