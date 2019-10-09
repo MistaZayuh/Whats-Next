@@ -7,34 +7,27 @@ import { DateTimeInput } from "semantic-ui-calendar-react";
 import { AuthConsumer } from "../providers/AuthProvider";
 
 class EventFormModal extends React.Component {
-  state = { date: "", name: "", location: "", description: "", open: true };
+    state = { date: "", name: "", location: "", description: "", open: true };
+    
+  
+    handleChange = (e, { name, value }) => {
+      this.setState({ [name]: value });
+    };
+  
+    handleSubmit = (e) => {
+      e.preventDefault();
+      const { location, history, auth: {user} } = this.props
+        axios.post("/api/events", this.state )
+        .then(res => {
+          axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
+          history.push(`/events/${res.data.id}`)
+        })
 
-
-  handleChange = (e, { name, value }) => {
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { location, history } = this.props
-    //  if (location.pathname === "/events/new") {
-    axios.post("/api/events", this.state)
-      .then(res => {
-        history.push(`/events/${res.data.id}`)
-      })
-    // } else {
-    // axios.put(`/api/events/${match.params.id}`, this.state)
-    // .then(res => {
-
-    //   history.push(`/events/${match.params.id}`)
-    // })
-    // }
-
-  };
-
-  handleCheckChange = (e, { name, checked }) => {
-    this.setState({ [name]: !!checked })
-  };
+    };
+  
+    handleCheckChange = (e, { name, checked }) => {
+      this.setState({ [name]: !!checked })
+    };
 
   render() {
     return (
