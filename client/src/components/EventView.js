@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Header, Image, Button, Container } from "semantic-ui-react";
+import { Header, Image, Button, Container, Grid } from "semantic-ui-react";
 
 
 class EventView extends React.Component {
@@ -60,29 +60,21 @@ class EventView extends React.Component {
           {this.state.event.date}
           </Header>
         
-          </Container>  
+      </Container>  
       <br />
      
         <Container textAlign="right">
-          <Button 
-            as={Link} 
-            to={`/events/${this.state.event.id}/edit`}  
-            size="small" 
-            >
-          Edit Event
-          </Button>
         </Container>
      
       <br />
       <br />
-      {/* <br />
-      <Container textAlign="right">
-        
-          <Header as="h3" >
-            {this.state.event.location}
-          </Header>
-        
-      </Container> */}
+      <Grid celled>
+        <Grid.Row>
+          <Grid.Column width={10}>
+            <Header>Create Post</Header>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
 
       <br />
       <br />
@@ -101,6 +93,16 @@ class EventView extends React.Component {
       <br />
         <Container textAlign="center">
           <Button  onClick={() => this.deleteEvent()} inverted color="red">Delete Event</Button>
+          <Button 
+            as={Link} 
+            to={`/events/${this.state.event.id}/edit`}  
+            size="small" 
+            >
+          Edit Event
+          </Button>
+          <Button>
+            Join Event
+          </Button>
         </Container>
    
      

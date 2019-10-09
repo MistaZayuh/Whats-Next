@@ -4,6 +4,7 @@ import { withRouter, } from "react-router-dom";
 import { Form, TextArea, Checkbox, } from "semantic-ui-react";
 import { Modal, Button, } from "react-bootstrap";
 import { AuthConsumer } from "../providers/AuthProvider";
+import {DateTimeInput} from "semantic-ui-calendar-react";
 
 class EventFormModal extends React.Component {
     state = { date: "", name: "", location: "", description: "", open: true };
@@ -61,13 +62,12 @@ class EventFormModal extends React.Component {
                 value={this.state.location}
                 onChange={this.handleChange}
               />
-              <Form.Input
+              <DateTimeInput
                 label="Date/Time"
                 name="date"
                 inline
                 required
                 placeholder="Date"
-                type="date"
                 value={this.state.date}
                 iconPosition="left"
                 onChange={this.handleChange}
