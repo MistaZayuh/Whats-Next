@@ -12,10 +12,6 @@ class Home extends React.Component {
     const { auth: { user } } = this.props
     axios.get(`/api/specific_user_events?specificuserid=${user.id}`)
       .then(res => {
-<<<<<<< HEAD
-       
-=======
->>>>>>> e09b0732c8ac327535ec8b2d43ac0c4ab6d3dfb4
         if (res.data.length !== 0) {
           this.setState({ events: res.data, nextEvent: res.data[0], })
         }

@@ -64,14 +64,14 @@ class EventView extends React.Component {
      
       <br />
       <br />
-      <br />
-      <Container>
+      {/* <br />
+      <Container textAlign="right">
         
-          <Header as="h3" floated='right'>
+          <Header as="h3" >
             {this.state.event.location}
           </Header>
         
-      </Container>
+      </Container> */}
 
       <br />
       <br />
