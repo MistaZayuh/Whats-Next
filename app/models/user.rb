@@ -27,14 +27,31 @@ class User < ActiveRecord::Base
 
   def self.specific_user_events(specificuserid)
       query = <<-SQL
-      SELECT events.*, users.name AS username, users.id AS userid
+      SELECT events.*, invitations.accepted, invitations.organizer, users.name AS username, users.id AS userid
       FROM invitations
       INNER JOIN users
           on user_id = users.id
       INNER JOIN events
           on event_id = events.id
       WHERE user_id = #{specificuserid}
-      GROUP BY events.id, username, userid
+      GROUP BY events.id, username, userid, invitations.accepted, invitations.organizer
+      ORDER BY events.date ASC
+    SQL
+
+    ActiveRecord::Base.connection.exec_query(query)
+  end
+
+  def self.accepted_user_events(specificuserid)
+      query = <<-SQL
+      SELECT events.*, invitations.accepted, invitations.organizer, users.name AS username, users.id AS userid
+      FROM invitations
+      INNER JOIN users
+          on user_id = users.id
+      INNER JOIN events
+          on event_id = events.id
+      WHERE user_id = #{specificuserid}
+      AND invitations.accepted = true
+      GROUP BY events.id, username, userid, invitations.accepted, invitations.organizer
       ORDER BY events.date ASC
     SQL
 

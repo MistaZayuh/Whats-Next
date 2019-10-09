@@ -29,6 +29,10 @@ class Api::UsersController < ApplicationController
     render json: User.specific_user_events(params[:specificuserid])
   end
 
+  def accepted_user_events  
+    render json: User.accepted_user_events(params[:specificuserid])
+  end
+
   private
     def set_user
       @user = User.find(params[:id])

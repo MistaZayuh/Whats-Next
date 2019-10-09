@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios";
 import WhatsNext from "./WhatsNext";
 import Upcoming from "./Upcoming";
-import { AuthConsumer } from "../providers/AuthProvider"
+import { Link, } from "react-router-dom";
+import { AuthConsumer } from "../providers/AuthProvider";
 import { Header, Container, } from 'semantic-ui-react';
 
 class Home extends React.Component {
@@ -10,7 +11,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     const { auth: { user } } = this.props
-    axios.get(`/api/specific_user_events?specificuserid=${user.id}`)
+    axios.get(`/api/accepted_user_events?specificuserid=${user.id}`)
       .then(res => {
         if (res.data.length !== 0) {
           this.setState({ events: res.data, nextEvent: res.data[0], })
@@ -22,7 +23,6 @@ class Home extends React.Component {
   };
 
   render() {
-    var exploreLink = <a href="/explore">explore page</a>
     return (
       <>
         {this.state.events ?
@@ -37,7 +37,9 @@ class Home extends React.Component {
           :
           <Container>
             <Header as="h1">It looks like you aren't attending any events.</Header>
-            <Header as="h2">{"Why don't you check out the " + exploreLink + " and find one you fucking loser"}</Header>
+            <Header as="h2">"Why don't you check out the
+             <Link to="/explore"> explore page   </Link>
+             and find one you fucking loser"</Header>
           </Container>
         }
       </>

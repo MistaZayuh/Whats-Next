@@ -1,18 +1,29 @@
 import React from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import {Header, Image, Button, Container} from "semantic-ui-react";
+import { Header, Image, Button, Container } from "semantic-ui-react";
 
 
 class EventView extends React.Component {
-  state = { event: {}, }
+  state = { event: {}, eventUsers: [] };
 
   componentDidMount() {
-    const {id} = this.props.match.params
+    const { id } = this.props.match.params
     axios.get(`/api/events/${id}`)
       .then(res => {
-        this.setState({ event: res.data})
+        this.setState({ event: res.data })
+        var eventInfo = res.data
+        axios.get(`/api/specific_event_users?specificeventid=${eventInfo.id}`)
+          .then(res => {
+            this.setState({ eventUsers: res.data})
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      })
+      .catch(err => {
+        console.log(err)
       })
   }
   
@@ -97,14 +108,6 @@ class EventView extends React.Component {
     )
   }
 };
-
-
-
-
-
-
-
-
 
 
 

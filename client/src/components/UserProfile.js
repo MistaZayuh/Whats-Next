@@ -7,18 +7,17 @@ import { Grid, Image, Header, Button, Segment } from 'semantic-ui-react';
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class User extends React.Component {
-  state = { name: "", nickname: "", email: "", image: "", };
+  state = { invitedEvents: [], };
 
-  // componentDidMount() {
-  //   const { auth: { user, } } = this.props
-  //   axios.get(`/api/users/${user.id}`)
-  //     .then(res => {
-  //       this.setState({ name: res.data.name, nickname: res.data.nickname, image: res.data.image })
-  //     })
-  //     .catch(err => console.log(err))
-  //   // const { auth: { user: {name, nickname, email, image, }, }, } = this.props;
-  //   // this.setState({ name: name, nickname: nickname, email: email, image: image, });
-  // };
+  componentDidMount() {
+    axios.get(`/api/specific_user_events?specificuserid=${this.props.match.params.id}`)
+      .then(res => {
+        this.setState({ invitedEvents: res.data})
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  };
 
   render() {
     const { auth: { user }, } = this.props;
