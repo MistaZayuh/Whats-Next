@@ -19,7 +19,6 @@ class EventFormModal extends React.Component {
       //  if (location.pathname === "/events/new") {
         axios.post("/api/events", this.state )
         .then(res => {
-          debugger
           history.push(`/events/${res.data.id}`)
         })
       // } else {
