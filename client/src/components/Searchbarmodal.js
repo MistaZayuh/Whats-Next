@@ -1,9 +1,10 @@
 import React from "react";
-import Axios from "axios";
-import Search from './Search';
-import { Table, } from "semantic-ui-react";
+import axios from "axios";
+// import Search from './Search';
+import { Table, Button, Search, } from "semantic-ui-react";
+import { Modal } from "react-bootstrap";
 
-class Searchbar extends React.Component {
+class SearchBarModal extends React.Component {
   state = { events: [], filtered: [], search: "", time: "", date: "", };
 
   listEvents = () => {
@@ -18,29 +19,35 @@ class Searchbar extends React.Component {
   searchEvent = (e, search) => {
     e.preventDefault()
 
-    Axios.get(`api/events?column=${this.state.column}&search=${search}`)
+    axios.get(`api/events?column=${this.state.column}&search=${search}`)
       .then(res => {
         this.setState({ events: res.data })
       })
       .catch(err => { })
   }
 
-
+  
   render() {
     return (
       <div>
-        <Search searchEvent={this.searchEvent} Icon="search" />
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.Header>Event Name</Table.Header>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {this.listEvents()}
-          </Table.Body>
-        </Table>
+        <Modal {...this.props}>
+          <Modal.Header closeButton >
+            <Modal.Body>
+
+       <Search
+       size="sm"
+            input={{ icon: 'search', iconPosition: 'left' }} />
+            </Modal.Body>
+          </Modal.Header>
+          {/* <Modal.Footer>
+          <Button variant="secondary" onClick={this.props.onHide}>
+            Close</Button>
+          </Modal.Footer> */}
+
+        </Modal>
       </div>
     )
   }
 }
+
+export default SearchBarModal;
