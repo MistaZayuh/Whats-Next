@@ -22,6 +22,18 @@ class Home extends React.Component {
       })
   };
 
+  renderUpcoming = () => {
+    let upcoming = this.state.events
+    upcoming.shift()
+    return upcoming.map(e => (
+      <Upcoming 
+      key={e.id}
+      event={e}
+      />
+    ))
+  }
+  
+
   render() {
     return (
       <>
@@ -32,14 +44,14 @@ class Home extends React.Component {
             <WhatsNext nextEvent={this.state.nextEvent} />
             <br />
             <p style={{ paddingLeft: "255px", color: "gray" }}>Upcoming Events.</p>
-            <Upcoming />
+            {this.renderUpcoming()}
           </Container>
           :
           <Container>
-            <Header as="h1">It looks like you aren't attending any events.</Header>
+            <Header as="h1">It looks like you aren't attending any upcoming events.</Header>
             <Header as="h2">"Why don't you check out the
              <Link to="/explore"> explore page   </Link>
-             and find one you fucking loser"</Header>
+             and find one."</Header>
           </Container>
         }
       </>
