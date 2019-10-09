@@ -1,5 +1,8 @@
 class Api::InvitationsController < ApplicationController
+  before_action :set_user, except: [:create_invitation]
+  before_action :set_event, except: [:create_invitation]
   before_action :set_invitation, only: [:show, :update, :destroy]
+
   def index
     render json: Invitation.all
   end
@@ -9,8 +12,7 @@ class Api::InvitationsController < ApplicationController
   end
 
   def create
-    @event = Event.find(params[:event_id])
-    invitation = @event.invitations.new(invitation_params)
+    invitation = @user.invitations.new(invitation_params)
     if invitation.save
       render json: invitation
     else
@@ -19,6 +21,11 @@ class Api::InvitationsController < ApplicationController
   end
 
   def update
+    if @invitation.update(invitation_params)
+      render json: @invitation
+    else
+      render json: @invitation.errors, status: 422
+    end
   end
 
   def destroy
@@ -39,6 +46,6 @@ class Api::InvitationsController < ApplicationController
     end
 
     def invitation_params
-      params.require(:invitation).permit(:accepted, :organizer)
+      params.require(:invitation).permit(:accepted, :organizer, :user_id, :event_id)
     end
 end
