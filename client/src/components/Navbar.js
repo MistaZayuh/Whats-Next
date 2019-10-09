@@ -7,12 +7,15 @@ import { Nav, Navbar, Image, Modal, } from "react-bootstrap";
 import EventFormModal from "./EventFormModal";
 import axios from 'axios';
 import Search from "./Search";
+import SearchBarModal from './SearchBarModal';
 
 
 class NavBar extends React.Component {
-  state = { showEventModal: false, };
+  state = { showEventModal: false, showSearchModal: false, };
 
   eventModalClose =() => {
+  }
+  eventSearchClose =() => {
   }
 
 
@@ -24,6 +27,8 @@ class NavBar extends React.Component {
         this.setState({ events: res.data })
       })
   }
+
+  // searchEvent={this.searchEvent}
   
   rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = this.props;
@@ -33,12 +38,12 @@ class NavBar extends React.Component {
         
         <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px" }} position='right'>
           <Menu.Item>
-            <Search searchEvent={this.searchEvent} Icon="search"/>
+            
           </Menu.Item>
           <Header as='h4'>
             <Menu.Item>
               <Header as="h4">
-              <Icon name="search" />
+              <Icon onClick={ () => this.setState({showSearchModal: true}) } name="search" />
               </Header>
               <Button color="blue" onClick={ () => this.setState({showEventModal: true})}>Create New Event</Button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -46,7 +51,7 @@ class NavBar extends React.Component {
             <Header.Content>
               <Dropdown>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="/events/new" text='Add New Event' icon="add" />
+                  {/* <Dropdown.Item href="/events/new" text='Add New Event' icon="add" /> */}
                   <Dropdown.Item href={`/users/${user.id}`} text='Account' icon="arrow right" />
                   <Dropdown.Item text='Notifications' icon="bell outline" />
                   <Dropdown.Item text='Logout' onClick={ () => handleLogout(this.props.history) } />
@@ -81,6 +86,7 @@ class NavBar extends React.Component {
   
   render() {
     let eventModalClose = () => this.setState({ showEventModal: false, })
+    let searchModalClose = () => this.setState({ showSearchModal: false, })
     return (
       <>
         <Menu secondary>
@@ -93,6 +99,9 @@ class NavBar extends React.Component {
         show={this.state.showEventModal}
         onHide={eventModalClose}
          />
+         <SearchBarModal
+         show={this.state.showSearchModal}
+         onHide={searchModalClose} />
          </>
     )
   }

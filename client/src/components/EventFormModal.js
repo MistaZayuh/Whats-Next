@@ -15,7 +15,7 @@ class EventFormModal extends React.Component {
   
     handleSubmit = (e) => {
       e.preventDefault();
-      const { location, match, history } = this.props
+      const { location, history } = this.props
       //  if (location.pathname === "/events/new") {
         axios.post("/api/events", this.state )
         .then(res => {
