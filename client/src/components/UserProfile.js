@@ -1,37 +1,50 @@
 import React from 'react';
 import axios from 'axios';
+import {Link} from "react-router-dom";
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Grid, Image, Header, Button } from 'semantic-ui-react';
+import { Grid, Image, Header, Button, Segment } from 'semantic-ui-react';
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class User extends React.Component {
-  state = { name: "", nickname: "", email: "", image: "", };
+  state = { invitedEvents: [], };
 
-  // componentDidMount() {
-  //   const { auth: { user, } } = this.props
-  //   axios.get(`/api/users/${user.id}`)
-  //     .then(res => {
-  //       this.setState({ name: res.data.name, nickname: res.data.nickname, image: res.data.image })
-  //     })
-  //     .catch(err => console.log(err))
-  //   // const { auth: { user: {name, nickname, email, image, }, }, } = this.props;
-  //   // this.setState({ name: name, nickname: nickname, email: email, image: image, });
-  // };
+  componentDidMount() {
+    axios.get(`/api/specific_user_events?specificuserid=${this.props.match.params.id}`)
+      .then(res => {
+        this.setState({ invitedEvents: res.data})
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  };
 
   render() {
     const { auth: { user }, } = this.props;
     return (
       <>
-        <Grid.Column>
-          <Image src={user.image || defaultImage} />
-        </Grid.Column>
-        <Grid.Column>
-          <Header as ="h1">{user.name}</Header>
-          <Header as ="h1">{user.nickname}</Header>
-          <Header as ="h2">{user.email}</Header>
-        </Grid.Column>
-        <Button href='/users/:id/edit' color='yellow'>Edit</Button>
+      <br /> 
+      <Grid>
+        <Grid.Row >
+          <Grid.Column width={7}>
+           
+              <Image src={user.image || defaultImage} />
+           
+          </Grid.Column>
+          <Grid.Column width={9}>
+            <br />
+            <br />
+            <br />
+            <Header size="huge">{user.name} {user.nickname}</Header>
+            <Header size="medium" >{user.email}</Header>
+            <br />
+            <br />
+            <br />
+            <br />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+            <Button as={Link} to='/users/:id/edit' floated="right">Edit Profile</Button>
       </>
     )
   }
