@@ -23,7 +23,6 @@ class EventForm extends React.Component {
            })
         })
         .catch(err => {
-          debugger
           console.log(err)
         })
     }
