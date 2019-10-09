@@ -26,40 +26,84 @@ class EventView extends React.Component {
         console.log(err)
       })
   }
+  
+  deleteEvent = () => {
+    const {history, match: {params}} = this.props
+    axios.delete(`/api/events/${params.id}`)
+      .then( res => {
+        
+        history.push("/")
+      })
+      .catch( err => {
+       
+        console.log(err)
+      })
+  };
 
   render() {
-    return (
-      <>
-        <div >
-          {/* <Image src="/client/src/images/building.jpeg" fluid /> */}
-          <Header as="h1" textAlign="left">{this.state.event.name}</Header>
-          <Header sub textAlign="left">{this.state.event.date}</Header>
-
-        </div>
-        <br />
-        <div>
-          <Button as={Link} to={`/events/${this.state.event.id}/edit`}  >
-            Edit Event
+    return(
+      <> 
+      <br />
+      <Container >
+        {/* <Image src="/client/src/images/building.jpeg" fluid /> */}
+        <Header 
+          
+          as="h1" 
+          size="huge"
+          textAlign="left">
+          {this.state.event.name}
+        </Header>
+        <Header
+          sub
+          size="large"
+          textAlign="left">
+          {this.state.event.date}
+          </Header>
+        
+          </Container>  
+      <br />
+     
+        <Container textAlign="right">
+          <Button 
+            as={Link} 
+            to={`/events/${this.state.event.id}/edit`}  
+            size="small" 
+            >
+          Edit Event
           </Button>
-        </div>
-        <br />
-        <div>
-
-          <Header as="h3">
+        </Container>
+     
+      <br />
+      <br />
+      {/* <br />
+      <Container textAlign="right">
+        
+          <Header as="h3" >
             {this.state.event.location}
           </Header>
+        
+      </Container> */}
 
-        </div>
-        <br />
-        <div>
+      <br />
+      <br />
+     
 
-          <Container text >
-            <p>
-              {this.state.event.description}
-            </p>
-          </Container>
-        </div>
-
+        <Container text textAlign="right" >
+          <p>Location:</p>
+          <p> {this.state.event.location} </p>
+          <p>
+            Description:
+          </p>
+          <p>
+            {this.state.event.description}
+          </p>
+        </Container>
+      <br />
+        <Container textAlign="center">
+          <Button  onClick={() => this.deleteEvent()} inverted color="red">Delete Event</Button>
+        </Container>
+   
+     
       </>
     )
   }
