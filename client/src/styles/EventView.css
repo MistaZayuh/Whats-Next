@@ -1,0 +1,51 @@
+.banner-event-name {
+    z-index: 1;
+    position: absolute;
+    top: 35%;
+    left: 15%;
+    text-align: center;
+}
+
+.event-name {
+    color: white;
+    font-family: 'Bitter', serif;
+    font-size: 4em;
+}
+
+.banner-event-date {
+    z-index: 2;
+    position: absolute;
+    top: 44%;
+    left: 15%;
+    text-align: center;
+}
+
+.event-date {
+    color: lightgrey;
+
+}
+
+.background-image-events {
+    background-position: center;
+    background-size: cover;
+    z-index: -100;
+    width: 100%;
+    height: 350px;
+    
+}
+
+.opacity-test {
+    height: 100%;
+    width: 100%;
+    filter: blur(1.5px) brightness(60%);
+    background-size: cover;
+    background-position: center;
+}
+
+.join-event-button {
+    z-index: 100;
+    position: absolute;
+    top: 63%;
+    left: 85%;
+}
+

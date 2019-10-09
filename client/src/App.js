@@ -17,8 +17,9 @@ import { Container, } from "semantic-ui-react";
 const App = () => (
   <>
     <NavBar />
+  
     <FetchUser>
-      <Container>
+      {/* <Container> */}
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
@@ -31,7 +32,7 @@ const App = () => (
           <ProtectedRoute exact path="/users/:id/edit" component={UserForm} />
           <Route component={NoMatch} />
         </Switch>
-      </Container>
+      {/* </Container> */}
     </FetchUser>
   </>
 )
