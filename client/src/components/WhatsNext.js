@@ -21,7 +21,7 @@ class WhatsNext extends React.Component {
 			return (
 					<div style={{display: "flex", justifyContent: "space-around"}}>
 							<Link to={`/events/${this.props.nextEvent.id}`}>
-							<Card style={{ width: "600px", height: "250px" }} className="bg-dark text-white">
+							<Card style={{ width: "700px", height: "250px" }} className="bg-dark text-white">
 									<MyCardImage  src={this.props.nextEvent.image || building} alt="nextEvent location" />
 									<Card.ImgOverlay>
 											<Card.Title>{this.props.nextEvent.name}</Card.Title>
