@@ -25,25 +25,17 @@ class SearchBarModal extends React.Component {
       })
       .catch(err => { })
   }
-
-  
   render() {
     return (
       <div>
         <Modal {...this.props}>
           <Modal.Header closeButton >
             <Modal.Body>
-
        <Search
        size="sm"
             input={{ icon: 'search', iconPosition: 'left' }} />
             </Modal.Body>
           </Modal.Header>
-          {/* <Modal.Footer>
-          <Button variant="secondary" onClick={this.props.onHide}>
-            Close</Button>
-          </Modal.Footer> */}
-
         </Modal>
       </div>
     )
