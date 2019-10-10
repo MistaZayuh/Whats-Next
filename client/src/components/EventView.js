@@ -5,8 +5,9 @@ import building from "../images/building.jpeg";
 import party from "../images/party.jpg";
 import styled from "styled-components";
 import { Carousel, } from "react-bootstrap";
-import { Grid, Segment, Button, Container } from "semantic-ui-react";
+import { Grid, Segment, Button, Container, Card, Image } from "semantic-ui-react";
 import "../styles/EventView.css";
+import CommentForm from "./CommentForm";
 
 class EventView extends React.Component {
   state = { event: {}, eventUsers: [] };
@@ -43,109 +44,27 @@ class EventView extends React.Component {
       })
   };
 
-  render() {
-<<<<<<< HEAD
+  listPosts = () => {
     return(
-      <> 
-      <br />
-      <Container >
-        {/* <Image src="/client/src/images/building.jpeg" fluid /> */}
-        <Header 
-          
-          as="h1" 
-          size="huge"
-          textAlign="left">
-          {this.state.event.name}
-        </Header>
-        <Header
-          sub
-          size="large"
-          textAlign="left">
-          {this.state.event.date}
-          </Header>
-        
-      </Container>  
-      <br />
-     
-        <Container textAlign="right">
-        </Container>
-     
-      <br />
-      <br />
+      <Card fluid>
+        <Card.Content>
+          <Image
+            floated='left'
+            size='mini'
+            src='https://react.semantic-ui.com/images/avatar/large/steve.jpg'
+          />
+          <Card.Header>Steve Sanders</Card.Header>
+          <Card.Meta>Date Posted</Card.Meta>
+          <Card.Description>
+            Post content
+          </Card.Description>
+        </Card.Content>
+      </Card>
       
-      <div>
-      <Container style={{ padding: '5em 0em' }}>
-        <Grid columns={2}>
+    )
+  }
 
-          <Grid.Column >Create Post</Grid.Column>
-
-          
-
-          <Grid.Column width={4} >
-            <Segment  basic>{this.state.event.description}</Segment>
-            <Segment.Group >
-              <Segment>Going -</Segment>
-              <Segment.Group>
-                <Segment>Person 1</Segment>
-                <Segment>Person 2</Segment>
-                <Segment>Person 3</Segment>
-              </Segment.Group>
-            </Segment.Group>
-
-            <Segment basic >
-              <Button  
-                onClick={() => this.deleteEvent()} 
-                inverted color="red"
-                size="small"
-                >
-                Delete Event
-              </Button>
-              <Button 
-                as={Link} 
-                to={`/events/${this.state.event.id}/edit`}   
-                inverted color="blue" 
-                size="small"
-                >
-                Edit Event
-              </Button>
-            </Segment>
-          </Grid.Column>
-        </Grid>
-      </Container>
-      </div>
-
-      <br />
-      <br />
-     
-
-        {/* <Container text textAlign="right" >
-          <p>Location:</p>
-          <p> {this.state.event.location} </p>
-          <p>
-            Description:
-          </p>
-          <p>
-            {this.state.event.description}
-          </p>
-        </Container> */}
-      {/* <br />
-        <Container textAlign="center">
-          <Button  onClick={() => this.deleteEvent()} inverted color="red">Delete Event</Button>
-          <Button 
-            as={Link} 
-            to={`/events/${this.state.event.id}/edit`}  
-            size="small" 
-            >
-          Edit Event
-          </Button>
-          <Button>
-            Join Event
-          </Button>
-        </Container> */}
-        <br />
-   
-     
-=======
+  render() {
     return (
       <>
 
@@ -190,17 +109,29 @@ class EventView extends React.Component {
       <div>
       <Container style={{ padding: '5em 0em' }}>
         <Grid columns={2}>
-          <Grid.Column >Create Post</Grid.Column>
+          
+          <Grid.Column >
+            <CommentForm />
+            <br />
+            <Segment basic>
+              <Card.Group>
+                {this.listPosts()}
+              </Card.Group>
+            </Segment>
+          </Grid.Column>
+
           
           <Grid.Column width={4} >
             <Segment  basic>{this.state.event.description}</Segment>
             <Segment.Group >
-              <Segment>Going -</Segment>
-              <Segment.Group>
-                <Segment>Person 1</Segment>
-                <Segment>Person 2</Segment>
-                <Segment>Person 3</Segment>
-              </Segment.Group>
+              <Segment>
+                Going -
+              </Segment>
+                <Segment.Group>
+                  <Segment>Person 1</Segment>
+                  <Segment>Person 2</Segment>
+                  <Segment>Person 3</Segment>
+                </Segment.Group>
             </Segment.Group>
             <Segment basic >
               <Button  
@@ -226,7 +157,6 @@ class EventView extends React.Component {
       <br />
 
 
->>>>>>> 0eba28d9013e89737bbe6c70c536e8bdf72abb74
       </>
     )
   }
