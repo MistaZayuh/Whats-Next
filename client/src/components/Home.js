@@ -5,7 +5,8 @@ import Upcoming from "./Upcoming";
 import { Link, } from "react-router-dom";
 import { AuthConsumer } from "../providers/AuthProvider";
 import { Header, Container, } from 'semantic-ui-react';
-import { Card } from 'react-bootstrap';
+import { CardGroup } from 'react-bootstrap';
+import "../styles/Home.css";
 
 class Home extends React.Component {
   state = { events: null, nextEvent: {}, };
@@ -23,16 +24,18 @@ class Home extends React.Component {
       })
   };
 
-  renderUpcoming = () => {
-    let upcoming = this.state.events
-    upcoming.shift()
-    return upcoming.map(e => (
-      <Upcoming 
-      key={e.id}
-      event={e}
-      />
-    ))
-  }
+  // renderUpcoming = () => {
+  //   let upcoming = this.state.events
+  //   upcoming.shift()
+  //   return upcoming.map(e => (
+
+  //     <Upcoming 
+  //     key={e.id}
+  //     event={e}
+  //     />
+      
+  //   ))
+  // }
   
 
   render() {
@@ -41,14 +44,28 @@ class Home extends React.Component {
         {this.state.events ?
           <Container>
             <br />
-            <p style={{ paddingLeft: "255px", color: "gray" }}>What's Next?</p>
+            <div className="whats-next-div">
+            <div className="whats-next-p">
+            <p style={{color: "grey"}}>What's Next?</p>
+            </div>
+            </div>
             <WhatsNext nextEvent={this.state.nextEvent} />
             <br />
-            <p style={{ paddingLeft: "255px", color: "gray" }}>Upcoming Events.</p>
-            {/* <Card.Group> */}
+            <br/>
+            <div className="upcoming-events-div">
+            <div className="upcoming-events-p">
+            <p style={{color: "grey"}}>Upcoming Events...</p>
+            </div>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center"}}>
 
-            {this.renderUpcoming()}
-            {/* </Card.Group> */}
+            <Upcoming 
+            event={this.state.events}
+            
+            />
+            {/* {this.renderUpcoming()} */}
+            </div>
+
           </Container>
           :
           <Container>

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import building from "../images/building.jpeg";
 import party from "../images/party.jpg";
@@ -88,7 +89,7 @@ class EventView extends React.Component {
           <div className="banner-event-date">
             <p
             className="event-date">
-              {this.state.event.date}
+              <Moment format="LLL">{this.state.event.date}</Moment>
             </p>
           </div>
           
