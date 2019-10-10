@@ -8,47 +8,42 @@ import styled from "styled-components";
 import axios from "axios";
 
 class WhatsNext extends React.Component {
-	state = { event: null, };
+	state = { days: null, hours: null, minutes: null, seconds: null, };
 
-	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.nextEvent !== this.props.nextEvent) {
-			this.setState({ event: this.props.nextEvent })
-		}
-		if (prevState.event !== this.state.event) {
-		}
+	componentDidMount() {
+		this.ticker = setInterval(() => this.tick(), 1000)
+	};
+
+	tick = () => {
+		var now = moment().format("X")
+		var eventDate = moment(this.props.nextEvent.date).format("X")
+		var timeLeft = eventDate - now
+
+
+		// this.setState({ years, months, weeks, days, hours, minutes, seconds})
 	};
 
 	renderCountdown = () => {
-		const { nextEvent: { date }, auth: { user } } = this.props
-		axios.get(`/api/accepted_user_events?specificuserid=${user.id}`)
-			.then(res => {
-				if (res.data.length !== 0) {
-					this.setState({ event: res.data[0] })
-				}
-			})
-			.catch(err => {
-				console.log(err)
-			})
-			var eventDate = new Date(date)
-			var now = new Date()
-			let secondsLeft = moment(eventDate).diff(now, "seconds")
-			let subtracted = moment(eventDate).subtract(now)
-			let minutesLeft = moment.duration(moment(eventDate).diff(now))
-			let hoursLeft = eventDate.toDateString()
-			let daysLeft = Math.floor(secondsLeft / 86400) 
-			let weeksLeft = Math.floor(secondsLeft / 604800)
-			let monthsLeft = Math.floor(secondsLeft / 2628288)
-			let yearsLeft = Math.floor(secondsLeft / 31536000)
+		var now = moment().format("LLL")
+		var eventDate = moment(this.props.nextEvent.date).format("LLL")
+		var d = moment(eventDate).format("DDD") - moment(now).format("DDD")
+		var h = moment(eventDate).fromNow()
+		var m = moment(eventDate).format("m") - moment(now).format("m")
+		var s = moment(eventDate).format("s") - moment(now).format("s")
 		return (
 			<Container>
 
-				{yearsLeft == 0 ?
+				{now == 0 ?
 					null
 					:
 					<div>
-						Years: {Math.floor(yearsLeft)}
+						Days: {d}
+						Hours: {h}
+						Minutes: {m}
+						Seconds: {s}
 					</div>
 				}
+				{/* 
 				{monthsLeft == 0 ?
 					null
 					:
@@ -90,7 +85,7 @@ class WhatsNext extends React.Component {
 					<div>
 						Seconds: {Math.floor(secondsLeft)}
 					</div>
-				}
+				} */}
 				
 
 			</Container>

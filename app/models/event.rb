@@ -18,4 +18,5 @@ class Event < ApplicationRecord
 
     ActiveRecord::Base.connection.exec_query(query)
   end
+
 end
