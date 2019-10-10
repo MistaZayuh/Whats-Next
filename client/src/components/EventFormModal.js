@@ -7,6 +7,7 @@ import { Modal, Button, } from "react-bootstrap";
 import { DateTimeInput } from "semantic-ui-calendar-react";
 import { AuthConsumer } from "../providers/AuthProvider";
 
+
 class EventFormModal extends React.Component {
     state = { date: "", name: "", location: "", description: "", open: true };
     
