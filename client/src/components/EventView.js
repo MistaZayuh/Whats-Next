@@ -31,11 +31,11 @@ class EventView extends React.Component {
     const {history, match: {params}} = this.props
     axios.delete(`/api/events/${params.id}`)
       .then( res => {
-        
+        debugger
         history.push("/")
       })
       .catch( err => {
-       
+       debugger
         console.log(err)
       })
   };
