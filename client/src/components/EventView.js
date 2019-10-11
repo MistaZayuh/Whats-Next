@@ -26,16 +26,16 @@ class EventView extends React.Component {
           .catch(err => {
             console.log(err)
           })
+          axios.get(`/api/specific_event_comments?specificeventid=${eventInfo.id}`)
+            .then(res => {
+              this.setState({comments: res.data})
+            })
+            .catch(err => {
+              console.log(err)
+            })
       })
       .catch(err => {
         console.log(err)
-      })
-    axios.get(`/api/events/${id}/comments`)
-      .then(res => {
-        debugger
-      })
-      .catch(err => {
-        debugger
       })
   }
 

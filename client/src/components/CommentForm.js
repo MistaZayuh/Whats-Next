@@ -8,7 +8,7 @@ import Axios from "axios";
 
 
 class CommentForm extends React.Component {
-  state = { comment: "", }
+  state = { body: "", }
 
   handleChange = (e, {name, value}) => {
     this.setState({ [name]: value})
@@ -16,9 +16,9 @@ class CommentForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    debugger
+    const { body} = this.state
     const { event} = this.props;
-    Axios.post(`/api/events/${event.id}/comments`, this.state)
+    Axios.post(`/api/events/${event.id}/comments`, body)
       .then( res => {
         debugger
       })
@@ -26,7 +26,7 @@ class CommentForm extends React.Component {
         debugger
       })
       debugger
-  }
+  };
 
   render() {
     
