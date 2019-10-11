@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_many :invitations
+  has_many :invitations, dependent: :destroy
   has_many :users, through: :invitations
   has_many :comments, dependent: :destroy
 
@@ -14,6 +14,21 @@ class Event < ApplicationRecord
     WHERE event_id = #{specificeventid}
     GROUP BY events.id, username, userid, invitations.accepted, invitations.organizer
     ORDER BY events.date ASC
+    SQL
+
+    ActiveRecord::Base.connection.exec_query(query)
+  end
+
+
+  def self.specific_event_comments(specificeventid)
+    query = <<-SQL
+    SELECT comments.*, users.name, users.image
+    FROM comments
+    INNER JOIN users
+        on user_id = users.id
+    WHERE event_id = #{specificeventid}
+    GROUP BY comments.id, users.name, users.image
+    ORDER BY comments.created_at ASC
     SQL
 
     ActiveRecord::Base.connection.exec_query(query)

@@ -1,5 +1,5 @@
 class Api::EventsController < ApplicationController
-  before_action :set_event, only: [:show, :update, :destroy]
+  before_action :set_event, only: [:show, :update, :destroy, :split_date]
   def index
     render json: Event.event_search(params[:column], params[:search])
   end
@@ -31,6 +31,10 @@ class Api::EventsController < ApplicationController
 
   def specific_event_users 
     render json: Event.specific_event_users(params[:specificeventid])
+  end
+
+  def specific_event_comments
+    render json: Event.specific_event_comments(params[:specificeventid])
   end
 
   private

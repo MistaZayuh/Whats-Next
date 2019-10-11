@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 
 class CommentForm extends React.Component {
-  state = { comment: "", }
+  state = { body: "", }
 
   handleChange = (e, {name, value}) => {
     this.setState({ [name]: value})
@@ -17,17 +17,16 @@ class CommentForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    debugger
-    const { event} = this.props;
-    Axios.post(`/api/events/${event.id}/comments`, this.state)
+    const { body} = this.state
+    const { event, } = this.props;
+    Axios.post(`/api/events/${event.id}/comments`, {body})
       .then( res => {
-        debugger
+        this.setState({body: ""})
       })
       .catch( err => {
-        debugger
+        console.log(err)
       })
-      debugger
-  }
+  };
 
   render() {
     
@@ -42,10 +41,10 @@ class CommentForm extends React.Component {
             circular 
             
             />
-              <MyFormInput 
-                
-                name="comment"
-                value={this.state.comment}
+              <MyFormInput                
+                name="body"
+                value={this.state.body}
+                onSubmit={this.handleSubmit}
                 onChange={this.handleChange}
                 placeholder="Write your thoughts, feelings or ideas"
               />
@@ -76,4 +75,4 @@ const MyFormInput = styled(Form.Input)`
     width: 92% !important;
 `;
 
-export default CommentForm;
+export default ConnectedCommentForm;
