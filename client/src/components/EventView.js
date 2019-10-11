@@ -9,6 +9,9 @@ import { Carousel, } from "react-bootstrap";
 import { Grid, Segment, Button, Container, Card, Image, Header } from "semantic-ui-react";
 import "../styles/EventView.css";
 import CommentForm from "./CommentForm";
+import GoingList from "./GoingList";
+
+
 
 class EventView extends React.Component {
   state = { event: {}, eventUsers: [] };
@@ -108,11 +111,11 @@ class EventView extends React.Component {
 
         <br />
       
-      <div>
-      <Container style={{ padding: '5em 0em' }}>
+      <div >
+      <Container style={{ padding: '2em 0em', }}>
         <Grid columns={2}>
           
-          <Grid.Column >
+          <Grid.Column width={12}>
             <Header >WHAT'S NEW?</Header>
             <CommentForm />
             <br />
@@ -124,33 +127,27 @@ class EventView extends React.Component {
           </Grid.Column>
 
           
-          <Grid.Column width={4} >
+          <Grid.Column width={3} >
             <Segment  basic>{this.state.event.description}</Segment>
-            <Segment.Group >
-              <Segment >
-                Going -
-              </Segment>
-                <Segment.Group>
-                  <Segment>Person 1</Segment>
-                  <Segment>Person 2</Segment>
-                  <Segment>Person 3</Segment>
-                </Segment.Group>
-            </Segment.Group>
+
+            <GoingList />
+
             <Segment basic >
-              <Button  
-                onClick={() => this.deleteEvent()} 
-                inverted color="red"
-                size="small"
-                >
-                Delete Event
-              </Button>
               <Button 
                 as={Link} 
                 to={`/events/${this.state.event.id}/edit`}   
                 inverted color="blue" 
-                size="small"
+                fluid
                 >
                 Edit Event
+              </Button>
+              <br />
+              <Button  
+                onClick={() => this.deleteEvent()} 
+                inverted color="red"
+                fluid
+                >
+                Delete Event
               </Button>
             </Segment>
           </Grid.Column>
