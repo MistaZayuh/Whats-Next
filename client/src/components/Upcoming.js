@@ -14,7 +14,7 @@ const Upcoming = ({ event }) => (
 			<Card.ImgOverlay>
 				<Card.Title>{event.name}</Card.Title>
 				<br />
-				<Card.Text>{moment(event.date).format("LLLL")}</Card.Text>
+				<Card.Text>{moment(event.date).format("ll, h:mm a")}</Card.Text>
 			</Card.ImgOverlay>
 		</Card>
 		<br />

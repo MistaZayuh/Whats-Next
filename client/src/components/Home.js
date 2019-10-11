@@ -57,7 +57,6 @@ class Home extends React.Component {
                 </CardDeck>
                 <br />
               </div>
-              {/* {this.renderUpcoming()} */}
             </div>
 
           </Container>
