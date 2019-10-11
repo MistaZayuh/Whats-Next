@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Form, TextArea, Checkbox, Header } from "semantic-ui-react";
+import { Form, TextArea, Checkbox, Header, Container } from "semantic-ui-react";
 import { DateTimeInput } from "semantic-ui-calendar-react";
 import { AuthConsumer } from "../providers/AuthProvider";
 
@@ -59,7 +59,7 @@ class EventForm extends React.Component {
   render() {
     return (
 
-      <>
+      <Container>
       {this.props.location.pathname === "/events/new" ?
         <Header as="h1" textAlign="center">New Event</Header> 
           :
@@ -111,10 +111,10 @@ class EventForm extends React.Component {
             checked={this.state.open}
             onChange={this.handleCheckChange}
           />
-          <Form.Button primary>Submit</Form.Button>
+          <Form.Button primary >Submit</Form.Button>
         </Form>
         <br />
-      </>
+      </Container>
     )
   };
 };

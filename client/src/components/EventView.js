@@ -6,12 +6,15 @@ import building from "../images/building.jpeg";
 import party from "../images/party.jpg";
 import styled from "styled-components";
 import { Carousel, } from "react-bootstrap";
-import { Grid, Segment, Button, Container, Card, Image } from "semantic-ui-react";
+import { Grid, Segment, Button, Container, Card, Image, Header } from "semantic-ui-react";
 import "../styles/EventView.css";
 import CommentForm from "./CommentForm";
+import GoingList from "./GoingList";
+
+
 
 class EventView extends React.Component {
-  state = { event: {}, eventUsers: [] };
+  state = { event: {}, eventUsers: [], comments: [], };
 
   componentDidMount() {
     const { id } = this.props.match.params
@@ -26,6 +29,13 @@ class EventView extends React.Component {
           .catch(err => {
             console.log(err)
           })
+          axios.get(`/api/specific_event_comments?specificeventid=${eventInfo.id}`)
+            .then(res => {
+              this.setState({comments: res.data})
+            })
+            .catch(err => {
+              console.log(err)
+            })
       })
       .catch(err => {
         console.log(err)
@@ -47,14 +57,18 @@ class EventView extends React.Component {
 
   listPosts = () => {
     return(
-      <Card fluid>
+      // {this.state.comments.map(c => (
+
+        <Card fluid>
         <Card.Content>
           <Image
             floated='left'
+            circular
             size='mini'
-            src='https://react.semantic-ui.com/images/avatar/large/steve.jpg'
-          />
-          <Card.Header>Steve Sanders</Card.Header>
+            circular
+            src={'https://react.semantic-ui.com/images/avatar/large/steve.jpg'}
+            />
+          <Card.Header>User Name</Card.Header>
           <Card.Meta>Date Posted</Card.Meta>
           <Card.Description>
             Post content
@@ -62,6 +76,7 @@ class EventView extends React.Component {
         </Card.Content>
       </Card>
       
+      // ))}
     )
   }
 
@@ -107,12 +122,14 @@ class EventView extends React.Component {
 
         <br />
       
-      <div>
-      <Container style={{ padding: '5em 0em' }}>
+      <div >
+      <Container style={{ padding: '2em 0em', }}>
         <Grid columns={2}>
           
-          <Grid.Column >
-            <CommentForm />
+          <Grid.Column width={12}>
+            <Header >WHAT'S NEW?</Header>
+            <CommentForm event={this.state.event} />         
+      
             <br />
             <Segment basic>
               <Card.Group>
@@ -122,33 +139,27 @@ class EventView extends React.Component {
           </Grid.Column>
 
           
-          <Grid.Column width={4} >
+          <Grid.Column width={3} >
             <Segment  basic>{this.state.event.description}</Segment>
-            <Segment.Group >
-              <Segment>
-                Going -
-              </Segment>
-                <Segment.Group>
-                  <Segment>Person 1</Segment>
-                  <Segment>Person 2</Segment>
-                  <Segment>Person 3</Segment>
-                </Segment.Group>
-            </Segment.Group>
+
+            <GoingList />
+
             <Segment basic >
-              <Button  
-                onClick={() => this.deleteEvent()} 
-                inverted color="red"
-                size="small"
-                >
-                Delete Event
-              </Button>
               <Button 
                 as={Link} 
                 to={`/events/${this.state.event.id}/edit`}   
                 inverted color="blue" 
-                size="small"
+                fluid
                 >
                 Edit Event
+              </Button>
+              <br />
+              <Button  
+                onClick={() => this.deleteEvent()} 
+                inverted color="red"
+                fluid
+                >
+                Delete Event
               </Button>
             </Segment>
           </Grid.Column>
