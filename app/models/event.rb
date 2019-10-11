@@ -19,7 +19,6 @@ class Event < ApplicationRecord
     ActiveRecord::Base.connection.exec_query(query)
   end
 
-<<<<<<< HEAD
   def self.event_search(column, search)
     find_by_sql(["
     SELECT 
@@ -29,7 +28,7 @@ class Event < ApplicationRecord
     FROM events
     WHERE LOWER(name) LIKE LOWER(?);
     ", "%#{search}%"])
-=======
+  end
 
   def self.specific_event_comments(specificeventid)
     query = <<-SQL
@@ -43,6 +42,5 @@ class Event < ApplicationRecord
     SQL
 
     ActiveRecord::Base.connection.exec_query(query)
->>>>>>> 471020a703dc8045884496702ff89afebc39ebf6
   end
 end
