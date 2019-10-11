@@ -2,6 +2,7 @@ import React from "react"
 import {AuthConsumer} from "../providers/AuthProvider";
 import {Comment, Form, Button, Image, Segment} from "semantic-ui-react";
 import Axios from "axios";
+import styled from "styled-components";
 
 
 
@@ -31,14 +32,24 @@ class CommentForm extends React.Component {
     
     return(
       <Segment basic >
-          {/* <Image src={user.image} /> */}
+
           <Form onSubmit={this.handleSubmit}>
-              <Form.Input 
+        <div style={{display: "flex", justifyContent: "space-between", marginBottom: "5px"}}>
+          <Image 
+            src='https://react.semantic-ui.com/images/avatar/large/steve.jpg' 
+            size="mini" 
+            circular 
+            
+            />
+              <MyFormInput                
                 name="body"
                 value={this.state.body}
+                onSubmit={this.handleSubmit}
                 onChange={this.handleChange}
                 placeholder="Write your thoughts, feelings or ideas"
-                />
+              />
+                </div>
+              
               <Form.Button primary floated="right">
                 Post
               </Form.Button>
@@ -60,5 +71,8 @@ export class ConnectedCommentForm extends React.Component {
   }
 }
 
+const MyFormInput = styled(Form.Input)`
+    width: 92% !important;
+`;
 
 export default ConnectedCommentForm;
