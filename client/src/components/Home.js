@@ -5,7 +5,7 @@ import Upcoming from "./Upcoming";
 import { Link, } from "react-router-dom";
 import { AuthConsumer } from "../providers/AuthProvider";
 import { Header, Container, } from 'semantic-ui-react';
-import { CardGroup } from 'react-bootstrap';
+import { CardGroup, CardDeck } from 'react-bootstrap';
 import "../styles/Home.css";
 
 class Home extends React.Component {
@@ -24,46 +24,40 @@ class Home extends React.Component {
       })
   };
 
-  // renderUpcoming = () => {
-  //   let upcoming = this.state.events
-  //   upcoming.shift()
-  //   return upcoming.map(e => (
-
-  //     <Upcoming 
-  //     key={e.id}
-  //     event={e}
-  //     />
-      
-  //   ))
-  // }
-  
-
   render() {
+    const {events, nextEvent} = this.state;
+    if (events !== null) {var eventList = events.slice([1])}
     return (
       <>
-        {this.state.events ?
+        {events ?
           <Container>
             <br />
             <div className="whats-next-div">
-            <div className="whats-next-p">
-            <p style={{color: "grey"}}>What's Next?</p>
+              <div className="whats-next-p">
+                <p style={{ color: "grey" }}>What's Next?</p>
+              </div>
             </div>
-            </div>
-            <WhatsNext nextEvent={this.state.nextEvent} />
+            <WhatsNext nextEvent={nextEvent} />
             <br />
-            <br/>
+            <br />
             <div className="upcoming-events-div">
-            <div className="upcoming-events-p">
-            <p style={{color: "grey"}}>Upcoming Events...</p>
+              <div className="upcoming-events-p">
+                <p style={{ color: "grey" }}>Upcoming Events...</p>
+              </div>
             </div>
-            </div>
-            <div style={{ display: "flex", justifyContent: "center"}}>
-
-            <Upcoming 
-            event={this.state.events}
-            
-            />
-            {/* {this.renderUpcoming()} */}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div style={{ alignItems: "center", width: "700px", height: "250px", justifyContent: "center" }}>
+                <CardDeck>
+                  {eventList.map(e => (
+                    <Upcoming
+                    key={e.id}
+                    event={e}
+                    />
+                    ))}
+                </CardDeck>
+                <br />
+              </div>
+              {/* {this.renderUpcoming()} */}
             </div>
 
           </Container>
@@ -72,7 +66,7 @@ class Home extends React.Component {
             <Header as="h1">It looks like you aren't attending any upcoming events.</Header>
             <Header as="h2">"Why don't you check out the
              <Link to="/explore"> explore page   </Link>
-             and find one."</Header>
+              and find one."</Header>
           </Container>
         }
       </>
