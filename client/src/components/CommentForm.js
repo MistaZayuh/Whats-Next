@@ -17,15 +17,14 @@ class CommentForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { body} = this.state
-    const { event} = this.props;
-    Axios.post(`/api/events/${event.id}/comments`, body)
+    const { event, } = this.props;
+    Axios.post(`/api/events/${event.id}/comments`, {body})
       .then( res => {
-        debugger
+        this.setState({body: ""})
       })
       .catch( err => {
-        debugger
+        console.log(err)
       })
-      debugger
   };
 
   render() {
@@ -35,8 +34,8 @@ class CommentForm extends React.Component {
           {/* <Image src={user.image} /> */}
           <Form onSubmit={this.handleSubmit}>
               <Form.Input 
-                name="comment"
-                value={this.state.comment}
+                name="body"
+                value={this.state.body}
                 onChange={this.handleChange}
                 placeholder="Write your thoughts, feelings or ideas"
                 />
@@ -62,4 +61,4 @@ export class ConnectedCommentForm extends React.Component {
 }
 
 
-export default CommentForm;
+export default ConnectedCommentForm;
