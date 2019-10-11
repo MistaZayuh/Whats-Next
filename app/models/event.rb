@@ -19,6 +19,16 @@ class Event < ApplicationRecord
     ActiveRecord::Base.connection.exec_query(query)
   end
 
+  def self.event_search(column, search)
+    find_by_sql(["
+    SELECT 
+      events.id,
+      events.name AS event_name,
+      events.created_at::date AS formatted_date
+    FROM events
+    WHERE LOWER(name) LIKE LOWER(?);
+    ", "%#{search}%"])
+  end
 
   def self.specific_event_comments(specificeventid)
     query = <<-SQL
