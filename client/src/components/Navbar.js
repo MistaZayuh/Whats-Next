@@ -37,13 +37,13 @@ class NavBar extends React.Component {
       return (
         
         <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px" }} position='right'>
-          
+        
           <Header as='h4'>
             <Menu.Item>
               <Header as="h4">
-              <Icon pointing onClick={ () => this.setState({showSearchModal: true}) } name="search" style={{paddingTop: "10px"}} />
+              <Icon onClick={ () => this.setState({showSearchModal: true}) } name="search" style={{paddingTop: "10px"}}/>
               </Header>
-              <Button color="blue" onClick={ () => this.setState({showEventModal: true})}>Create New Event</Button>
+              <Button  color="blue" onClick={ () => this.setState({showEventModal: true})}>Create New Event</Button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <Image  src={ user.image } roundedCircle />
             <Header.Content>

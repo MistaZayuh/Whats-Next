@@ -1,12 +1,14 @@
 import React from "react";
 import axios from "axios";
+import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import building from "../images/building.jpeg";
 import party from "../images/party.jpg";
 import styled from "styled-components";
 import { Carousel, } from "react-bootstrap";
-import { Grid, Segment, Button, Container } from "semantic-ui-react";
+import { Grid, Segment, Button, Container, Card, Image } from "semantic-ui-react";
 import "../styles/EventView.css";
+import CommentForm from "./CommentForm";
 
 class EventView extends React.Component {
   state = { event: {}, eventUsers: [] };
@@ -43,6 +45,26 @@ class EventView extends React.Component {
       })
   };
 
+  listPosts = () => {
+    return(
+      <Card fluid>
+        <Card.Content>
+          <Image
+            floated='left'
+            size='mini'
+            src='https://react.semantic-ui.com/images/avatar/large/steve.jpg'
+          />
+          <Card.Header>Steve Sanders</Card.Header>
+          <Card.Meta>Date Posted</Card.Meta>
+          <Card.Description>
+            Post content
+          </Card.Description>
+        </Card.Content>
+      </Card>
+      
+    )
+  }
+
   render() {
     return (
       <>
@@ -67,7 +89,7 @@ class EventView extends React.Component {
           <div className="banner-event-date">
             <p
             className="event-date">
-              {this.state.event.date}
+              <Moment format="LLL">{this.state.event.date}</Moment>
             </p>
           </div>
           
@@ -88,17 +110,29 @@ class EventView extends React.Component {
       <div>
       <Container style={{ padding: '5em 0em' }}>
         <Grid columns={2}>
-          <Grid.Column >Create Post</Grid.Column>
+          
+          <Grid.Column >
+            <CommentForm />
+            <br />
+            <Segment basic>
+              <Card.Group>
+                {this.listPosts()}
+              </Card.Group>
+            </Segment>
+          </Grid.Column>
+
           
           <Grid.Column width={4} >
             <Segment  basic>{this.state.event.description}</Segment>
             <Segment.Group >
-              <Segment>Going -</Segment>
-              <Segment.Group>
-                <Segment>Person 1</Segment>
-                <Segment>Person 2</Segment>
-                <Segment>Person 3</Segment>
-              </Segment.Group>
+              <Segment>
+                Going -
+              </Segment>
+                <Segment.Group>
+                  <Segment>Person 1</Segment>
+                  <Segment>Person 2</Segment>
+                  <Segment>Person 3</Segment>
+                </Segment.Group>
             </Segment.Group>
             <Segment basic >
               <Button  
