@@ -4,7 +4,7 @@ class Api::CommentsController < ApplicationController
   before_action :set_comment, only: [:update, :destroy]
   
   def index
-    render json: Comment.all
+    render json: @event.comments.all
   end
 
   def create
