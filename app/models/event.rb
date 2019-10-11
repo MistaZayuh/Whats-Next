@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_many :invitations
+  has_many :invitations, dependent: :destroy
   has_many :users, through: :invitations
   has_many :comments, dependent: :destroy
 
@@ -18,4 +18,5 @@ class Event < ApplicationRecord
 
     ActiveRecord::Base.connection.exec_query(query)
   end
+
 end
