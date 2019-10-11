@@ -33,6 +33,10 @@ class Api::EventsController < ApplicationController
     render json: Event.specific_event_users(params[:specificeventid])
   end
 
+  def specific_event_comments
+    render json: Event.specific_event_comments(params[:specificeventid])
+  end
+
   private
     def set_event
       @event = Event.find(params[:id])

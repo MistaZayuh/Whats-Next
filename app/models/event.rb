@@ -18,4 +18,18 @@ class Event < ApplicationRecord
 
     ActiveRecord::Base.connection.exec_query(query)
   end
+
+  def self.specific_event_comments(specificeventid)
+    query = <<-SQL
+    SELECT comments.*, users.name, users.image
+    FROM comments
+    INNER JOIN users
+        on user_id = users.id
+    WHERE event_id = #{specificeventid}
+    GROUP BY comments.id, users.name, users.image
+    ORDER BY comments.created_at ASC
+    SQL
+
+    ActiveRecord::Base.connection.exec_query(query)
+  end
 end
