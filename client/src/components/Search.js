@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Search = (props) => {
+const Searching = (props) => {
   const [search, setSearch] = useState('')
 
   return (
@@ -11,5 +11,5 @@ const Search = (props) => {
   )
 }
 
-export default Search
+export default Searching
 
