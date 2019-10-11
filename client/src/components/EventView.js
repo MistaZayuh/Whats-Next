@@ -6,7 +6,7 @@ import building from "../images/building.jpeg";
 import party from "../images/party.jpg";
 import styled from "styled-components";
 import { Carousel, } from "react-bootstrap";
-import { Grid, Segment, Button, Container, Card, Image } from "semantic-ui-react";
+import { Grid, Segment, Button, Container, Card, Image, Header } from "semantic-ui-react";
 import "../styles/EventView.css";
 import CommentForm from "./CommentForm";
 
@@ -51,6 +51,7 @@ class EventView extends React.Component {
         <Card.Content>
           <Image
             floated='left'
+            circular
             size='mini'
             src='https://react.semantic-ui.com/images/avatar/large/steve.jpg'
           />
@@ -112,6 +113,7 @@ class EventView extends React.Component {
         <Grid columns={2}>
           
           <Grid.Column >
+            <Header >WHAT'S NEW?</Header>
             <CommentForm />
             <br />
             <Segment basic>
@@ -125,7 +127,7 @@ class EventView extends React.Component {
           <Grid.Column width={4} >
             <Segment  basic>{this.state.event.description}</Segment>
             <Segment.Group >
-              <Segment>
+              <Segment >
                 Going -
               </Segment>
                 <Segment.Group>
