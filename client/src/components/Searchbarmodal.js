@@ -5,30 +5,21 @@ import Searching from './Search';
 import { Modal, Table } from "react-bootstrap";
 
 class SearchBarModal extends React.Component {
-  state = { events: [], search: "", };
-
-  // listEvents = () => {
-  //   return this.state.events.map(event => {
-  //   })
-  // }
+  state = { events: [], };
 
   searchEvent = (e, search) => {
     e.preventDefault();
     axios.get(`api/events?search=${search}`)
-    .then(res => {
-      debugger
-      this.setState({ events: res.data, search })
-    })
-    .catch(err => { 
-      debugger
-
-
+      .then(res => {
+        this.setState({ events: res.data, })
       })
-  }
+      .catch(err => {
+        console.log(err)
+      })
+  };
 
   render() {
-    const { search, events } = this.state
-
+    const { events } = this.state;
     return (
       <div>
         <Modal {...this.props}>
@@ -38,17 +29,14 @@ class SearchBarModal extends React.Component {
                 size="sm"
                 input={{ icon: 'search', iconPosition: 'left' }}
                 searchEvent={this.searchEvent}
-                events={events}
-                search={search}
               />
               <Table>
                 <thead>
-                  <td>
-                    {events.map(e => (
+                  {events.map(e => (
+                    <td>
                       <Upcoming key={e.id} event={e} />
-
-                    ))}
-                  </td>
+                    </td>
+                  ))}
                 </thead>
               </Table>
             </Modal.Body>

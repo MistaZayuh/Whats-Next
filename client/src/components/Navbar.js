@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Menu, Icon, Dropdown, Header, Button, } from 'semantic-ui-react'
-import { Link, withRouter, } from 'react-router-dom'
-import logo from "../images/logo.png"
+import { Menu, Icon, Dropdown, Header, Button, } from 'semantic-ui-react';
+import { Link, withRouter, } from 'react-router-dom';
+import logo from "../images/logo.png";
 import { Nav, Navbar, Image, Modal, } from "react-bootstrap";
 import EventFormModal from "./EventFormModal";
 import axios from 'axios';
 import Search from "./Search";
-import SearchBarModal from './SearchBarModal';
+import SearchBarModal from './Searchbarmodal';
 
 
 class NavBar extends React.Component {
@@ -35,9 +35,7 @@ class NavBar extends React.Component {
     
         if (user) {
       return (
-        
         <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px" }} position='right'>
-        
           <Header as='h4'>
             <Menu.Item>
               <Header as="h4">
