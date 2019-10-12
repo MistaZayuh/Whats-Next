@@ -48,7 +48,7 @@ class EventView extends React.Component {
       .catch(err => {
         console.log(err)
       })
-  }
+  };
 
   joinEvent = () => {
     const {event, joined, eventUsers} = this.state;
@@ -115,7 +115,7 @@ class EventView extends React.Component {
 
       // ))}
     )
-  }
+  };
 
   render() {
     return (
@@ -175,7 +175,7 @@ class EventView extends React.Component {
               </Grid.Column>
               <Grid.Column width={3} >
                 <Segment basic>{this.state.event.description}</Segment>
-                <GoingList />
+                <GoingList users={this.state.eventUsers} />
                 <Segment basic >
                   <Button
                     as={Link}
