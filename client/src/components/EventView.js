@@ -17,7 +17,7 @@ import GoingList from "./GoingList";
 class EventView extends React.Component {
   state = { event: {}, eventUsers: [], comments: [], joined: false, };
   // BE AWARE if you want the user id from eventUsers, you have to call eventUsers.userid, with no underscore
-  // If you only call eventUsers.id, you will get the id of the user's invitation to the event -Isaiah
+  // If you only call eventUsers.id, you will get the id of the event -Isaiah
 
   componentDidMount() {
     const { match: {params: {id}}, auth: {user} } = this.props
@@ -29,7 +29,7 @@ class EventView extends React.Component {
           .then(res => {
             this.setState({ eventUsers: res.data })
             res.data.filter(u => {
-              if (u.userid == user.id ) {
+              if (u.user_id == user.id ) {
                 this.setState({ joined: true})
               }
             })
@@ -54,7 +54,7 @@ class EventView extends React.Component {
     const {event, joined, eventUsers} = this.state;
     axios.post(`/api/events/${event.id}/invitations`, {user_id: this.props.auth.user.id, event_id: event.id, accepted: true})
       .then(res => {
-        this.setState({ joined: true, eventUsers: [this.props.auth.user, ...eventUsers] })
+        this.setState({ joined: true, eventUsers: [res.data, ...eventUsers] })
       })
       .catch(err => {
         console.log(err)
@@ -64,30 +64,31 @@ class EventView extends React.Component {
   leaveEvent = () => {
     const {event, joined, eventUsers} = this.state;
     var invite = eventUsers.filter( u => {
-      if (u.userid == this.props.auth.user.id) {
+      if (u.user_id === this.props.auth.user.id) {
         return {...u}
       }
     });
-    debugger
     axios.delete(`/api/events/${event.id}/invitations/${invite[0].id}`)
       .then(res => {
-        debugger
+        var newEventUsers = this.state.eventUsers.filter( u => {
+          if (u.user_id !== this.props.auth.user.id) {
+            return u
+          }
+        })
+        this.setState({ joined: false, eventUsers: [...newEventUsers] })
       })
       .catch(err => {
-        debugger
+        console.log(err)
       })
-    this.setState({ joined: false })
   };
 
   deleteEvent = () => {
     const { history, match: { params } } = this.props
     axios.delete(`/api/events/${params.id}`)
       .then(res => {
-
         history.push("/")
       })
       .catch(err => {
-
         console.log(err)
       })
   };
