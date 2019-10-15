@@ -8,7 +8,7 @@
 
 .event-name {
     color: white;
-    font-family: 'Bitter', serif;
+    font-family: 'Barlow', sans-serif;
     font-size: 4em;
 }
 
@@ -47,5 +47,36 @@
     position: absolute;
     top: 63%;
     left: 85%;
+}
+
+.countdown-event-all {
+    display: flex;
+    z-index: 500;
+    position: absolute;
+    top: 60%;
+    left: 15%;
+    color: black;
+    justify-content: space-between;
+    padding: 5px
+}
+
+.countdown-day, .countdown-hour, .countdown-minute, .countdown-second {
+    background-color: white;
+    width: 50px;
+    height: 40px;
+    border-radius: 3px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.countdown-labels {
+    display: flex;
+    z-index: 500;
+    position: absolute;
+    top: 57%;
+    left: 16%;
+    color: white;
+    justify-content: space-between;
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Segment, Image } from "semantic-ui-react";
+import styled from "styled-components";
+import { Segment, Image, Header } from "semantic-ui-react";
 
 
 
@@ -14,10 +15,15 @@ class GoingList extends React.Component {
         </Segment>
         <Segment.Group>
           {this.props.users.map(u => (
+         
             <Segment>
-              <Image src={u.userimage} />
-              <p>{u.username}</p>
+              <div style={{display: "flex", }}>
+
+                <Image src={u.userimage} size="mini" circular />
+                <p>{u.username}</p>
+              </div>
             </Segment>
+          
           ))}
         </Segment.Group>
       </Segment.Group>

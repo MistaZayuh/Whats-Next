@@ -18,6 +18,7 @@ class CommentForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.props.addComment(this.state.body);
     const { body } = this.state
     const { event, } = this.props;
     Axios.post(`/api/events/${event.id}/comments`, {body})
@@ -40,7 +41,7 @@ class CommentForm extends React.Component {
             src='https://react.semantic-ui.com/images/avatar/large/steve.jpg' 
             size="mini" 
             circular 
-            
+            style={{width: "38px"}}
             />
               <MyFormInput                
                 name="body"
@@ -49,7 +50,7 @@ class CommentForm extends React.Component {
                 onChange={this.handleChange}
                 placeholder="Write your thoughts, feelings or ideas"
               />
-          </div>
+        </div>
               
               <Form.Button primary floated="right">
                 Post
