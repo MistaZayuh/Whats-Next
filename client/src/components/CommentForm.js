@@ -38,7 +38,7 @@ class CommentForm extends React.Component {
           <Form onSubmit={this.handleSubmit}>
         <div style={{display: "flex", justifyContent: "space-between", marginBottom: "5px"}}>
           <Image 
-            src='https://react.semantic-ui.com/images/avatar/large/steve.jpg' 
+            src={this.props.auth.user.image} 
             size="mini" 
             circular 
             style={{width: "38px"}}
