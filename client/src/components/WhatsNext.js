@@ -21,31 +21,31 @@ class WhatsNext extends React.Component {
 	}
 
 	render() {
-		return (
-			<div style={{ display: "flex", justifyContent: "space-around" }}>
-				<Link to={`/events/${this.props.nextEvent.id}`}>
-					<Card style={{ width: "700px", height: "200px" }} className="bg-dark text-white">
-						<MyCardImage src={this.props.nextEvent.image || building} alt="nextEvent location" />
-						<Card.ImgOverlay>
-							<Card.Title>{this.props.nextEvent.name}</Card.Title>
-							<Card.Text>
-								{this.props.nextEvent.description}
-							</Card.Text>
-							<Card.Text>{moment(this.props.nextEvent.date).format('MMMM Do YYYY, h:mm:ss a')}</Card.Text>
-							<Container>
-								<div>
-									{/* { this.state.days } days */}
-								</div>
-								<div>
-									{/* { this.state.hours } Hours */}
-								</div>
-							</Container>
-						</Card.ImgOverlay>
+			return (
+					<div style={{display: "flex", justifyContent: "space-around"}}>
+							<Link to={`/events/${this.props.nextEvent.id}`}>
+							<Card style={{ width: "700px", height: "200px" }} className="bg-dark text-white">
+									<MyCardImage  src={this.props.nextEvent.image || building} alt="nextEvent location" />
+									<Card.ImgOverlay>
+											<MyCardTitle>{this.props.nextEvent.name}</MyCardTitle>
+											{/* <Card.Text>
+													{this.props.nextEvent.description}
+												</Card.Text>
+											<Card.Text>{moment(this.props.nextEvent.date).format('MMMM Do YYYY, h:mm:ss a') }</Card.Text> */}
+											<Container>
+												<div>
+													{/* { this.state.days } days */}
+												</div>
+												<div>
+													{/* { this.state.hours } Hours */}
+												</div>
+											</Container>
+									</Card.ImgOverlay>
 
-					</Card>
-				</Link>
-			</div>
-		);
+							</Card>
+							</Link>
+					</div>
+			);
 	};
 };
 
@@ -63,4 +63,10 @@ const MyCardImage = styled(Card.Img)`
     filter: blur(2.5px) brightness(60%);
 `;
 
-export default ConnectedWhatsNext;
+const MyCardTitle = styled(Card.Title)`
+    color: white;
+    font-family: 'Barlow', sans-serif;
+    font-size: 3em !important;
+`;
+
+export default WhatsNext;

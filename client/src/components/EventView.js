@@ -10,6 +10,7 @@ import { Carousel, } from "react-bootstrap";
 import { Grid, Segment, Button, Container, Card, Image, Header } from "semantic-ui-react";
 import "../styles/EventView.css";
 import CommentForm from "./CommentForm";
+import Clock from "./Clock";
 import GoingList from "./GoingList";
 
 
@@ -54,7 +55,7 @@ class EventView extends React.Component {
     const {event, joined, eventUsers} = this.state;
     axios.post(`/api/events/${event.id}/invitations`, {user_id: this.props.auth.user.id, event_id: event.id, accepted: true})
       .then(res => {
-        this.setState({ joined: true, eventUsers: [res.data, ...eventUsers] })
+        this.setState({ joined: true, eventUsers: [{...res.data, ...this.props.auth.user}, ...eventUsers] })
       })
       .catch(err => {
         console.log(err)
@@ -121,25 +122,32 @@ class EventView extends React.Component {
   render() {
     return (
       <>
-        <div>
-          <div className='opacity-test'>
-            <img src={building} className='background-image-events' />
-          </div>
-          <Container>
-            <div className="banner-event-name" >
-              <h1
-                className="event-name"
+
+
+              <div>
+                <div className='opacity-test'>
+                <img src={building} className='background-image-events'/>
+                </div>
+            
+
+        <Container>
+          <div className="banner-event-name" >
+            <h1
+            className="event-name"
               >
-                {this.state.event.name}
-              </h1>
-            </div>
-            <div className="banner-event-date">
-              <p
-                className="event-date">
-                <Moment format="LLL">{this.state.event.date}</Moment>
-              </p>
-            </div>
-            <div>
+              {this.state.event.name}
+            </h1>
+          </div>
+          <div className="banner-event-date">
+            <p
+            className="event-date">
+              <Moment format="LLL">{this.state.event.date}</Moment>
+            </p>
+          </div>
+              <Clock
+              deadline={this.state.event.date}
+               />
+               <div>
               {this.state.joined ? 
               <Button
               color="red"
@@ -157,8 +165,9 @@ class EventView extends React.Component {
               </Button>
             }
             </div>
-          </Container>
-        </div>
+        </Container>
+          </div>
+        
         <br />
         <br />
         <div >
