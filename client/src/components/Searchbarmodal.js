@@ -27,8 +27,9 @@ class SearchBarModal extends React.Component {
             <Modal.Body>
               <Searching
                 size="sm"
-                input={{ icon: 'search', iconPosition: 'left' }}
+                input={{ icon: 'search', iconPosition: 'left', fluid: true }}
                 searchEvent={this.searchEvent}
+                
               />
               <Table>
                 <thead>
@@ -42,7 +43,7 @@ class SearchBarModal extends React.Component {
             </Modal.Body>
           </Modal.Header>
         </Modal>
-      </div>
+     </div>
     )
   }
 }

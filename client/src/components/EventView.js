@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Moment from "react-moment";
+import moment from "moment";
 import { Link } from "react-router-dom";
 import building from "../images/building.jpeg";
 import { AuthConsumer, } from "../providers/AuthProvider";
@@ -94,9 +95,19 @@ class EventView extends React.Component {
       })
   };
 
+  addComment = (body) => {
+    const {comments} = this.state;
+    const comment = {body}
+    this.setState({comments: [comment, ...this.state.comments]})
+  }
+
+  
   listPosts = () => {
-    return (
-      // {this.state.comments.map(c => (
+    if (this.state.comments.length <= 0)
+      return <Header as="h2" >No Comments</Header>
+    
+    return ( 
+      this.state.comments.map(c => (
 
       <Card fluid>
         <Card.Content>
@@ -104,18 +115,17 @@ class EventView extends React.Component {
             floated='left'
             circular
             size='mini'
-            circular
             src={'https://react.semantic-ui.com/images/avatar/large/steve.jpg'}
           />
-          <Card.Header>User Name</Card.Header>
-          <Card.Meta>Date Posted</Card.Meta>
+          <Card.Header>{c.name}</Card.Header>
+          <Card.Meta>{moment(c.date).format("LLL")}</Card.Meta>
           <Card.Description>
-            Post content
+            {c.body}
           </Card.Description>
         </Card.Content>
       </Card>
 
-      // ))}
+      ))
     )
   };
 
@@ -175,7 +185,7 @@ class EventView extends React.Component {
             <Grid columns={2}>
               <Grid.Column width={12}>
                 <Header >WHAT'S NEW?</Header>
-                <CommentForm event={this.state.event} />
+                <CommentForm event={this.state.event} addComment={this.addComment}/>
                 <br />
                 <Segment basic>
                   <Card.Group>
@@ -213,7 +223,6 @@ class EventView extends React.Component {
     )
   }
 };
-
 const ConnectedEventView = (props) => (
   <AuthConsumer>
     {auth =>
@@ -221,7 +230,4 @@ const ConnectedEventView = (props) => (
     }
   </AuthConsumer>
 )
-
-
-
 export default ConnectedEventView;
