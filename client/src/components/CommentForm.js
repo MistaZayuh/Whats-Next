@@ -18,12 +18,12 @@ class CommentForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addComment(this.state.body);
     const { body } = this.state
     const { event, } = this.props;
     Axios.post(`/api/events/${event.id}/comments`, {body})
-      .then( res => {
-        this.setState({body: ""})
+    .then( res => {
+      this.setState({body: ""})
+      this.props.addComment(res.data);
       })
       .catch( err => {
         console.log(err)
@@ -38,7 +38,7 @@ class CommentForm extends React.Component {
           <Form onSubmit={this.handleSubmit}>
         <div style={{display: "flex", justifyContent: "space-between", marginBottom: "5px"}}>
           <Image 
-            src='https://react.semantic-ui.com/images/avatar/large/steve.jpg' 
+            src={this.props.auth.user.image} 
             size="mini" 
             circular 
             style={{width: "38px"}}
