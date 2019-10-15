@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Card, Container  } from "react-bootstrap";
+import { Card, Container  } from "react-bootstrap";
 import { Link, } from "react-router-dom";
 import moment from "moment";
 import building from "../images/building.jpeg";
@@ -24,11 +24,11 @@ class WhatsNext extends React.Component {
 							<Card style={{ width: "700px", height: "200px" }} className="bg-dark text-white">
 									<MyCardImage  src={this.props.nextEvent.image || building} alt="nextEvent location" />
 									<Card.ImgOverlay>
-											<Card.Title>{this.props.nextEvent.name}</Card.Title>
-											<Card.Text>
+											<MyCardTitle>{this.props.nextEvent.name}</MyCardTitle>
+											{/* <Card.Text>
 													{this.props.nextEvent.description}
 												</Card.Text>
-											<Card.Text>{moment(this.props.nextEvent.date).format('MMMM Do YYYY, h:mm:ss a') }</Card.Text>
+											<Card.Text>{moment(this.props.nextEvent.date).format('MMMM Do YYYY, h:mm:ss a') }</Card.Text> */}
 											<Container>
 												<div>
 													{/* { this.state.days } days */}
@@ -50,6 +50,12 @@ const MyCardImage = styled(Card.Img)`
     width: 650px;
     height: 200px;
     filter: blur(2.5px) brightness(60%);
+`;
+
+const MyCardTitle = styled(Card.Title)`
+    color: white;
+    font-family: 'Barlow', sans-serif;
+    font-size: 3em !important;
 `;
 
 export default WhatsNext;

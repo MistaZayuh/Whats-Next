@@ -3,12 +3,12 @@ import axios from "axios";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import building from "../images/building.jpeg";
-import party from "../images/party.jpg";
 import styled from "styled-components";
 import { Carousel, } from "react-bootstrap";
 import { Grid, Segment, Button, Container, Card, Image } from "semantic-ui-react";
 import "../styles/EventView.css";
 import CommentForm from "./CommentForm";
+import Clock from "./Clock";
 
 class EventView extends React.Component {
   state = { event: {}, eventUsers: [] };
@@ -77,7 +77,6 @@ class EventView extends React.Component {
             
 
         <Container>
-        
           <div className="banner-event-name" >
             <h1
             className="event-name"
@@ -85,22 +84,15 @@ class EventView extends React.Component {
               {this.state.event.name}
             </h1>
           </div>
-
           <div className="banner-event-date">
             <p
             className="event-date">
               <Moment format="LLL">{this.state.event.date}</Moment>
             </p>
           </div>
-          
-
-          <div>
-            <Button
-            color="blue" 
-            className="join-event-button">
-              Join Event
-              </Button>
-          </div>
+              <Clock
+              deadline={this.state.event.date}
+               />
         </Container>
           </div>
         <br />

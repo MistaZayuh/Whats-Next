@@ -7,7 +7,7 @@ import { Nav, Navbar, Image, Modal, } from "react-bootstrap";
 import EventFormModal from "./EventFormModal";
 import axios from 'axios';
 import Search from "./Search";
-import SearchBarModal from './SearchBarModal';
+import SearchBarModal from './Searchbarmodal';
 
 
 class NavBar extends React.Component {

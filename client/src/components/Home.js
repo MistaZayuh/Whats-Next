@@ -54,7 +54,7 @@ class Home extends React.Component {
             <br/>
             <div className="upcoming-events-div">
             <div className="upcoming-events-p">
-            <p style={{color: "grey"}}>Upcoming Events...</p>
+            <p style={{color: "grey"}}>What's Coming Up?</p>
             </div>
             </div>
             <div style={{ display: "flex", justifyContent: "center"}}>
