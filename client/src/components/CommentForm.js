@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import moment from "moment";
 import {AuthConsumer} from "../providers/AuthProvider";
 import {Comment, Form, Button, Image, Segment} from "semantic-ui-react";
 import Axios from "axios";
@@ -17,7 +18,8 @@ class CommentForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { body} = this.state
+    this.props.addComment(this.state.body);
+    const { body } = this.state
     const { event, } = this.props;
     Axios.post(`/api/events/${event.id}/comments`, {body})
       .then( res => {
@@ -39,7 +41,7 @@ class CommentForm extends React.Component {
             src='https://react.semantic-ui.com/images/avatar/large/steve.jpg' 
             size="mini" 
             circular 
-            
+            style={{width: "38px"}}
             />
               <MyFormInput                
                 name="body"
@@ -48,7 +50,7 @@ class CommentForm extends React.Component {
                 onChange={this.handleChange}
                 placeholder="Write your thoughts, feelings or ideas"
               />
-                </div>
+        </div>
               
               <Form.Button primary floated="right">
                 Post
