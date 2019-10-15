@@ -101,7 +101,7 @@ class EventView extends React.Component {
   addComment = (comment) => {
     const {comments} = this.state;
     // const comment = {body,}
-    this.setState({comments: [{...comment, name: this.props.auth.user.name}, ...this.state.comments]})
+    this.setState({comments: [{...comment, name: this.props.auth.user.name, image: this.props.auth.user.image}, ...this.state.comments]})
   }
 
   
