@@ -5,14 +5,14 @@ class Event < ApplicationRecord
 
   def self.specific_event_users(specificeventid)
     query = <<-SQL
-    SELECT events.*, invitations.accepted, invitations.organizer, users.name AS username, users.id AS userid, users.image AS userimage
+    SELECT events.*, events.id AS eventid, invitations.accepted, invitations.organizer, invitations.id, users.name AS username, users.id AS user_id, users.image AS userimage
     FROM invitations
     INNER JOIN users
         on user_id = users.id
     INNER JOIN events
         on event_id = events.id
     WHERE event_id = #{specificeventid}
-    GROUP BY events.id, username, userid, invitations.accepted, invitations.organizer, userimage
+    GROUP BY eventid, username, users.id, invitations.accepted, invitations.id, invitations.organizer, userimage
     ORDER BY events.date ASC
     SQL
 
