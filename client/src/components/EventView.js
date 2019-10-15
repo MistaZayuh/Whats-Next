@@ -14,6 +14,7 @@ import CommentForm from "./CommentForm";
 import Clock from "./Clock";
 import GoingList from "./GoingList";
 
+const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class EventView extends React.Component {
   state = { event: {}, eventUsers: [], comments: [], joined: false, };
@@ -50,6 +51,8 @@ class EventView extends React.Component {
         console.log(err)
       })
   };
+
+  
 
   joinEvent = () => {
     const { auth: { user } } = this.props
@@ -95,10 +98,10 @@ class EventView extends React.Component {
       })
   };
 
-  addComment = (body) => {
+  addComment = (comment) => {
     const {comments} = this.state;
-    const comment = {body}
-    this.setState({comments: [comment, ...this.state.comments]})
+    // const comment = {body,}
+    this.setState({comments: [{...comment, name: this.props.auth.user.name}, ...this.state.comments]})
   }
 
   
@@ -115,10 +118,10 @@ class EventView extends React.Component {
             floated='left'
             circular
             size='mini'
-            src={'https://react.semantic-ui.com/images/avatar/large/steve.jpg'}
+            src={c.image || defaultImage }
           />
           <Card.Header>{c.name}</Card.Header>
-          <Card.Meta>{moment(c.date).format("LLL")}</Card.Meta>
+          <Card.Meta>{moment(c.created_at).format("LLL")}</Card.Meta>
           <Card.Description>
             {c.body}
           </Card.Description>
