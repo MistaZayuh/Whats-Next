@@ -5,6 +5,17 @@ import { Segment, Image, Header } from "semantic-ui-react";
 
 
 class GoingList extends React.Component {
+  state = { users: [], };
+
+  componentDidMount() {
+    this.setState({users: this.props.users})
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      this.setState({users: this.props.users})
+    }
+  };
 
 
   render() {
@@ -14,13 +25,12 @@ class GoingList extends React.Component {
           Going -
         </Segment>
         <Segment.Group>
-          {this.props.users.map(u => (
-         
-            <Segment>
+          {this.state.users.map(u => (
+            <Segment key={u.id}>
               <div style={{display: "flex", }}>
 
-                <Image src={u.userimage} size="mini" circular />
-                <p>{u.username}</p>
+              <Image src={u.image} size="mini" circular />
+              <p>{u.name}</p>
               </div>
             </Segment>
           
