@@ -31,13 +31,14 @@ class SearchBarModal extends React.Component {
         <Modal {...this.props}>
           <Modal.Header closeButton >
             <Modal.Body>
-       <Search
-       size="sm"
-            input={{ icon: 'search', iconPosition: 'left' }} />
+          <Search
+            size="sm"
+            input={{ icon: 'search', iconPosition: 'left', fluid: true }} 
+            />
             </Modal.Body>
           </Modal.Header>
         </Modal>
-      </div>
+     </div>
     )
   }
 }

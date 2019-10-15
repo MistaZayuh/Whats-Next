@@ -40,12 +40,12 @@ class EventForm extends React.Component {
         axios.post("/api/events", this.state )
         .then(res => {
           axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
+          
           history.push(`/events/${res.data.id}`)
       })
     } else {
       axios.put(`/api/events/${match.params.id}`, this.state)
       .then(res => {
-        
         history.push(`/events/${match.params.id}`)
       })
     }

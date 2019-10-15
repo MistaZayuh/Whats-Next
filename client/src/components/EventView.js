@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import building from "../images/building.jpeg";
 import party from "../images/party.jpg";
 import styled from "styled-components";
+import moment from "moment";
 import { Carousel, } from "react-bootstrap";
 import { Grid, Segment, Button, Container, Card, Image, Header } from "semantic-ui-react";
 import "../styles/EventView.css";
@@ -55,29 +56,30 @@ class EventView extends React.Component {
       })
   };
 
-  listPosts = () => {
-    return(
-      // {this.state.comments.map(c => (
+  // componentDidUpdate() {
 
-        <Card fluid>
+  // }
+
+  listPosts = () => {
+    return this.state.comments.map (c => ( 
+      <Card fluid>
         <Card.Content>
           <Image
             floated='left'
             circular
-            size='mini'
-            circular
+            size='mini'            
             src={'https://react.semantic-ui.com/images/avatar/large/steve.jpg'}
             />
-          <Card.Header>User Name</Card.Header>
-          <Card.Meta>Date Posted</Card.Meta>
+          <Card.Header>{c.name}</Card.Header>
+          <Card.Meta>{moment(c.created_at).format("LLL")}</Card.Meta>
           <Card.Description>
-            Post content
+            {c.body}
           </Card.Description>
         </Card.Content>
       </Card>
       
-      // ))}
-    )
+      
+    ))
   }
 
   render() {
@@ -133,6 +135,7 @@ class EventView extends React.Component {
             <br />
             <Segment basic>
               <Card.Group>
+                
                 {this.listPosts()}
               </Card.Group>
             </Segment>
