@@ -13,14 +13,13 @@ import Clock from "./Clock";
 import GoingList from "./GoingList";
 
 
-
 class EventView extends React.Component {
   state = { event: {}, eventUsers: [], comments: [], joined: false, };
   // BE AWARE if you want the user id from eventUsers, you have to call eventUsers.userid, with no underscore
   // If you only call eventUsers.id, you will get the id of the event -Isaiah
 
   componentDidMount() {
-    const { match: {params: {id}}, auth: {user} } = this.props
+    const { match: { params: { id } }, auth: { user } } = this.props
     axios.get(`/api/events/${id}`)
       .then(res => {
         this.setState({ event: res.data })
@@ -29,8 +28,8 @@ class EventView extends React.Component {
           .then(res => {
             this.setState({ eventUsers: res.data })
             res.data.filter(u => {
-              if (u.user_id == user.id ) {
-                this.setState({ joined: true})
+              if (u.user_id == user.id) {
+                this.setState({ joined: true })
               }
             })
           })
@@ -51,10 +50,11 @@ class EventView extends React.Component {
   };
 
   joinEvent = () => {
-    const {event, joined, eventUsers} = this.state;
-    axios.post(`/api/events/${event.id}/invitations`, {user_id: this.props.auth.user.id, event_id: event.id, accepted: true})
+    const { auth: { user } } = this.props
+    const { event, joined, eventUsers } = this.state;
+    axios.post(`/api/events/${event.id}/invitations`, { user_id: user.id, event_id: event.id, accepted: true })
       .then(res => {
-        this.setState({ joined: true, eventUsers: [{...res.data, ...this.props.auth.user}, ...eventUsers] })
+        this.setState({ joined: true, eventUsers: [{ ...res.data, image: user.image, name: user.name }, ...eventUsers] })
       })
       .catch(err => {
         console.log(err)
@@ -62,15 +62,15 @@ class EventView extends React.Component {
   };
 
   leaveEvent = () => {
-    const {event, joined, eventUsers} = this.state;
-    var invite = eventUsers.filter( u => {
+    const { event, joined, eventUsers } = this.state;
+    var invite = eventUsers.filter(u => {
       if (u.user_id === this.props.auth.user.id) {
-        return {...u}
+        return { ...u }
       }
     });
     axios.delete(`/api/events/${event.id}/invitations/${invite[0].id}`)
       .then(res => {
-        var newEventUsers = this.state.eventUsers.filter( u => {
+        var newEventUsers = this.state.eventUsers.filter(u => {
           if (u.user_id !== this.props.auth.user.id) {
             return u
           }
@@ -130,52 +130,48 @@ class EventView extends React.Component {
   render() {
     return (
       <>
-
-
-              <div>
-                <div className='opacity-test'>
-                <img src={building} className='background-image-events'/>
-                </div>
-            
-
-        <Container>
-          <div className="banner-event-name" >
-            <h1
-            className="event-name"
-              >
-              {this.state.event.name}
-            </h1>
+        <div>
+          <div className='opacity-test'>
+            <img src={building} className='background-image-events' />
           </div>
-          <div className="banner-event-date">
-            <p
-            className="event-date">
-              <Moment format="LLL">{this.state.event.date}</Moment>
-            </p>
-          </div>
-              <Clock
-              deadline={this.state.event.date}
-               />
-               <div>
-              {this.state.joined ? 
-              <Button
-              color="red"
-              onClick={this.leaveEvent}
+          <Container>
+            <div className="banner-event-name" >
+              <h1
+                className="event-name"
               >
-                Leave Event
-              </Button>
-              :
-              <Button
-              color="blue"
-              className="join-event-button"
-              onClick={this.joinEvent}
-              >
-                Join Event
-              </Button>
-            }
+                {this.state.event.name}
+              </h1>
             </div>
-        </Container>
-          </div>
-        
+            <div className="banner-event-date">
+              <p
+                className="event-date">
+                <Moment format="LLL">{this.state.event.date}</Moment>
+              </p>
+            </div>
+            <Clock
+              deadline={this.state.event.date}
+            />
+            <div>
+              {this.state.joined ?
+                <Button
+                  color="red"
+                  onClick={this.leaveEvent}
+                >
+                  Leave Event
+              </Button>
+                :
+                <Button
+                  color="blue"
+                  className="join-event-button"
+                  onClick={this.joinEvent}
+                >
+                  Join Event
+              </Button>
+              }
+            </div>
+          </Container>
+        </div>
+
         <br />
         <br />
         <div >
@@ -224,7 +220,7 @@ class EventView extends React.Component {
 const ConnectedEventView = (props) => (
   <AuthConsumer>
     {auth =>
-    <EventView {...props} auth={auth} /> 
+      <EventView {...props} auth={auth} />
     }
   </AuthConsumer>
 )
