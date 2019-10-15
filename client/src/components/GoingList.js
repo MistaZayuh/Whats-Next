@@ -25,7 +25,7 @@ class GoingList extends React.Component {
         </Segment>
         <Segment.Group>
           {this.state.users.map(u => (
-            <Segment>
+            <Segment key={u.id}>
               <Image src={u.image} />
               <p>{u.name}</p>
             </Segment>
