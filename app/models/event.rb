@@ -46,7 +46,7 @@ class Event < ApplicationRecord
         on user_id = users.id
     WHERE event_id = #{specificeventid}
     GROUP BY comments.id, users.name, users.image
-    ORDER BY comments.created_at ASC
+    ORDER BY comments.created_at DESC
     SQL
 
     ActiveRecord::Base.connection.exec_query(query)
