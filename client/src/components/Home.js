@@ -29,6 +29,7 @@ class Home extends React.Component {
     if (events !== null) {var eventList = events.slice([1])}
     return (
       <>
+      
         {events ?
           <Container>
             <br />
