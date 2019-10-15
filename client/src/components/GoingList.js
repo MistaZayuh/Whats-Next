@@ -4,6 +4,17 @@ import { Segment, Image } from "semantic-ui-react";
 
 
 class GoingList extends React.Component {
+  state = { users: [], };
+
+  componentDidMount() {
+    this.setState({users: this.props.users})
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      this.setState({users: this.props.users})
+    }
+  };
 
 
   render() {
@@ -13,10 +24,10 @@ class GoingList extends React.Component {
           Going -
         </Segment>
         <Segment.Group>
-          {this.props.users.map(u => (
+          {this.state.users.map(u => (
             <Segment>
-              <Image src={u.userimage} />
-              <p>{u.username}</p>
+              <Image src={u.image} />
+              <p>{u.name}</p>
             </Segment>
           ))}
         </Segment.Group>

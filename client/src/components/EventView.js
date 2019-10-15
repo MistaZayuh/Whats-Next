@@ -52,10 +52,11 @@ class EventView extends React.Component {
   };
 
   joinEvent = () => {
+    const {auth: {user}} = this.props
     const {event, joined, eventUsers} = this.state;
-    axios.post(`/api/events/${event.id}/invitations`, {user_id: this.props.auth.user.id, event_id: event.id, accepted: true})
+    axios.post(`/api/events/${event.id}/invitations`, {user_id: user.id, event_id: event.id, accepted: true})
       .then(res => {
-        this.setState({ joined: true, eventUsers: [{...res.data, ...this.props.auth.user}, ...eventUsers] })
+        this.setState({ joined: true, eventUsers: [{...res.data, image: user.image, name: user.name}, ...eventUsers] })
       })
       .catch(err => {
         console.log(err)
