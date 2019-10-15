@@ -1,39 +1,44 @@
 import React from "react";
 import axios from "axios";
-// import Search from './Search';
-import { Table, Button, Search, } from "semantic-ui-react";
-import { Modal } from "react-bootstrap";
+import Upcoming from "./Upcoming"
+import Searching from './Search';
+import { Modal, Table } from "react-bootstrap";
 
 class SearchBarModal extends React.Component {
-  state = { events: [], filtered: [], search: "", time: "", date: "", };
+  state = { events: [], };
 
-  listEvents = () => {
-    return this.state.events.map(event => {
-      return (
-        <Table.Row>
-          <Table.Cell>{event.event_name}</Table.Cell>
-        </Table.Row>
-      )
-    })
-  }
   searchEvent = (e, search) => {
-    e.preventDefault()
-
-    axios.get(`api/events?column=${this.state.column}&search=${search}`)
+    e.preventDefault();
+    axios.get(`api/events?search=${search}`)
       .then(res => {
-        this.setState({ events: res.data })
+        this.setState({ events: res.data, })
       })
-      .catch(err => { })
-  }
+      .catch(err => {
+        console.log(err)
+      })
+  };
+
   render() {
+    const { events } = this.state;
     return (
       <div>
         <Modal {...this.props}>
           <Modal.Header closeButton >
             <Modal.Body>
-       <Search
-       size="sm"
-            input={{ icon: 'search', iconPosition: 'left' }} />
+              <Searching
+                size="sm"
+                input={{ icon: 'search', iconPosition: 'left' }}
+                searchEvent={this.searchEvent}
+              />
+              <Table>
+                <thead>
+                  {events.map(e => (
+                    <td>
+                      <Upcoming key={e.id} event={e} />
+                    </td>
+                  ))}
+                </thead>
+              </Table>
             </Modal.Body>
           </Modal.Header>
         </Modal>

@@ -1,21 +1,24 @@
 import React from "react";
-import { Card, Container  } from "react-bootstrap";
+import { Header, Card, Container } from "react-bootstrap";
 import { Link, } from "react-router-dom";
 import moment from "moment";
+import { AuthConsumer } from "../providers/AuthProvider";
 import building from "../images/building.jpeg";
 import styled from "styled-components";
+import axios from "axios";
 
 class WhatsNext extends React.Component {
-	state = { event: null, years: "", months: "", weeks: "", days: "", hours: "", minutes: "", seconds: "", };
+	state = { days: null, hours: null, minutes: null, seconds: null, };
 
-	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.nextEvent !== this.props.nextEvent ) {
-			this.setState({ event: this.props.nextEvent })
-		} 
-		if (prevState.event !== this.state.event) {
-		}
+	componentDidMount() {
+		this.ticker = setInterval(() => this.tick(), 1000)
 	};
 
+	tick = () => {
+		var now = moment().format("X")
+		var eventDate = moment(this.props.nextEvent.date).format("X")
+		var timeLeft = eventDate - now
+	}
 
 	render() {
 			return (
@@ -45,6 +48,14 @@ class WhatsNext extends React.Component {
 			);
 	};
 };
+
+const ConnectedWhatsNext = (props) => (
+	<AuthConsumer>
+		{auth =>
+			<WhatsNext {...props} auth={auth} />
+		}
+	</AuthConsumer>
+)
 
 const MyCardImage = styled(Card.Img)`
     width: 650px;

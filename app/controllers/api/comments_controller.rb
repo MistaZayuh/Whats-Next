@@ -1,14 +1,15 @@
 class Api::CommentsController < ApplicationController
-  before_action :set_user
   before_action :set_event
+  before_action :set_user, except: [:create]
   before_action :set_comment, only: [:update, :destroy]
   
   def index
-    render json: Comment.all
+    render json: @event.comments.all
   end
 
   def create
-    comment = Comment.new(comment_params)
+    comment = current_user.comments.new(comment_params)
+    comment.event_id = @event.id
     if comment.save
       render json: comment
     else
@@ -42,6 +43,6 @@ class Api::CommentsController < ApplicationController
     end
 
     def comment_params
-      params.require(:comments).permit(:body)
+      params.require(:comment).permit(:body, :user_id, :event_id)
     end
 end

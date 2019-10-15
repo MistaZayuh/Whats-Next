@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Menu, Icon, Dropdown, Header, Button, } from 'semantic-ui-react'
-import { Link, withRouter, } from 'react-router-dom'
-import logo from "../images/logo.png"
+import { Menu, Icon, Dropdown, Header, Button, } from 'semantic-ui-react';
+import { Link, withRouter, } from 'react-router-dom';
+import logo from "../images/logo.png";
 import { Nav, Navbar, Image, Modal, } from "react-bootstrap";
 import EventFormModal from "./EventFormModal";
 import axios from 'axios';
@@ -35,9 +35,7 @@ class NavBar extends React.Component {
     
         if (user) {
       return (
-        
         <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px" }} position='right'>
-        
           <Header as='h4'>
             <Menu.Item>
               <Header as="h4">
@@ -52,7 +50,7 @@ class NavBar extends React.Component {
                   {/* <Dropdown.Item href="/events/new" text='Add New Event' icon="add" /> */}
                   <Dropdown.Item href={`/users/${user.id}`} text='Account' icon="arrow right" />
                   <Dropdown.Item text='Notifications' icon="bell outline" />
-                  <Dropdown.Item text='Logout' onClick={ () => handleLogout(this.props.history) } />
+                  <Dropdown.Item text='Logout' onClick={ () => handleLogout(this.props.history) } icon="log out" />
                 </Dropdown.Menu>
               </Dropdown>
             </Header.Content>

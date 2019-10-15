@@ -1,5 +1,5 @@
 class Api::InvitationsController < ApplicationController
-  before_action :set_user, except: [:create_invitation]
+  before_action :set_user, except: [:create_invitation, :destroy]
   before_action :set_event, except: [:create_invitation]
   before_action :set_invitation, only: [:show, :update, :destroy]
 
