@@ -11,11 +11,13 @@ import "../styles/EventView.css";
 import CommentForm from "./CommentForm";
 import Clock from "./Clock";
 import GoingList from "./GoingList";
+import "moment-timezone";
+
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class EventView extends React.Component {
-  state = { event: {}, eventUsers: [], comments: [], joined: false, };
+  state = { event: {}, eventUsers: [], comments: [], joined: false, nextEvent: {} };
   // BE AWARE if you want the user id from eventUsers, you have to call eventUsers.userid, with no underscore
   // If you only call eventUsers.id, you will get the id of the event -Isaiah
 
@@ -148,7 +150,7 @@ class EventView extends React.Component {
             <div className="banner-event-date">
               <p
                 className="event-date">
-                <Moment format="LLL">{this.state.event.date}</Moment>
+					  <div>{moment.tz(this.state.event.date, "America/Denver").format("LLL")}</div>
               </p>
             </div>
             <Clock

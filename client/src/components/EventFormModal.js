@@ -8,6 +8,7 @@ import { DateTimeInput } from "semantic-ui-calendar-react";
 import { AuthConsumer } from "../providers/AuthProvider";
 
 
+
 class EventFormModal extends React.Component {
     state = { date: "", name: "", location: "", description: "", open: true };
     
@@ -67,6 +68,7 @@ class EventFormModal extends React.Component {
                 value={this.state.date}
                 iconPosition="left"
                 onChange={this.handleChange}
+                localization="en-ca"
               />
 
               <Form.Field
