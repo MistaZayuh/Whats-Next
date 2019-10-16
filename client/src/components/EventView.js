@@ -5,9 +5,9 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import building from "../images/building.jpeg";
 import { AuthConsumer, } from "../providers/AuthProvider";
-import party from "../images/party.jpg";
-import styled from "styled-components";
-import { Carousel, } from "react-bootstrap";
+// import party from "../images/party.jpg";
+// import styled from "styled-components";
+// import { Carousel, } from "react-bootstrap";
 import { Grid, Segment, Button, Container, Card, Image, Header } from "semantic-ui-react";
 import "../styles/EventView.css";
 import CommentForm from "./CommentForm";
@@ -160,6 +160,7 @@ class EventView extends React.Component {
               {this.state.joined ?
                 <Button
                   color="red"
+                  className="join-event-button"
                   onClick={this.leaveEvent}
                 >
                   Leave Event
