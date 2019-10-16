@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Explore from "./components/Explore";
 import EventForm from "./components/EventForm";
 import EventView from "./components/EventView";
+import Refresh from "./components/Refresh";
 import Register from './components/Register';
 import FetchUser from './components/FetchUser';
 import UserProfile from './components/UserProfile';
@@ -24,6 +25,7 @@ const App = () => (
           <ProtectedRoute exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/refresh" component={Refresh} />
           <ProtectedRoute exact path="/explore" component={Explore} />
           <ProtectedRoute exact path="/events/new" component={EventForm} />
           <ProtectedRoute exact path="/events/:id" component={EventView} />

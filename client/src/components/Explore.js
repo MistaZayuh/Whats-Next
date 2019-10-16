@@ -13,10 +13,21 @@ class Explore extends React.Component {
   state = { events: [], };
 
   componentDidMount() {
-    Axios.get("/api/explore_events")
+    this.props.auth.user ?
+    Axios.get(`/api/explore_events`)
       .then(res => {
         debugger
         this.setState({ events: res.data, })
+      })
+      .catch(err => {
+        debugger
+        console.log(err)
+      })
+    :
+    Axios.get("/api/events")
+      .then(res => {
+        debugger
+        this.setState({ events: res.data})
       })
       .catch(err => {
         debugger

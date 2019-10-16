@@ -23,6 +23,7 @@ class EventFormModal extends React.Component {
         .then(res => {
           axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
           history.push(`/events/${res.data.id}`)
+          history.push("/refresh")
         })
 
     };

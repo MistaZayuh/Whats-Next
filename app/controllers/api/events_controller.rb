@@ -1,8 +1,8 @@
 class Api::EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy, :split_date]
-  # def index
-  #   render json: Event.event_search(params[:column], params[:search])
-  # end
+  def index
+    render json: Event.all
+  end
 
   def show
     render json: @event
