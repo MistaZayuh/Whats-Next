@@ -24,7 +24,6 @@ class Explore extends React.Component {
       })
   }
 
-
   render() {
     const { events } = this.state
     return (
