@@ -9,7 +9,8 @@ class SearchBarModal extends React.Component {
 
   searchEvent = (e, search) => {
     e.preventDefault();
-    axios.get(`api/events?search=${search}`)
+    this.setState({ events: [] })
+    axios.get(`/api/event_search?search=${search}`)
       .then(res => {
         this.setState({ events: res.data, })
       })
@@ -29,7 +30,7 @@ class SearchBarModal extends React.Component {
                 size="sm"
                 input={{ icon: 'search', iconPosition: 'left', fluid: true }}
                 searchEvent={this.searchEvent}
-                
+
               />
               <Table>
                 <thead>
@@ -43,7 +44,7 @@ class SearchBarModal extends React.Component {
             </Modal.Body>
           </Modal.Header>
         </Modal>
-     </div>
+      </div>
     )
   }
 }
