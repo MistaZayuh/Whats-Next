@@ -27,11 +27,11 @@ class GoingList extends React.Component {
         <Segment.Group>
           {this.state.users.map(u => (
             <Segment key={u.id}>
-              <div style={{display: "flex", }}>
+              {/* <div style={{display: "flex", }}> */}
 
-              <Image src={u.image} size="mini" circular />
-              <p>{u.name}</p>
-              </div>
+              <Image src={u.image} size="mini" circular avatar />
+              <span>{u.name}</span>
+              {/* </div> */}
             </Segment>
           
           ))}
