@@ -6,5 +6,6 @@
     created_at: date,
     updated_at: date,
     )
-
+  end
+  
 puts "100 Events Seeded"
