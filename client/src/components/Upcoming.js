@@ -12,7 +12,7 @@ const Upcoming = ({ event }) => (
 		<Card style={{ width: "213px", height: "120px" }} className="bg-dark text-white">
 			<MyCardImage src={event.image || party} alt="event location" />
 			<Card.ImgOverlay>
-				<Card.Title>{event.name}</Card.Title>
+				<Card.Title>{event.name || event.event_name}</Card.Title>
 				<br />
 				<Card.Text>{moment(event.date).format("ll, h:mm a")}</Card.Text>
 			</Card.ImgOverlay>

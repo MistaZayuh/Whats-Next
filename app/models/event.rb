@@ -51,4 +51,23 @@ class Event < ApplicationRecord
 
     ActiveRecord::Base.connection.exec_query(query)
   end
+
+  def self.explore_events
+    query = <<-SQL
+    SELECT
+    events.*, 
+    invitations.id AS invitation_id, 
+    users.id AS user_id
+    FROM invitations
+    INNER JOIN users
+        on user_id = users.id
+    INNER JOIN events
+        on event_id = events.id
+    WHERE events.date > NOW()
+    GROUP BY events.id, users.name, users.id, invitations.id, events.date
+    ORDER BY events.date ASC
+    SQL
+
+    ActiveRecord::Base.connection.exec_query(query)
+  end
 end
