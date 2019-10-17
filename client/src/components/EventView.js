@@ -17,18 +17,19 @@ import "moment-timezone";
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class EventView extends React.Component {
-  state = { event: {}, eventUsers: [], comments: [], joined: false, nextEvent: {} };
+  state = { events: {}, event: {}, eventUsers: [], comments: [], joined: false, nextEvent: {} };
   // BE AWARE if you want the user id from eventUsers, you have to call eventUsers.userid, with no underscore
   // If you only call eventUsers.id, you will get the id of the event -Isaiah
 
   componentDidMount() {
     const { match: { params: { id } }, auth: { user } } = this.props
-    axios.get(`/api/events/${id}`)
-      .then(res => {
-        this.setState({ event: res.data })
+    axios.get(`/api/specific_event?specificeventid=${id}`)
+    .then(res => {
+        this.setState({ event: res.data[0] })
         var eventInfo = res.data
-        axios.get(`/api/specific_event_users?specificeventid=${eventInfo.id}`)
-          .then(res => {
+        debugger
+        axios.get(`/api/specific_event_users?specificeventid=${res.data[0].id}`)
+        .then(res => {
             this.setState({ eventUsers: res.data })
             res.data.filter(u => {
               if (u.user_id == user.id) {
@@ -39,11 +40,14 @@ class EventView extends React.Component {
           .catch(err => {
             console.log(err)
           })
-        axios.get(`/api/specific_event_comments?specificeventid=${eventInfo.id}`)
+          debugger
+        axios.get(`/api/specific_event_comments?specificeventid=${res.data[0].id}`)
           .then(res => {
+            debugger
             this.setState({ comments: res.data })
           })
           .catch(err => {
+            debugger
             console.log(err)
           })
       })
@@ -51,6 +55,7 @@ class EventView extends React.Component {
         console.log(err)
       })
   };
+
 
   
 
