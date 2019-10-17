@@ -5,30 +5,31 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import building from "../images/building.jpeg";
 import { AuthConsumer, } from "../providers/AuthProvider";
-import party from "../images/party.jpg";
 import styled from "styled-components";
-import { Carousel, } from "react-bootstrap";
 import { Grid, Segment, Button, Container, Card, Image, Header } from "semantic-ui-react";
 import "../styles/EventView.css";
 import CommentForm from "./CommentForm";
 import Clock from "./Clock";
 import GoingList from "./GoingList";
+import "moment-timezone";
+
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class EventView extends React.Component {
-  state = { event: {}, eventUsers: [], comments: [], joined: false, };
+  state = { events: {}, event: {}, eventUsers: [], comments: [], joined: false, nextEvent: {} };
   // BE AWARE if you want the user id from eventUsers, you have to call eventUsers.userid, with no underscore
   // If you only call eventUsers.id, you will get the id of the event -Isaiah
 
   componentDidMount() {
     const { match: { params: { id } }, auth: { user } } = this.props
-    axios.get(`/api/events/${id}`)
-      .then(res => {
-        this.setState({ event: res.data })
+    axios.get(`/api/specific_event?specificeventid=${id}`)
+    .then(res => {
+        this.setState({ event: res.data[0] })
         var eventInfo = res.data
-        axios.get(`/api/specific_event_users?specificeventid=${eventInfo.id}`)
-          .then(res => {
+        debugger
+        axios.get(`/api/specific_event_users?specificeventid=${res.data[0].id}`)
+        .then(res => {
             this.setState({ eventUsers: res.data })
             res.data.filter(u => {
               if (u.user_id == user.id) {
@@ -39,11 +40,14 @@ class EventView extends React.Component {
           .catch(err => {
             console.log(err)
           })
-        axios.get(`/api/specific_event_comments?specificeventid=${eventInfo.id}`)
+          debugger
+        axios.get(`/api/specific_event_comments?specificeventid=${res.data[0].id}`)
           .then(res => {
+            debugger
             this.setState({ comments: res.data })
           })
           .catch(err => {
+            debugger
             console.log(err)
           })
       })
@@ -51,6 +55,7 @@ class EventView extends React.Component {
         console.log(err)
       })
   };
+
 
   
 
@@ -150,7 +155,7 @@ class EventView extends React.Component {
             <div className="banner-event-date">
               <p
                 className="event-date">
-                <Moment format="LLL">{this.state.event.date}</Moment>
+					  <div>{moment.tz(this.state.event.date, "America/Denver").format("LLL")}</div>
               </p>
             </div>
             <Clock

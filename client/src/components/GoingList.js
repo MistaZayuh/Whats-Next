@@ -41,4 +41,14 @@ class GoingList extends React.Component {
   }
 }
 
+const UserSegment = styled(Segment)`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const UserImage = styled(Image)`
+  height: 35%;
+  width: 35%
+`;
+
 export default GoingList;

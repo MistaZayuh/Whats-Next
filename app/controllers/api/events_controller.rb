@@ -41,6 +41,10 @@ class Api::EventsController < ApplicationController
     render json: Event.event_search(params[:search])
   end
 
+  def specific_event
+    render json: Event.specific_event(params[:specificeventid])
+  end
+
   private
     def set_event
       @event = Event.find(params[:id])

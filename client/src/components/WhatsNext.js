@@ -6,21 +6,16 @@ import { AuthConsumer } from "../providers/AuthProvider";
 import building from "../images/building.jpeg";
 import styled from "styled-components";
 import axios from "axios";
+import Clock from "./Clock";
+import "moment-timezone";
 
 class WhatsNext extends React.Component {
-	state = { days: null, hours: null, minutes: null, seconds: null, };
+	state = { days: null, hours: null, minutes: null, seconds: null, event: {} };
 
-	componentDidMount() {
-		this.ticker = setInterval(() => this.tick(), 1000)
-	};
 
-	tick = () => {
-		var now = moment().format("X")
-		var eventDate = moment(this.props.nextEvent.date).format("X")
-		var timeLeft = eventDate - now
-	}
-
+	
 	render() {
+		// var eventDate = moment.tz(this.props.nextEvent.date, "America/Denver").format("X")
 			return (
 					<div style={{display: "flex", justifyContent: "space-around"}}>
 							<Link to={`/events/${this.props.nextEvent.id}`}>
@@ -28,10 +23,13 @@ class WhatsNext extends React.Component {
 									<MyCardImage  src={this.props.nextEvent.image || building} alt="nextEvent location" />
 									<Card.ImgOverlay>
 											<MyCardTitle>{this.props.nextEvent.name}</MyCardTitle>
-											{/* <Card.Text>
-													{this.props.nextEvent.description}
-												</Card.Text>
-											<Card.Text>{moment(this.props.nextEvent.date).format('MMMM Do YYYY, h:mm:ss a') }</Card.Text> */}
+					  {/* <Moment format="LLL">{this.props.nextEvent.date}</Moment> */}
+					  <div>{moment.tz(this.props.nextEvent.date, "America/Denver").format("LLL")}</div>
+                      <div style={{}}>
+											<Clock
+             						deadline={this.props.nextEvent.date}
+                      />
+                      </div>
 											<Container>
 												<div>
 													{/* { this.state.days } days */}
@@ -69,4 +67,4 @@ const MyCardTitle = styled(Card.Title)`
     font-size: 3em !important;
 `;
 
-export default WhatsNext;
+export default ConnectedWhatsNext;

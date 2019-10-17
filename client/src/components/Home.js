@@ -7,9 +7,11 @@ import { AuthConsumer } from "../providers/AuthProvider";
 import { Header, Container, } from 'semantic-ui-react';
 import { CardGroup, CardDeck } from 'react-bootstrap';
 import "../styles/Home.css";
+import Moment from "react-moment"
 
 class Home extends React.Component {
   state = { events: null, nextEvent: {}, };
+  
 
   componentDidMount() {
     const { auth: { user } } = this.props
@@ -17,6 +19,7 @@ class Home extends React.Component {
       .then(res => {
         if (res.data.length !== 0) {
           this.setState({ events: res.data, nextEvent: res.data[0], })
+          debugger
         }
       })
       .catch(err => {
@@ -29,6 +32,7 @@ class Home extends React.Component {
     if (events !== null) {var eventList = events.slice([1])}
     return (
       <>
+      {/* <Moment format="LLL">{this.props.events.id.date}</Moment> */}
         {events ?
           <Container>
             <br />
@@ -52,6 +56,7 @@ class Home extends React.Component {
                     <Upcoming
                     key={e.id}
                     event={e}
+                    nextEvent={nextEvent}
                     />
                     ))}
                 </CardDeck>
