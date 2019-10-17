@@ -28,7 +28,6 @@ class EventForm extends React.Component {
       }
     }
     
-    
     handleChange = (e, { name, value }) => {
       this.setState({ [name]: value });
     };
@@ -40,7 +39,6 @@ class EventForm extends React.Component {
         axios.post("/api/events", this.state )
         .then(res => {
           axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
-          
           history.push(`/events/${res.data.id}`)
       })
     } else {
@@ -49,7 +47,6 @@ class EventForm extends React.Component {
         history.push(`/events/${match.params.id}`)
       })
     }
-      
   };
 
   handleCheckChange = (e, { name, checked }) => {
@@ -58,7 +55,6 @@ class EventForm extends React.Component {
 
   render() {
     return (
-
       <Container>
       {this.props.location.pathname === "/events/new" ?
         <Header as="h1" textAlign="center">New Event</Header> 
