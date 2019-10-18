@@ -18,7 +18,6 @@ import { Container, } from "semantic-ui-react";
 const App = () => (
   <>
     <NavBar />
-  
     <FetchUser>
       {/* <Container> */}
         <Switch>
@@ -26,9 +25,9 @@ const App = () => (
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/refresh" component={Refresh} />
-          <ProtectedRoute exact path="/explore" component={Explore} />
+          <Route exact path="/explore" component={Explore} />
           <ProtectedRoute exact path="/events/new" component={EventForm} />
-          <ProtectedRoute exact path="/events/:id" component={EventView} />
+          <Route exact path="/events/:id" component={EventView} />
           <ProtectedRoute exact path="/events/:id/edit" component={EventForm} />
           <ProtectedRoute exact path="/users/:id" component={UserProfile} />
           <ProtectedRoute exact path="/users/:id/edit" component={UserForm} />
