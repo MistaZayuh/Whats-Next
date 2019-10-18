@@ -27,7 +27,6 @@ class EventView extends React.Component {
     .then(res => {
         this.setState({ event: res.data[0] })
         var eventInfo = res.data
-        debugger
         axios.get(`/api/specific_event_users?specificeventid=${res.data[0].id}`)
         .then(res => {
             this.setState({ eventUsers: res.data })
@@ -40,14 +39,12 @@ class EventView extends React.Component {
           .catch(err => {
             console.log(err)
           })
-          debugger
         axios.get(`/api/specific_event_comments?specificeventid=${res.data[0].id}`)
           .then(res => {
             debugger
             this.setState({ comments: res.data })
           })
           .catch(err => {
-            debugger
             console.log(err)
           })
       })
@@ -146,25 +143,26 @@ class EventView extends React.Component {
           </div>
           <Container>
             <div className="banner-event-name" >
-              <h1
-                className="event-name"
-              >
+              <h1 className="event-name">
                 {this.state.event.name}
               </h1>
             </div>
             <div className="banner-event-date">
-              <p
-                className="event-date">
+              <p className="event-date">
 					  <div>{moment.tz(this.state.event.date, "America/Denver").format("LLL")}</div>
               </p>
             </div>
+            <div>
+
             <Clock
               deadline={this.state.event.date}
-            />
+              />
+              </div>
             <div>
               {this.state.joined ?
                 <Button
                   color="red"
+                  className="join-event-button"
                   onClick={this.leaveEvent}
                 >
                   Leave Event
