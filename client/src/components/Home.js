@@ -19,7 +19,7 @@ class Home extends React.Component {
       .then(res => {
         if (res.data.length !== 0) {
           this.setState({ events: res.data, nextEvent: res.data[0], })
-          debugger
+         
         }
       })
       .catch(err => {

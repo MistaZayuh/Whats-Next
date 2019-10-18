@@ -27,7 +27,7 @@ class EventView extends React.Component {
     .then(res => {
         this.setState({ event: res.data[0] })
         var eventInfo = res.data
-        debugger
+      
         axios.get(`/api/specific_event_users?specificeventid=${res.data[0].id}`)
         .then(res => {
             this.setState({ eventUsers: res.data })
@@ -40,14 +40,14 @@ class EventView extends React.Component {
           .catch(err => {
             console.log(err)
           })
-          debugger
+        
         axios.get(`/api/specific_event_comments?specificeventid=${res.data[0].id}`)
           .then(res => {
-            debugger
+          
             this.setState({ comments: res.data })
           })
           .catch(err => {
-            debugger
+          
             console.log(err)
           })
       })

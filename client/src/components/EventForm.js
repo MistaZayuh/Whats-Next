@@ -2,14 +2,15 @@ import React from "react";
 import axios from "axios";
 import Dropzone from "react-dropzone";
 import styled from "styled-components";
-import { Form, TextArea, Checkbox, Header, Container } from "semantic-ui-react";
+import { Form, TextArea, Checkbox, Header, Container, Image } from "semantic-ui-react";
 import { DateTimeInput } from "semantic-ui-calendar-react";
 import { AuthConsumer } from "../providers/AuthProvider";
+import building from "../images/building.jpeg";
 
 
 
 class EventForm extends React.Component {
-  state = { date: "", name: "", location: "", description: "", };
+  state = { date: "", name: "", location: "", description: "", file: ""};
 
   componentDidMount() {
     const { match: {params}, auth: {user}} = this.props;         
@@ -30,6 +31,7 @@ class EventForm extends React.Component {
       }
     }
     
+    
     handleChange = (e, { name, value }) => {
       this.setState({ [name]: value });
     };
@@ -41,6 +43,7 @@ class EventForm extends React.Component {
         axios.post("/api/events", this.state )
         .then(res => {
           axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
+          
           history.push(`/events/${res.data.id}`)
       })
     } else {
@@ -49,18 +52,24 @@ class EventForm extends React.Component {
         history.push(`/events/${match.params.id}`)
       })
     }
+      
   };
 
   handleCheckChange = (e, { name, checked }) => {
     this.setState({ [name]: !!checked })
   };
 
-  onDrop = (files, rejectedFiles) => {
+  onDrop = (files, rejectFiles) => { 
     console.log(files)
+    console.log("Rejected Image=>",rejectFiles)
+    debugger
+    this.setState({...this.state, file: rejectFiles[0]})
+    debugger
   }
 
   render() {
     return (
+
       <Container>
       {this.props.location.pathname === "/events/new" ?
         <Header as="h1" textAlign="center">New Event</Header> 
@@ -96,7 +105,10 @@ class EventForm extends React.Component {
             iconPosition="left"
             onChange={this.handleChange}
           />
+
+
           <Form.Field
+            
             label="Description"
             placeholder="Description"
             name="description"
@@ -104,10 +116,12 @@ class EventForm extends React.Component {
             required
             value={this.state.description}
             onChange={this.handleChange}
-          />
+            />
+
           <Dropzone
             onDrop={this.onDrop}
             multiple={false}
+            // accept="images/*"
           >
             {({ getRootProps, getInputProps, isDragActive }) => {
               return (
@@ -119,12 +133,18 @@ class EventForm extends React.Component {
                   {
                     isDragActive ?
                       <p>Drop files here...</p> :
-                      <p>Try dropping some files here, or click to select files to upload.</p>
+                      <p>Drop/Click to select files to upload.</p>
                   }
                 </div>
               )
             }}
           </Dropzone>
+          
+          <Image  src={this.state.file || building}
+          
+          />
+          
+
           <Form.Field
             name="open"
             control={Checkbox}
