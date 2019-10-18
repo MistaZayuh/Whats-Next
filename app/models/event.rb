@@ -59,6 +59,21 @@ class Event < ApplicationRecord
     FROM events
     WHERE events.id = #{specificeventid}
     SQL
+
+    ActiveRecord::Base.connection.exec_query(query)
+  end
+
+  def self.explore(specificuserid)
+    query = <<-SQL
+    SELECT events.*
+    FROM events
+    LEFT JOIN invitations
+        ON events.id = invitations.event_id
+    WHERE events.id NOT IN(SELECT event_id FROM invitations) OR invitations.user_id != #{specificuserid}
+    GROUP BY events.id
+    ORDER BY events.date
+    SQL
+
     ActiveRecord::Base.connection.exec_query(query)
   end
 end

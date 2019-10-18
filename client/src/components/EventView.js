@@ -41,7 +41,6 @@ class EventView extends React.Component {
           })
         axios.get(`/api/specific_event_comments?specificeventid=${res.data[0].id}`)
           .then(res => {
-            debugger
             this.setState({ comments: res.data })
           })
           .catch(err => {
@@ -101,11 +100,9 @@ class EventView extends React.Component {
   };
 
   addComment = (comment) => {
-    const {comments} = this.state;
-    // const comment = {body,}
-    this.setState({comments: [{...comment, name: this.props.auth.user.name}, ...this.state.comments]})
-  }
-
+    const {auth: {user}} = this.props
+    this.setState({comments: [{...comment, name: user.name, image: user.image}, ...this.state.comments]})
+  };
   
   listPosts = () => {
     if (this.state.comments.length <= 0)

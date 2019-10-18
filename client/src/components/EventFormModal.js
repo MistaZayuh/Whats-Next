@@ -10,7 +10,6 @@ import { DateTimeInput } from "semantic-ui-calendar-react";
 class EventFormModal extends React.Component {
     state = { date: "", name: "", location: "", description: "", open: true };
     
-  
     handleChange = (e, { name, value }) => {
       this.setState({ [name]: value });
     };
