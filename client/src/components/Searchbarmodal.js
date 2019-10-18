@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
-import Upcoming from "./Upcoming"
+import UpcomingSearch from "./UpcomingSearch"
 import Searching from './Search';
-import { Modal, Table } from "react-bootstrap";
+import { Modal, Table, CardDeck } from "react-bootstrap";
 
 class SearchBarModal extends React.Component {
   state = { events: [], };
@@ -19,28 +19,34 @@ class SearchBarModal extends React.Component {
       })
   };
 
+  eventSelected = (e) => {
+    this.setState({ events: [], })
+  }
+
   render() {
     const { events } = this.state;
     return (
       <div>
-        <Modal {...this.props}>
+        <Modal {...this.props} style={{overflowX: "auto"}} >
           <Modal.Header closeButton >
             <Modal.Body>
               <Searching
                 size="sm"
-                input={{ icon: 'search', iconPosition: 'left', fluid: true }}
+                // icon="search"
+                input={{ fluid: true }}
                 searchEvent={this.searchEvent}
-
               />
-              <Table>
-                <thead>
+              <br/>
+              <div style={{width: "510px"}}>
+              <CardDeck>
                   {events.map(e => (
-                    <td>
-                      <Upcoming key={e.id} event={e} />
-                    </td>
+                    <div>
+                      <UpcomingSearch key={e.id} event={e} onHide={this.props.onHide} clearEvents={this.eventSelected} />
+                      <br/>
+                    </div>
                   ))}
-                </thead>
-              </Table>
+                  </CardDeck>
+              </div>
             </Modal.Body>
           </Modal.Header>
         </Modal>
