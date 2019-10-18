@@ -52,4 +52,13 @@ class Event < ApplicationRecord
 
     ActiveRecord::Base.connection.exec_query(query)
   end
+
+  def self.specific_event(specificeventid)
+    query = <<-SQL
+    SELECT *
+    FROM events
+    WHERE events.id = #{specificeventid}
+    SQL
+    ActiveRecord::Base.connection.exec_query(query)
+  end
 end

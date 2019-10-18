@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get "specific_event_users", to: "events#specific_event_users"
     get "specific_event_comments", to: "events#specific_event_comments"
     get "event_search", to: "events#event_search"
+    get "specific_event", to: "events#specific_event"
   end
   
 

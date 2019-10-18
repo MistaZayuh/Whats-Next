@@ -1,11 +1,10 @@
 import React from "react";
 import axios from "axios";
-import Moment from "react-moment";
 import { withRouter, } from "react-router-dom";
-import { Form, TextArea, Checkbox, } from "semantic-ui-react";
+import { TextArea, Checkbox, Form, } from "semantic-ui-react";
 import { Modal, Button, } from "react-bootstrap";
-import { DateTimeInput } from "semantic-ui-calendar-react";
 import { AuthConsumer } from "../providers/AuthProvider";
+import { DateTimeInput } from "semantic-ui-calendar-react";
 
 
 class EventFormModal extends React.Component {
@@ -23,13 +22,15 @@ class EventFormModal extends React.Component {
         .then(res => {
           axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
           history.push(`/events/${res.data.id}`)
+          history.push(`/refresh`)
         })
-
     };
   
     handleCheckChange = (e, { name, checked }) => {
       this.setState({ [name]: !!checked })
     };
+
+    onChange = date => this.setState({ date })
 
   render() {
     return (
@@ -57,6 +58,7 @@ class EventFormModal extends React.Component {
                 value={this.state.location}
                 onChange={this.handleChange}
               />
+
               <p><strong>Date/Time</strong></p>
               <DateTimeInput
                 label="Date/Time"
