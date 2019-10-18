@@ -32,7 +32,8 @@ class SearchBarModal extends React.Component {
             <Modal.Body>
               <Searching
                 size="sm"
-                input={{ icon: 'search', iconPosition: 'left', fluid: true }}
+                // icon="search"
+                input={{ fluid: true }}
                 searchEvent={this.searchEvent}
               />
               <br/>
