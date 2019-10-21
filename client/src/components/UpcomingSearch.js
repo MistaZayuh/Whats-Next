@@ -11,8 +11,8 @@ import { withRouter } from  'react-router-dom'
 const UpcomingSearch = ({ event, history, onHide, clearEvents }) => {
   const handleClick = (e) => {
     e.preventDefault();
+    clearEvents(e)
     onHide()
-    clearEvents()
     history.push(`/events/${event.id}`)
     history.push(`/refresh`)
   }
