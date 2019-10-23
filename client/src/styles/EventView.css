@@ -1,7 +1,7 @@
 .banner-event-name {
     z-index: 1;
     position: absolute;
-    top: 35%;
+    top: 30%;
     left: 15%;
     text-align: center;
 }
@@ -15,7 +15,7 @@
 .banner-event-date {
     z-index: 2;
     position: absolute;
-    top: 44%;
+    top: 48%;
     left: 15%;
     text-align: center;
 }
@@ -40,24 +40,25 @@
     filter: blur(1.5px) brightness(60%);
     background-size: cover;
     background-position: center;
+    overflow: auto;
 }
 
 .join-event-button {
     z-index: 100;
     position: absolute;
-    top: 63%;
-    left: 85%;
+    top: 85%;
+    left: 75%;
 }
 
 .countdown-event-all {
     display: flex;
     z-index: 500;
     position: absolute;
-    top: 60%;
+    top: 80%;
     left: 15%;
     color: black;
     justify-content: space-between;
-    padding: 5px
+    padding: 5px;
 }
 
 .countdown-day, .countdown-hour, .countdown-minute, .countdown-second {
@@ -74,9 +75,21 @@
     display: flex;
     z-index: 500;
     position: absolute;
-    top: 57%;
+    top: 75%;
     left: 16%;
     color: white;
     justify-content: space-between;
 }
 
+.image-content {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    z-index: 10;
+    width: 100%;
+    position: relative;
+  }
+
+ 
+
+  

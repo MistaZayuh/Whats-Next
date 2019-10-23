@@ -134,32 +134,34 @@ class EventView extends React.Component {
   render() {
     return (
       <>
-        <div>
+        
+          <div className="image-content"> 
           <div className='opacity-test'>
             <img src={this.state.event.image || building} className='background-image-events' />
           </div>
-          <Container>
-            <div className="banner-event-name" >
-              <h1
-                className="event-name"
-              >
+            
+            <div  className="banner-event-name" >
+              <h1 className="event-name">
                 {this.state.event.name}
               </h1>
             </div>
-            <div className="banner-event-date">
-              <p
-                className="event-date">
-					  <div>{moment.tz(this.state.event.date, "America/Denver").format("LLL")}</div>
+            <div  className="banner-event-date">
+              <p className="event-date">
+					  <div >{moment.tz(this.state.event.date, "America/Denver").format("LL")}</div>
               </p>
             </div>
+            <div className="clock-comp" >
+
             <Clock
               deadline={this.state.event.date}
             />
+            </div>
               {this.props.auth.user ?
               <div>
               {this.state.joined ?
                 <Button
-                color="red"
+                style={{opacity: "0.8"}}
+                color="grey"
                 className="join-event-button"
                 onClick={this.leaveEvent}
                 >
@@ -178,8 +180,9 @@ class EventView extends React.Component {
               :
               null
             }
-          </Container>
         </div>
+        
+        
 
         <br />
         <br />

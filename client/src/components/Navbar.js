@@ -8,6 +8,7 @@ import EventFormModal from "./EventFormModal";
 import axios from 'axios';
 import Search from "./Search";
 import SearchBarModal from './Searchbarmodal';
+import "../styles/Navbar.css";
 
 
 class NavBar extends React.Component {
@@ -40,7 +41,7 @@ class NavBar extends React.Component {
                 <Dropdown.Menu>
                   {/* <Dropdown.Item href="/events/new" text='Add New Event' icon="add" /> */}
                   <Dropdown.Item href={`/users/${user.id}`} text='Account' icon="arrow right" />
-                  <Dropdown.Item text='Explore' icon="globe" href={"/explore"} />
+                  <Dropdown.Item text='Explore' icon="globe" href={"/"} />
                   <Dropdown.Item text='Logout' onClick={ () => handleLogout(this.props.history) } icon="log out" />
                 </Dropdown.Menu>
               </Dropdown>
@@ -77,9 +78,15 @@ class NavBar extends React.Component {
     return (
       <>
         <Menu secondary>
+          {this.props.auth.user ?
+          <Link to='/dashboard'>
+            <Image style={{width: "100px", height: "80px", paddingLeft: "25px" }} src={logo} />
+          </Link>
+          :
           <Link to='/'>
             <Image style={{width: "100px", height: "80px", paddingLeft: "25px" }} src={logo} />
           </Link>
+        }
             { this.rightNavItems() }
         </Menu>
         <EventFormModal

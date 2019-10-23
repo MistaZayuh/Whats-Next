@@ -1,5 +1,5 @@
 import React from "react";
-import Axios from "axios";
+import axios from "axios";
 import party from "../images/party.jpg";
 import styled from "styled-components";
 import Search from './Search';
@@ -15,7 +15,7 @@ class Explore extends React.Component {
   componentDidMount() {
     const { auth: { user } } = this.props
     user ?
-      Axios.get(`/api/explore?specificuserid=${user.id}`)
+      axios.get(`/api/explore?specificuserid=${user.id}`)
         .then(res => {
           this.setState({ events: res.data })
         })
@@ -23,7 +23,7 @@ class Explore extends React.Component {
           console.log(err)
         })
       :
-      Axios.get("/api/events")
+      axios.get("/api/events")
         .then(res => {
           this.setState({ events: res.data })
         })
