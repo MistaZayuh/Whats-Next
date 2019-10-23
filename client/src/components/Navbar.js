@@ -40,7 +40,7 @@ class NavBar extends React.Component {
                 <Dropdown.Menu>
                   {/* <Dropdown.Item href="/events/new" text='Add New Event' icon="add" /> */}
                   <Dropdown.Item href={`/users/${user.id}`} text='Account' icon="arrow right" />
-                  <Dropdown.Item text='Notifications' icon="bell outline" />
+                  <Dropdown.Item text='Explore' icon="globe" href={"/explore"} />
                   <Dropdown.Item text='Logout' onClick={ () => handleLogout(this.props.history) } icon="log out" />
                 </Dropdown.Menu>
               </Dropdown>
