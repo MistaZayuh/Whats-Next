@@ -27,7 +27,7 @@ class NavBar extends React.Component {
     
         if (user) {
       return (
-        <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px" }} position='right'>
+        <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px", zIndex: "999", }} position='right'>
           <Header as='h4'>
             <Menu.Item>
               <Header as="h4">
@@ -52,7 +52,7 @@ class NavBar extends React.Component {
       )
     } else {
       return (
-        <Menu.Menu position='right'>
+        <Menu.Menu style={{zIndex: "999"}} position='right'>
           <Link to='/login'>
             <Menu.Item
               id='login'
@@ -77,9 +77,9 @@ class NavBar extends React.Component {
     let searchModalClose = () => this.setState({ showSearchModal: false, })
     return (
       <>
-        <Menu secondary>
-          <Link to='/'>
-            <Image style={{width: "100px", height: "80px", paddingLeft: "25px" }} src={logo} />
+        <Menu style={{zIndex: "999"}} secondary>
+          <Link style={{zIndex: "999"}} to='/'>
+            <Image style={{ zIndex: "1000" ,width: "100px", height: "80px", paddingLeft: "25px" }} src={logo} />
           </Link>
             { this.rightNavItems() }
         </Menu>

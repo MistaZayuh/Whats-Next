@@ -13,7 +13,7 @@
     z-index: 500;
     position: absolute;
     top: 70%;
-    left: 1%;
+    left: 2%;
     color: black;
     justify-content: space-between;
     padding: 5px;
@@ -34,7 +34,7 @@
     z-index: 500;
     position: absolute;
     top: 62%;
-    left: 2%;
+    left: 3%;
     color: white;
     justify-content: space-between;
 }
