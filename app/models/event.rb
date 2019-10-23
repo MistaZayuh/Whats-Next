@@ -63,15 +63,13 @@ class Event < ApplicationRecord
     ActiveRecord::Base.connection.exec_query(query)
   end
 
-  def self.explore(specificuserid)
+  def self.explore(page)
     query = <<-SQL
-    SELECT events.*
+    SELECT *
     FROM events
-    LEFT JOIN invitations
-        ON events.id = invitations.event_id
-    WHERE events.id NOT IN(SELECT event_id FROM invitations) OR invitations.user_id != #{specificuserid}
     GROUP BY events.id
     ORDER BY events.date
+    OFFSET (#{page} * 30) FETCH NEXT 30 ROWS ONLY
     SQL
 
     ActiveRecord::Base.connection.exec_query(query)
