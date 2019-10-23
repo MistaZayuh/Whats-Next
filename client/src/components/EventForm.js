@@ -6,6 +6,7 @@ import { Form, TextArea, Checkbox, Header, Container, Image } from "semantic-ui-
 import { DateTimeInput } from "semantic-ui-calendar-react";
 import { AuthConsumer } from "../providers/AuthProvider";
 import building from "../images/building.jpeg";
+import "../styles/EventForm.css";
 
 
 
@@ -77,6 +78,7 @@ class EventForm extends React.Component {
 
   render() {
     return (
+      <>
 
       <Container>
       {this.props.location.pathname === "/events/new" ?
@@ -86,7 +88,34 @@ class EventForm extends React.Component {
         <br />
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths="equal">
+      <div className="top-form">
+        <div className="dropzone-left">
+          <Dropzone
+            onDrop={this.onDrop}
+            multiple={false}
+          >
+            {({ getRootProps, getInputProps, isDragActive }) => {
+              return (
+                <div
+                  {...getRootProps()}
+                  style={styles.dropzone}
+                >
+                  <input {...getInputProps()} />
+                  {
+                    isDragActive ?
+                      <p>Drop files here...</p> :
+                      <p>Drop/Click to select files to upload.</p>
+                  }
+                </div>
+              )
+            }}
+          </Dropzone>
+
+        </div>
+        <div className="inputs-right">
+
             <Form.Input
+            style={{width: "100% !important"}}
               label="Event Name"
               placeholder="Event Name"
               name="name"
@@ -94,6 +123,7 @@ class EventForm extends React.Component {
               value={this.state.name}
               onChange={this.handleChange}
             />
+            <br/>
             <Form.Input
               label="Location"
               placeholder="Location"
@@ -102,6 +132,8 @@ class EventForm extends React.Component {
               value={this.state.location}
               onChange={this.handleChange}
             />
+        </div>
+      </div>
           </Form.Group>
           <DateTimeInput
             label="Date/Time"
@@ -126,30 +158,12 @@ class EventForm extends React.Component {
             onChange={this.handleChange}
             />
 
-          <Dropzone
-            onDrop={this.onDrop}
-            multiple={false}
-          >
-            {({ getRootProps, getInputProps, isDragActive }) => {
-              return (
-                <div
-                  {...getRootProps()}
-                  style={styles.dropzone}
-                >
-                  <input {...getInputProps()} />
-                  {
-                    isDragActive ?
-                      <p>Drop files here...</p> :
-                      <p>Drop/Click to select files to upload.</p>
-                  }
-                </div>
-              )
-            }}
-          </Dropzone>
+
+          <br />
           
-          <Image  src={this.state.file || building}
+          {/* <Image  src={this.state.file || building}
           
-          />
+          /> */}
           
 
           {/* <Form.Field
@@ -164,6 +178,7 @@ class EventForm extends React.Component {
         </Form>
         <br />
       </Container>
+      </>
     )
   };
 };
@@ -179,13 +194,14 @@ const ConnectedEventForm = (props) => (
 const styles = {
   dropzone: {
     height: "150px",
-    width: "150px",
-    border: "1px dashed black",
+    width: "250px",
+    // border: "1px solid black",
     borderRadius: "5px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     padding: "10px",
+    background: "lightgrey"
   },
 }
 
