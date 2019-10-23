@@ -1,13 +1,16 @@
 import React from "react";
 import axios from "axios";
-import { Form, TextArea, Checkbox, Header, Container } from "semantic-ui-react";
+import Dropzone from "react-dropzone";
+import styled from "styled-components";
+import { Form, TextArea, Checkbox, Header, Container, Image } from "semantic-ui-react";
 import { DateTimeInput } from "semantic-ui-calendar-react";
 import { AuthConsumer } from "../providers/AuthProvider";
+import building from "../images/building.jpeg";
 
 
 
 class EventForm extends React.Component {
-  state = { date: "", name: "", location: "", description: "", };
+  state = { date: "", name: "", location: "", description: "", image: "", file: ""};
 
   componentDidMount() {
     const { match: {params}, auth: {user}} = this.props;         
@@ -28,33 +31,53 @@ class EventForm extends React.Component {
       }
     }
     
+    
     handleChange = (e, { name, value }) => {
       this.setState({ [name]: value });
     };
     
     handleSubmit = (e) => {
       e.preventDefault();
+      let data = new FormData();
+      data.append('file', this.state.file)
+      data.append("name", this.state.name)
+      data.append("date", this.state.date)
+      data.append("location", this.state.location)
+      data.append("description", this.state.description)
+
+      
       const { location, match, history, auth: {user} } = this.props
       if (location.pathname === "/events/new") {
         axios.post("/api/events", this.state )
         .then(res => {
           axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
+          
           history.push(`/events/${res.data.id}`)
       })
     } else {
-      axios.put(`/api/events/${match.params.id}`, this.state)
+      axios.put(`/api/events/${match.params.id}`, data)
       .then(res => {
         history.push(`/events/${match.params.id}`)
       })
     }
+      
   };
 
   handleCheckChange = (e, { name, checked }) => {
     this.setState({ [name]: !!checked })
   };
 
+  onDrop = (files, rejectFiles) => { 
+    console.log(files)
+    console.log("Rejected Image=>",rejectFiles)
+    // let data = new FormData();
+    // data.append('file', files)
+    this.setState({file: files[0]})
+  }
+
   render() {
     return (
+
       <Container>
       {this.props.location.pathname === "/events/new" ?
         <Header as="h1" textAlign="center">New Event</Header> 
@@ -90,7 +113,10 @@ class EventForm extends React.Component {
             iconPosition="left"
             onChange={this.handleChange}
           />
+
+
           <Form.Field
+            
             label="Description"
             placeholder="Description"
             name="description"
@@ -98,15 +124,42 @@ class EventForm extends React.Component {
             required
             value={this.state.description}
             onChange={this.handleChange}
+            />
+
+          <Dropzone
+            onDrop={this.onDrop}
+            multiple={false}
+          >
+            {({ getRootProps, getInputProps, isDragActive }) => {
+              return (
+                <div
+                  {...getRootProps()}
+                  style={styles.dropzone}
+                >
+                  <input {...getInputProps()} />
+                  {
+                    isDragActive ?
+                      <p>Drop files here...</p> :
+                      <p>Drop/Click to select files to upload.</p>
+                  }
+                </div>
+              )
+            }}
+          </Dropzone>
+          
+          <Image  src={this.state.file || building}
+          
           />
-          <Form.Field
+          
+
+          {/* <Form.Field
             name="open"
             control={Checkbox}
             label='Open Event'
             // value={!this.state.open}
             checked={this.state.open}
             onChange={this.handleCheckChange}
-          />
+          /> */}
           <Form.Button primary >Submit</Form.Button>
         </Form>
         <br />
@@ -122,5 +175,18 @@ const ConnectedEventForm = (props) => (
     }
   </AuthConsumer>
 )
+
+const styles = {
+  dropzone: {
+    height: "150px",
+    width: "150px",
+    border: "1px dashed black",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "10px",
+  },
+}
 
 export default ConnectedEventForm;

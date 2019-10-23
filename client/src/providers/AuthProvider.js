@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+// import UserDefault from "../images/UserDefault.png";
 
 const AuthContext = React.createContext();
 export const AuthConsumer = AuthContext.Consumer;
@@ -10,7 +11,7 @@ export class AuthProvider extends React.Component {
   handleRegister = (user, history) => {
     axios.post("/api/auth", user)
       .then( res => {
-        this.setState({ user: res.data.data, });
+        this.setState({ user: res.data.data, });  
         history.push("/");
       })
       .catch( res => {
@@ -38,6 +39,16 @@ export class AuthProvider extends React.Component {
       .catch( res => {
         console.log(res);
       })
+  }
+
+  updateUser = (id, {name, nickname, file}) => {
+    let data = new FormData();
+    data.append("name", name)
+    data.append("nickname", nickname)
+    data.append("file", file)
+
+    axios.put(`/api/users/${id}`, data)
+      .then( res => this.setState({ user: res.data, }) )
   }
 
   render() {
