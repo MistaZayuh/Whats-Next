@@ -184,8 +184,8 @@ class EventView extends React.Component {
         
         
 
-        <br />
-        <br />
+        {/* <br />
+        <br /> */}
         <div >
           <Container style={{ padding: '2em 0em', }}>
             <Grid columns={2}>

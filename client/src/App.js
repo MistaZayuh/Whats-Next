@@ -22,11 +22,11 @@ const App = () => (
   </div>
     <FetchUser>
         <Switch>
-          <ProtectedRoute exact path="/" component={Home} />
+          <Route exact path="/" component={Explore} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/refresh" component={Refresh} />
-          <Route exact path="/explore" component={Explore} />
+          <ProtectedRoute exact path="/dashboard" component={Home} />
           <ProtectedRoute exact path="/events/new" component={EventForm} />
           <Route exact path="/events/:id" component={EventView} />
           <ProtectedRoute exact path="/events/:id/edit" component={EventForm} />

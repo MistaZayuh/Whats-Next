@@ -31,7 +31,7 @@ class ClockHome extends React.Component {
            <>
            <div className="countdown-labels2">
              <p>days</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             <p>hours</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <p>hours</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              <p>minutes</p>&nbsp;&nbsp;&nbsp;&nbsp;
              <p>seconds</p>
            </div>

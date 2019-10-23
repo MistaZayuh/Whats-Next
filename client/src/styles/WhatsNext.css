@@ -1,7 +1,6 @@
 .wn-card {
     width: 100% !important;
     height: 200px;
-    border: solid 0.5 black
 }
 
 .wn-image {
@@ -34,7 +33,7 @@
     z-index: 500;
     position: absolute;
     top: 62%;
-    left: 3%;
+    left: 3.9%;
     color: white;
     justify-content: space-between;
 }
