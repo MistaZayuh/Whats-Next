@@ -33,14 +33,21 @@ class Home extends React.Component {
       <>
       {/* <Moment format="LLL">{this.props.events.id.date}</Moment> */}
         {events ?
-          <Container>
+
+        
+          <Container className="overall-cont" >
+          
             <br />
             <div className="whats-next-div">
               <div className="whats-next-p">
                 <p style={{ color: "grey" }}>What's Next?</p>
               </div>
             </div>
+            <div style={{ display: "flex", justifyContent: "center"}}>
+            <div className="whats-next-outer">
             <WhatsNext nextEvent={nextEvent} />
+            </div>
+            </div>
             <br />
             <br />
             <div className="upcoming-events-div">
@@ -49,7 +56,7 @@ class Home extends React.Component {
             </div>
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <div style={{ alignItems: "center", width: "700px", height: "250px", justifyContent: "center" }}>
+              <div className="upcoming-comp" >
                 <CardDeck>
                   {eventList.map(e => (
                     <Upcoming
@@ -63,6 +70,7 @@ class Home extends React.Component {
               </div>
             </div>
 
+          
           </Container>
           :
           <Container>

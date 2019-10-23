@@ -1,0 +1,41 @@
+.wn-card {
+    width: 100% !important;
+    height: 200px;
+    border: solid 0.5 black
+}
+
+.wn-image {
+    width: 100% !important;
+}
+
+.countdown-event-all2 {
+    display: flex;
+    z-index: 500;
+    position: absolute;
+    top: 70%;
+    left: 1%;
+    color: black;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.countdown-day2, .countdown-hour2, .countdown-minute2, .countdown-second2 {
+    background-color: white;
+    width: 50px;
+    height: 40px;
+    border-radius: 3px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.countdown-labels2 {
+    display: flex;
+    z-index: 500;
+    position: absolute;
+    top: 62%;
+    left: 2%;
+    color: white;
+    justify-content: space-between;
+}
+
