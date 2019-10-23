@@ -76,7 +76,7 @@ class Home extends React.Component {
           <Container>
             <Header as="h1">It looks like you aren't attending any upcoming events.</Header>
             <Header as="h2">"Why don't you check out the
-             <Link to="/explore"> explore page   </Link>
+             <Link to="/"> explore page   </Link>
               and find one."</Header>
           </Container>
         }
