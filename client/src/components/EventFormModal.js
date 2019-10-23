@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Dropzone from "react-dropzone";
 import { withRouter, } from "react-router-dom";
 import { TextArea, Checkbox, Form, } from "semantic-ui-react";
 import { Modal, Button, } from "react-bootstrap";
@@ -8,7 +9,7 @@ import { DateTimeInput } from "semantic-ui-calendar-react";
 
 
 class EventFormModal extends React.Component {
-    state = { date: "", name: "", location: "", description: "", open: true };
+    state = { date: "", name: "", location: "", description: "", file: "", open: true };
     
     handleChange = (e, { name, value }) => {
       this.setState({ [name]: value });
@@ -16,8 +17,15 @@ class EventFormModal extends React.Component {
   
     handleSubmit = (e) => {
       e.preventDefault();
+      let data = new FormData();
+      data.append("date", this.state.date)
+      data.append("name", this.state.name)
+      data.append("location", this.state.location)
+      data.append("description", this.state.description)
+      data.append('file', this.state.file)
+
       const { location, history, auth: {user} } = this.props
-        axios.post("/api/events", this.state )
+        axios.post("/api/events", data)
         .then(res => {
           axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
           history.push(`/events/${res.data.id}`)
@@ -30,6 +38,14 @@ class EventFormModal extends React.Component {
     };
 
     onChange = date => this.setState({ date })
+
+    onDrop = (files, rejectFiles) => { 
+      console.log(files)
+      console.log("Rejected Image=>",rejectFiles)
+      // let data = new FormData();
+      // data.append('file', files)
+      this.setState({file: files[0]})
+    };
 
   render() {
     return (
@@ -79,14 +95,34 @@ class EventFormModal extends React.Component {
                 value={this.state.description}
                 onChange={this.handleChange}
               />
-              <Form.Field
+              {/* <Form.Field
                 name="open"
                 control={Checkbox}
                 label='Open Event'
                 // value={!this.state.open}
                 checked={this.state.open}
                 onChange={this.handleCheckChange}
-              />
+              /> */}
+              <Dropzone
+                onDrop={this.onDrop}
+                multiple={false}
+              >
+                {({ getRootProps, getInputProps, isDragActive }) => {
+                  return (
+                    <div
+                      {...getRootProps()}
+                      style={styles.dropzone}
+                    >
+                      <input {...getInputProps()} />
+                      {
+                        isDragActive ?
+                          <p>Drop files here...</p> :
+                          <p>Drop/Click to select files to upload.</p>
+                      }
+                    </div>
+                  )
+                }}
+              </Dropzone>
               <Form.Button inverted onClick={this.props.onHide} primary>Submit</Form.Button>
 
             </Form>
@@ -94,7 +130,7 @@ class EventFormModal extends React.Component {
           <Modal.Footer>
             <Button variant="secondary" onClick={this.props.onHide}>
               Close
-                        </Button>
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -109,5 +145,18 @@ const ConnectedEventFormModal = (props) => (
     }
   </AuthConsumer>
 )
+
+const styles = {
+  dropzone: {
+    height: "150px",
+    width: "150px",
+    border: "1px dashed black",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "10px",
+  },
+}
 
 export default withRouter(ConnectedEventFormModal);

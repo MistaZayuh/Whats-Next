@@ -10,6 +10,19 @@ class Api::EventsController < ApplicationController
 
   def create
     event = Event.new(event_params)
+
+    file = params[:file]
+
+    if file
+      begin
+        # ext = File.extname(file.tempfile)
+        cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
+        event.image = cloud_image['secure_url']
+      # rescue => exception
+      #   render json: {errors: exception}, status: 422
+      end
+    end
+
     if event.save
       render json: event
     else
@@ -18,6 +31,18 @@ class Api::EventsController < ApplicationController
   end
 
   def update
+    file = params[:file]
+
+    if file
+      begin
+        # ext = File.extname(file.tempfile)
+        cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
+        @event.image = cloud_image['secure_url']
+      # rescue => e
+      #   render json: {errors: e}, status: 422
+      end
+    end
+
     if @event.update(event_params)
       render json: @event
     else
@@ -55,6 +80,6 @@ class Api::EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:name, :description, :location, :date, :image, :open, :max_attendees)
+      params.permit(:name, :description, :location, :date, :image, :open, :max_attendees)
     end
 end

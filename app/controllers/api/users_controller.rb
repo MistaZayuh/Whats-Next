@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy ]
+  before_action :set_user, only: [:show, :destroy ]
   
   def index
     render json: User.all
@@ -10,6 +10,17 @@ class Api::UsersController < ApplicationController
   end
 
   def update
+    # binding.pry
+    file = params[:file]
+    
+    if file
+      begin
+        cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
+        current_user.image = cloud_image['secure_url']
+        # rescue => exception
+      end
+      
+    end
     if current_user.update(user_params)
       render json: current_user
     else
@@ -39,6 +50,6 @@ class Api::UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :image, :nickname)
+      params.permit(:name, :image, :nickname, :id, )
     end
 end
