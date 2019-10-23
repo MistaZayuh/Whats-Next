@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Segment, Image, Header } from "semantic-ui-react";
+import UserDefault from "../images/UserDefault.png";
 
 
 
@@ -22,9 +23,9 @@ class GoingList extends React.Component {
     return (
       <Segment.Group>
         <Segment >
-          Going -
+          Going - {this.state.users.length}
         </Segment>
-        <Segment.Group>
+        <Segment.Group style={{overflowX: "auto"}}>
           {this.state.users.map(u => (
             <Segment key={u.id}>
               {/* <div style={{display: "flex", }}> */}

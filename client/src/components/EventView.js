@@ -155,25 +155,29 @@ class EventView extends React.Component {
             <Clock
               deadline={this.state.event.date}
             />
-            <div>
+              {this.props.auth.user ?
+              <div>
               {this.state.joined ?
                 <Button
-                  color="red"
-                  className="join-event-button"
-                  onClick={this.leaveEvent}
+                color="red"
+                className="join-event-button"
+                onClick={this.leaveEvent}
                 >
-                  Leave Event
-              </Button>
+                Leave Event
+                </Button>
                 :
                 <Button
-                  color="blue"
-                  className="join-event-button"
-                  onClick={this.joinEvent}
+                color="blue"
+                className="join-event-button"
+                onClick={this.joinEvent}
                 >
                   Join Event
               </Button>
               }
-            </div>
+              </div>
+              :
+              null
+            }
           </Container>
         </div>
 
@@ -184,7 +188,11 @@ class EventView extends React.Component {
             <Grid columns={2}>
               <Grid.Column width={12}>
                 <Header >WHAT'S NEW?</Header>
+                {this.props.auth.user ? 
                 <CommentForm event={this.state.event} addComment={this.addComment}/>
+                  :
+                  null
+                }
                 <br />
                 <Segment basic>
                   <Card.Group>
@@ -195,13 +203,15 @@ class EventView extends React.Component {
               <Grid.Column width={3} >
                 <Segment basic>{this.state.event.description}</Segment>
                 <GoingList users={this.state.eventUsers} />
+                {this.props.auth.user ? 
+                
                 <Segment basic >
                   <Button
                     as={Link}
                     to={`/events/${this.state.event.id}/edit`}
                     inverted color="blue"
                     fluid
-                  >
+                    >
                     Edit Event
               </Button>
                   <br />
@@ -209,10 +219,14 @@ class EventView extends React.Component {
                     onClick={() => this.deleteEvent()}
                     inverted color="red"
                     fluid
-                  >
+                    >
                     Delete Event
               </Button>
                 </Segment>
+                :
+                null 
+                
+                }
               </Grid.Column>
             </Grid>
           </Container>

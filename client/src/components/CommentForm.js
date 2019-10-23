@@ -4,6 +4,8 @@ import {AuthConsumer} from "../providers/AuthProvider";
 import {Comment, Form, Button, Image, Segment} from "semantic-ui-react";
 import Axios from "axios";
 import styled from "styled-components";
+import UserDefault from "../images/UserDefault.png";
+
 
 
 
@@ -38,13 +40,14 @@ class CommentForm extends React.Component {
           <Form onSubmit={this.handleSubmit}>
         <div style={{display: "flex", justifyContent: "space-between", marginBottom: "5px"}}>
           <Image 
-            src={this.props.auth.user.image} 
+            src={UserDefault || this.props.auth.user.image} 
             size="mini" 
             circular 
             style={{width: "38px"}}
             />
               <MyFormInput                
                 name="body"
+                required
                 value={this.state.body}
                 onSubmit={this.handleSubmit}
                 onChange={this.handleChange}
