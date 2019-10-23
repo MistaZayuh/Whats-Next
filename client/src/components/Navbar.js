@@ -8,6 +8,7 @@ import EventFormModal from "./EventFormModal";
 import axios from 'axios';
 import Search from "./Search";
 import SearchBarModal from './Searchbarmodal';
+import "../styles/Navbar.css";
 
 
 class NavBar extends React.Component {

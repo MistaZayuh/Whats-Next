@@ -134,28 +134,30 @@ class EventView extends React.Component {
   render() {
     return (
       <>
-        <div>
+        
+          <div className="image-content"> 
           <div className='opacity-test'>
             <img src={building} className='background-image-events' />
           </div>
-          <Container>
-            <div className="banner-event-name" >
+            
+            <div  className="banner-event-name" >
               <h1 className="event-name">
                 {this.state.event.name}
               </h1>
             </div>
-            <div className="banner-event-date">
+            <div  className="banner-event-date">
               <p className="event-date">
-					  <div>{moment.tz(this.state.event.date, "America/Denver").format("LLL")}</div>
+					  <div >{moment.tz(this.state.event.date, "America/Denver").format("LL")}</div>
               </p>
             </div>
-            <div>
+            <div className="clock-comp" >
 
             <Clock
               deadline={this.state.event.date}
               />
+              
               </div>
-            <div>
+              
               {this.state.joined ?
                 <Button
                   color="red"
@@ -173,9 +175,10 @@ class EventView extends React.Component {
                   Join Event
               </Button>
               }
-            </div>
-          </Container>
+          
         </div>
+        
+        
 
         <br />
         <br />
@@ -184,7 +187,7 @@ class EventView extends React.Component {
             <Grid columns={2}>
               <Grid.Column width={12}>
                 <Header >WHAT'S NEW?</Header>
-                <CommentForm event={this.state.event} addComment={this.addComment}/>
+                {/* <CommentForm event={this.state.event} addComment={this.addComment}/> */}
                 <br />
                 <Segment basic>
                   <Card.Group>

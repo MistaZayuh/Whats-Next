@@ -8,6 +8,16 @@
     display: flex;
     justify-content: center;
     padding-bottom: 5px;
+    
+    /* max-width: 700px; */
+}
+
+.upcoming-comp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 705px;
+
 }
 
 .whats-next-p {
@@ -20,5 +30,22 @@
     display: flex;
     justify-content: center;
     padding-bottom: 5px;
+    /* max-width: 700px; */
+}
+
+
+.overall-cont {
+    display: flex;
+    justify-items: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-left: 100px;
+}
+
+.whats-next-outer {
+    justify-content: center;
+    max-width: 705px;
+    width: 100%;
+    border: solid black
 }
 

@@ -14,10 +14,13 @@ import UserProfile from './components/UserProfile';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Switch, Route, } from 'react-router-dom';
 import { Container, } from "semantic-ui-react";
+import "../src/App.css";
 
 const App = () => (
   <>
+  <div>
     <NavBar />
+  </div>
     <FetchUser>
       {/* <Container> */}
         <Switch>
