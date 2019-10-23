@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Button, Form, Segment, Header, } from 'semantic-ui-react';
+import { Button, Form, Segment, Header, Container} from 'semantic-ui-react';
 
 class Register extends React.Component {
   state = { name: '', nickname: '', email: '', password: '', passwordConfirmation: '', };
@@ -11,7 +11,7 @@ class Register extends React.Component {
     const { auth: { handleRegister, }, history, } = this.props;
 
     if (password === passwordConfirmation)
-      handleRegister({ ...this.state }, history);
+      handleRegister({ ...this.state,  }, history);
     else
       alert('Passwords Do Not Match!')
   }
@@ -25,6 +25,8 @@ class Register extends React.Component {
     const { email, password, passwordConfirmation, name, nickname, } = this.state;
 
     return (
+      <Container>
+
       <Segment basic>
         <Header as='h1' textAlign='center'>Register</Header>
         <Form onSubmit={this.handleSubmit}>
@@ -36,7 +38,7 @@ class Register extends React.Component {
             value={name}
             placeholder='First Name'
             onChange={this.handleChange}
-          />
+            />
           <Form.Input
             label="Last Name"
             required
@@ -44,7 +46,7 @@ class Register extends React.Component {
             value={nickname}
             placeholder='Last Name'
             onChange={this.handleChange}
-          />
+            />
           <Form.Input
             label="Email"
             required
@@ -52,7 +54,7 @@ class Register extends React.Component {
             value={email}
             placeholder='Email'
             onChange={this.handleChange}
-          />
+            />
           <Form.Input
             label="Password"
             required
@@ -61,7 +63,7 @@ class Register extends React.Component {
             placeholder='Password'
             type='password'
             onChange={this.handleChange}
-          />
+            />
           <Form.Input
             label="Password Confirmation"
             required
@@ -70,12 +72,13 @@ class Register extends React.Component {
             placeholder='Password Confirmation'
             type='password'
             onChange={this.handleChange}
-          />
+            />
           <Segment textAlign='center' basic>
             <Button primary type='submit'>Submit</Button>
           </Segment>
         </Form>
       </Segment>
+    </Container>
     )
   }
 }

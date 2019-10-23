@@ -27,10 +27,6 @@ class EventView extends React.Component {
     .then(res => {
         this.setState({ event: res.data[0] })
         var eventInfo = res.data
-<<<<<<< HEAD
-      
-=======
->>>>>>> f6371db532c40ff6e48c4cb8d20014115204ffca
         axios.get(`/api/specific_event_users?specificeventid=${res.data[0].id}`)
         .then(res => {
             this.setState({ eventUsers: res.data })
@@ -43,22 +39,11 @@ class EventView extends React.Component {
           .catch(err => {
             console.log(err)
           })
-<<<<<<< HEAD
-        
-        axios.get(`/api/specific_event_comments?specificeventid=${res.data[0].id}`)
-          .then(res => {
-          
-            this.setState({ comments: res.data })
-          })
-          .catch(err => {
-          
-=======
         axios.get(`/api/specific_event_comments?specificeventid=${res.data[0].id}`)
           .then(res => {
             this.setState({ comments: res.data })
           })
           .catch(err => {
->>>>>>> f6371db532c40ff6e48c4cb8d20014115204ffca
             console.log(err)
           })
       })
@@ -115,17 +100,9 @@ class EventView extends React.Component {
   };
 
   addComment = (comment) => {
-<<<<<<< HEAD
-    const {comments} = this.state;
-    // const comment = {body,}
-    this.setState({comments: [{...comment, name: this.props.auth.user.name, image: this.props.auth.user.image}, ...this.state.comments]})
-  }
-
-=======
     const {auth: {user}} = this.props
     this.setState({comments: [{...comment, name: user.name, image: user.image}, ...this.state.comments]})
   };
->>>>>>> f6371db532c40ff6e48c4cb8d20014115204ffca
   
   listPosts = () => {
     if (this.state.comments.length <= 0)
@@ -159,7 +136,7 @@ class EventView extends React.Component {
       <>
         <div>
           <div className='opacity-test'>
-            <img src={building} className='background-image-events' />
+            <img src={this.state.event.image || building} className='background-image-events' />
           </div>
           <Container>
             <div className="banner-event-name" >

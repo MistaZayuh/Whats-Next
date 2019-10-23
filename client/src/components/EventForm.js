@@ -10,7 +10,7 @@ import building from "../images/building.jpeg";
 
 
 class EventForm extends React.Component {
-  state = { date: "", name: "", location: "", description: "", file: ""};
+  state = { date: "", name: "", location: "", description: "", image: "", file: ""};
 
   componentDidMount() {
     const { match: {params}, auth: {user}} = this.props;         
@@ -38,6 +38,14 @@ class EventForm extends React.Component {
     
     handleSubmit = (e) => {
       e.preventDefault();
+      let data = new FormData();
+      data.append('file', this.state.file)
+      data.append("name", this.state.name)
+      data.append("date", this.state.date)
+      data.append("location", this.state.location)
+      data.append("description", this.state.description)
+
+      
       const { location, match, history, auth: {user} } = this.props
       if (location.pathname === "/events/new") {
         axios.post("/api/events", this.state )
@@ -47,7 +55,7 @@ class EventForm extends React.Component {
           history.push(`/events/${res.data.id}`)
       })
     } else {
-      axios.put(`/api/events/${match.params.id}`, this.state)
+      axios.put(`/api/events/${match.params.id}`, data)
       .then(res => {
         history.push(`/events/${match.params.id}`)
       })
@@ -62,9 +70,9 @@ class EventForm extends React.Component {
   onDrop = (files, rejectFiles) => { 
     console.log(files)
     console.log("Rejected Image=>",rejectFiles)
-    debugger
-    this.setState({...this.state, file: rejectFiles[0]})
-    debugger
+    // let data = new FormData();
+    // data.append('file', files)
+    this.setState({file: files[0]})
   }
 
   render() {
@@ -121,7 +129,6 @@ class EventForm extends React.Component {
           <Dropzone
             onDrop={this.onDrop}
             multiple={false}
-            // accept="images/*"
           >
             {({ getRootProps, getInputProps, isDragActive }) => {
               return (
@@ -145,14 +152,14 @@ class EventForm extends React.Component {
           />
           
 
-          <Form.Field
+          {/* <Form.Field
             name="open"
             control={Checkbox}
             label='Open Event'
             // value={!this.state.open}
             checked={this.state.open}
             onChange={this.handleCheckChange}
-          />
+          /> */}
           <Form.Button primary >Submit</Form.Button>
         </Form>
         <br />
