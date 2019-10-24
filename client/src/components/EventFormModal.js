@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Dropzone from "react-dropzone";
 import { withRouter, } from "react-router-dom";
-import { TextArea, Checkbox, Form, } from "semantic-ui-react";
+import { TextArea, Form, } from "semantic-ui-react";
 import { Modal, Button, } from "react-bootstrap";
 import { AuthConsumer } from "../providers/AuthProvider";
 import { DateTimeInput } from "semantic-ui-calendar-react";

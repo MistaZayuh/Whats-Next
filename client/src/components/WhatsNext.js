@@ -1,11 +1,9 @@
 import React from "react";
-import { Header, Card, Container } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { Link, } from "react-router-dom";
-import moment from "moment";
 import { AuthConsumer } from "../providers/AuthProvider";
 import building from "../images/building.jpeg";
 import styled from "styled-components";
-import axios from "axios";
 import ClockHome from "./ClockHome";
 import "moment-timezone";
 import "../styles/WhatsNext.css";

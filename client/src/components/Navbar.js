@@ -4,10 +4,8 @@ import { Menu, Icon, Dropdown, Header, Button, } from 'semantic-ui-react';
 import { Link, withRouter, } from 'react-router-dom';
 import logo from "../images/logo.png";
 import logo_w from "../images/logo_w.png";
-import { Nav, Navbar, Image, Modal, } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import EventFormModal from "./EventFormModal";
-import axios from 'axios';
-import Search from "./Search";
 import SearchBarModal from './Searchbarmodal';
 import "../styles/Navbar.css";
 
@@ -25,7 +23,7 @@ class NavBar extends React.Component {
   // searchEvent={this.searchEvent}
   
   rightNavItems = () => {
-    const { auth: { user, handleLogout, }, location, } = this.props;
+    const { auth: { user, handleLogout, } } = this.props;
     
         if (user) {
       return (

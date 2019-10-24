@@ -1,7 +1,6 @@
 import React from "react";
-import moment from "moment";
 import {AuthConsumer} from "../providers/AuthProvider";
-import {Comment, Form, Button, Image, Segment} from "semantic-ui-react";
+import {Form, Image, Segment} from "semantic-ui-react";
 import Axios from "axios";
 import styled from "styled-components";
 import UserDefault from "../images/UserDefault.png";
