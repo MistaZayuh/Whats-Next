@@ -104,7 +104,7 @@ class EventForm extends React.Component {
                   {
                     isDragActive ?
                       <p>Drop files here...</p> :
-                      <p>Drop/Click to select files to upload.</p>
+                      <p>Drop/Click to upload image</p>
                   }
                 </div>
               )
