@@ -6,6 +6,8 @@ import { AuthConsumer, } from "../providers/AuthProvider";
 import { Form, Header, Container } from "semantic-ui-react";
 import { Image, } from "react-bootstrap";
 
+const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
+
 class UserForm extends React.Component {
   state = { name: "", nickname: "", file: null, };
 
@@ -65,20 +67,20 @@ class UserForm extends React.Component {
         <br/>
         <Container>
             <Header as="h1" >{ this.props.auth.user.name } { this.props.auth.user.nickname }</Header>
-              <Image style={{width: "15%", height: "15%", border: "solid, black, 1px,"}} roundedCircle src={user.image} />
+              <Image style={{width: "15%", height: "15%", border: "solid, black, 1px,"}} roundedCircle src={user.image || defaultImage } />
             <Form onSubmit={this.handleSubmit}>
               <Form.Input
-                label="Name"
+                label="First Name"
                 name="name"
-                placeholder="Name"
+                placeholder="First Name"
                 required
                 onChange={this.handleChange}
                 value={this.state.name}
                 />
               <Form.Input
-                label="Nickname"
+                label="Last Name"
                 name="nickname"
-                placeholder="Nickname"
+                placeholder="Last Name"
                 required
                 onChange={this.handleChange}
                 value={this.state.nickname}
@@ -120,6 +122,8 @@ class UserForm extends React.Component {
     );
   };
 };
+
+
 
 const ConnectedUserForm = (props) => (
   <AuthConsumer>

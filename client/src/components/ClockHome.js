@@ -13,6 +13,10 @@ class ClockHome extends React.Component {
     setInterval(() => this.getTimeUntil(this.props.deadline), 1000);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.getTimeUntil)
+  }
+
           
   getTimeUntil(deadline) {
     const time = Date.parse(deadline) - Date.parse(new Date());

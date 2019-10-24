@@ -36,7 +36,7 @@ class NavBar extends React.Component {
               <Header as="h4">
               <Icon className="my-icon"  onClick={ () => this.setState({showSearchModal: true}) } name="search" style={{paddingTop: "10px",}}/>
               </Header>
-              <Button  color="grey" style={{opacity: "0.9"}} onClick={ () => this.setState({showEventModal: true})}>Create New Event</Button>
+              <Button  style={{background: "#6d6d6d85", color: "white"}} onClick={ () => this.setState({showEventModal: true})}>Create New Event</Button>
               </>
               :
               <>

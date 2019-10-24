@@ -117,7 +117,7 @@ class EventView extends React.Component {
             src={c.image || defaultImage }
           />
           <Card.Header>{c.name}</Card.Header>
-          <Card.Meta>{moment(c.created_at).format("LLL")}</Card.Meta>
+          <Card.Meta>{moment(c.created_at).format("LL")}</Card.Meta>
           <Card.Description>
             {c.body}
           </Card.Description>
@@ -143,9 +143,9 @@ class EventView extends React.Component {
               </h1>
             </div>
             <div  className="banner-event-date">
-              <p className="event-date">
-					  <div >{moment.tz(this.state.event.date, "America/Denver").format("LL")}</div>
-              </p>
+              <div className="event-date">
+					  <p >{moment.tz(this.state.event.date, "America/Denver").format("LL")}</p>
+              </div>
             </div>
             <div className="clock-comp" >
 
@@ -157,8 +157,7 @@ class EventView extends React.Component {
               <div>
               {this.state.joined ?
                 <Button
-                style={{opacity: "0.9"}}
-                color="grey"
+                style={{background: "#6d6d6d85", color: "white"}}
                 className="join-event-button"
                 onClick={this.leaveEvent}
                 >
@@ -166,7 +165,7 @@ class EventView extends React.Component {
                 </Button>
                 :
                 <Button
-                color="blue"
+                style={{background: "#54c8ff", color: "white"}}
                 className="join-event-button"
                 onClick={this.joinEvent}
                 >
