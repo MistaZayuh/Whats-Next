@@ -30,7 +30,7 @@ class Clock extends React.Component {
          return(
            <>
            <div className="countdown-labels">
-             <p>days</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <p>days</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              <p>hours</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              <p>minutes</p>&nbsp;&nbsp;&nbsp;&nbsp;
              <p>seconds</p>

@@ -133,11 +133,11 @@ class EventView extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="entire-event-view">
         
           <div className="image-content"> 
           <div className='opacity-test'>
-            <img src={this.state.event.image || building} className='background-image-events' />
+            <img style={{zIndex: "999"}} src={this.state.event.image || building} className='background-image-events' />
           </div>
             
             <div  className="banner-event-name" >
@@ -184,8 +184,8 @@ class EventView extends React.Component {
         
         
 
-        <br />
-        <br />
+        {/* <br />
+        <br /> */}
         <div >
           <Container style={{ padding: '2em 0em', }}>
             <Grid columns={2}>
@@ -235,7 +235,7 @@ class EventView extends React.Component {
           </Container>
         </div>
         <br />
-      </>
+      </div>
     )
   }
 };

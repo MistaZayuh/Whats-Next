@@ -22,8 +22,13 @@ class GoingList extends React.Component {
   render() {
     return (
       <Segment.Group>
-        <Segment >
-          Going - {this.state.users.length}
+        <Segment
+        style={{opacity: "0.5"}}
+        >
+          <strong>
+
+          GOING - {this.state.users.length}
+          </strong>
         </Segment>
         <Segment.Group style={{overflowX: "auto", height: "200px"}}>
           {this.state.users.map(u => (
