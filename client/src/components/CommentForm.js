@@ -55,7 +55,7 @@ class CommentForm extends React.Component {
               />
         </div>
               
-              <Form.Button primary floated="right">
+              <Form.Button style={{background: "#54c8ff"}} primary floated="right">
                 Post
               </Form.Button>
           </Form>      

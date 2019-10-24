@@ -50,6 +50,8 @@ class User extends React.Component {
   }
 }
 
+
+
 const ConnectedUser = (props) => (
   <AuthConsumer>
     { auth =>

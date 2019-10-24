@@ -31,8 +31,6 @@ class Event < ApplicationRecord
     query = <<-SQL
     SELECT 
       events.id,
-      events.image,
-      events.date,
       events.name AS event_name,
       events.created_at::date AS formatted_date
     FROM events
