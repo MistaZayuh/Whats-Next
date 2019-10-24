@@ -17,15 +17,15 @@ class EventFormModal extends React.Component {
   
     handleSubmit = (e) => {
       e.preventDefault();
+      const { date, name, location, description, file, } = this.state;
+      const { history, auth: {user} } = this.props;
       let data = new FormData();
-      data.append("date", this.state.date)
-      data.append("name", this.state.name)
-      data.append("location", this.state.location)
-      data.append("description", this.state.description)
-      data.append('file', this.state.file)
-
-      const { location, history, auth: {user} } = this.props
-        axios.post("/api/events", data)
+      // data.set("date", date)
+      // data.append("name", name)
+      // data.append("location", location)
+      // data.append("description", description)
+      data.append('file', file)
+      axios.post(`/api/events?date=${date}&name=${name}&location=${location}&description=${description}`, data)
         .then(res => {
           axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
           history.push(`/events/${res.data.id}`)
@@ -37,10 +37,11 @@ class EventFormModal extends React.Component {
       this.setState({ [name]: !!checked })
     };
 
-    onChange = date => this.setState({ date })
+    onChange = date => this.setState({ date });
 
     onDrop = (files, rejectFiles) => { 
       console.log(files)
+      debugger
       console.log("Rejected Image=>",rejectFiles)
       // let data = new FormData();
       // data.append('file', files)
