@@ -54,10 +54,9 @@ class CommentForm extends React.Component {
                 placeholder="Write your thoughts, feelings or ideas"
               />
         </div>
-              
-              <Form.Button primary floated="right">
-                Post
-              </Form.Button>
+                <Form.Button style={{background: "#54c8ff", color: "white"}} floated="right">
+                  Post
+                </Form.Button>
           </Form>      
     </Segment>
     )
@@ -79,5 +78,7 @@ export class ConnectedCommentForm extends React.Component {
 const MyFormInput = styled(Form.Input)`
     width: 92% !important;
 `;
+
+
 
 export default ConnectedCommentForm;

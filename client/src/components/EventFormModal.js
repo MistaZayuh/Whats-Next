@@ -103,7 +103,7 @@ class EventFormModal extends React.Component {
                 checked={this.state.open}
                 onChange={this.handleCheckChange}
               /> */}
-              <Dropzone
+              {/* <Dropzone
                 onDrop={this.onDrop}
                 multiple={false}
               >
@@ -122,7 +122,7 @@ class EventFormModal extends React.Component {
                     </div>
                   )
                 }}
-              </Dropzone>
+              </Dropzone> */}
               <Form.Button inverted onClick={this.props.onHide} primary>Submit</Form.Button>
 
             </Form>

@@ -92,7 +92,7 @@ class EventView extends React.Component {
     const { history, match: { params } } = this.props
     axios.delete(`/api/events/${params.id}`)
       .then(res => {
-        history.push("/")
+        history.push("/dashboard")
       })
       .catch(err => {
         console.log(err)
@@ -120,7 +120,7 @@ class EventView extends React.Component {
             src={c.image || defaultImage }
           />
           <Card.Header>{c.name}</Card.Header>
-          <Card.Meta>{moment(c.created_at).format("LLL")}</Card.Meta>
+          <Card.Meta>{moment(c.created_at).format("LL")}</Card.Meta>
           <Card.Description>
             {c.body}
           </Card.Description>
