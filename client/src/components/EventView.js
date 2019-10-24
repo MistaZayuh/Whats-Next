@@ -160,7 +160,7 @@ class EventView extends React.Component {
               <div>
               {this.state.joined ?
                 <Button
-                style={{opacity: "0.8"}}
+                style={{opacity: "0.9"}}
                 color="grey"
                 className="join-event-button"
                 onClick={this.leaveEvent}
