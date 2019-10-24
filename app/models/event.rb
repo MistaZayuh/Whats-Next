@@ -71,7 +71,6 @@ class Event < ApplicationRecord
     ORDER BY events.date
     OFFSET (#{page} * 30) FETCH NEXT 30 ROWS ONLY
     SQL
-
     ActiveRecord::Base.connection.exec_query(query)
   end
 end
