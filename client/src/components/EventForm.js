@@ -1,8 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Dropzone from "react-dropzone";
-import styled from "styled-components";
-import { Form, TextArea, Checkbox, Header, Container, Image } from "semantic-ui-react";
+import { Form, TextArea, Header, Container, Image } from "semantic-ui-react";
 import { DateTimeInput } from "semantic-ui-calendar-react";
 import { AuthConsumer } from "../providers/AuthProvider";
 import building from "../images/building.jpeg";
@@ -13,7 +12,7 @@ class EventForm extends React.Component {
   state = { date: "", name: "", location: "", description: "", image: "", file: ""};
 
   componentDidMount() {
-    const { match: {params}, auth: {user}} = this.props;         
+    const { match: {params} } = this.props;         
     if (this.props.location.pathname !== "/events/new") {
       axios.get(`/api/events/${params.id}`)
       .then(res => {

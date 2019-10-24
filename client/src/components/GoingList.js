@@ -1,7 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import { Segment, Image, Header } from "semantic-ui-react";
-import UserDefault from "../images/UserDefault.png";
+// import styled from "styled-components";
+import { Segment, Image } from "semantic-ui-react";
 
 
 
@@ -47,14 +46,14 @@ class GoingList extends React.Component {
   }
 }
 
-const UserSegment = styled(Segment)`
-  display: flex;
-  justify-content: space-between;
-`;
+// const UserSegment = styled(Segment)`
+//   display: flex;
+//   justify-content: space-between;
+// `;
 
-const UserImage = styled(Image)`
-  height: 35%;
-  width: 35%
-`;
+// const UserImage = styled(Image)`
+//   height: 35%;
+//   width: 35%
+// `;
 
 export default GoingList;

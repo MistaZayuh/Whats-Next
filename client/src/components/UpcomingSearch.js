@@ -1,10 +1,7 @@
-import React, { useEffect, } from "react";
-import moment from "moment";
-import { Header, Card, CardGroup, CardDeck, } from "react-bootstrap";
-import building from "../images/building.jpeg";
+import React from "react";
+import { Card } from "react-bootstrap";
 import party from "../images/party.jpg";
 import styled from "styled-components";
-import axios from 'axios';
 import { AuthConsumer } from "../providers/AuthProvider";
 import { withRouter } from  'react-router-dom'
 
@@ -19,7 +16,7 @@ const UpcomingSearch = ({ event, history, onHide, clearEvents }) => {
 
   return (
     <Card onClick={handleClick} style={{ width: "213px", height: "120px" }} className="bg-dark text-white">
-      <MyCardImage src={event.event_image || party} alt="event location" />
+      <MyCardImage src={event.image || party} alt="event location" />
       <Card.ImgOverlay>
         <Card.Title><h2>{event.name || event.event_name}</h2></Card.Title>
         <br />

@@ -1,14 +1,10 @@
 import React from "react";
 import axios from "axios";
-import party from "../images/party.jpg";
-import styled from "styled-components";
-import Search from './Search';
 import Upcoming from "./Upcoming";
 import "../styles/Explore.css";
 import { AuthConsumer } from "../providers/AuthProvider";
-import { Link, } from "react-router-dom";
 import { CardDeck, } from "react-bootstrap";
-import { Container, Button, Header, Segment, } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 
 class Explore extends React.Component {
   state = { events: [], page: 0 };
