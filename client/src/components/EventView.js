@@ -5,7 +5,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import building from "../images/building.jpeg";
 import { AuthConsumer, } from "../providers/AuthProvider";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { Grid, Segment, Button, Container, Card, Image, Header } from "semantic-ui-react";
 import "../styles/EventView.css";
 import CommentForm from "./CommentForm";
@@ -24,11 +24,11 @@ class EventView extends React.Component {
   componentDidMount() {
     const { match: { params: { id } }, auth: { user } } = this.props
     axios.get(`/api/specific_event?specificeventid=${id}`)
-      .then(res => {
+    .then(res => {
         this.setState({ event: res.data[0] })
         var eventInfo = res.data
         axios.get(`/api/specific_event_users?specificeventid=${res.data[0].id}`)
-          .then(res => {
+        .then(res => {
             this.setState({ eventUsers: res.data })
             res.data.filter(u => {
               if (u.user_id == user.id) {
@@ -53,7 +53,7 @@ class EventView extends React.Component {
   };
 
 
-
+  
 
   joinEvent = () => {
     const { auth: { user } } = this.props
@@ -100,32 +100,32 @@ class EventView extends React.Component {
   };
 
   addComment = (comment) => {
-    const { auth: { user } } = this.props
-    this.setState({ comments: [{ ...comment, name: user.name, image: user.image }, ...this.state.comments] })
+    const {auth: {user}} = this.props
+    this.setState({comments: [{...comment, name: user.name, image: user.image}, ...this.state.comments]})
   };
-
+  
   listPosts = () => {
     if (this.state.comments.length <= 0)
       return <Header as="h2" >No Comments</Header>
-
-    return (
+    
+    return ( 
       this.state.comments.map(c => (
 
-        <Card fluid>
-          <Card.Content>
-            <Image
-              floated='left'
-              circular
-              size='mini'
-              src={c.image || defaultImage}
-            />
-            <Card.Header>{c.name}</Card.Header>
-            <Card.Meta>{moment(c.created_at).format("LLL")}</Card.Meta>
-            <Card.Description>
-              {c.body}
-            </Card.Description>
-          </Card.Content>
-        </Card>
+      <Card fluid>
+        <Card.Content>
+          <Image
+            floated='left'
+            circular
+            size='mini'
+            src={c.image || defaultImage }
+          />
+          <Card.Header>{c.name}</Card.Header>
+          <Card.Meta>{moment(c.created_at).format("LLL")}</Card.Meta>
+          <Card.Description>
+            {c.body}
+          </Card.Description>
+        </Card.Content>
+      </Card>
 
       ))
     )
@@ -133,32 +133,30 @@ class EventView extends React.Component {
 
   render() {
     return (
-      <EventPageElm>
-
-        <div className="entire-event-view">
-
-          <div className="image-content">
-            <div className='opacity-test'>
-              <img style={{ zIndex: "999" }} src={this.state.event.image || building} className='background-image-events' />
-            </div>
-
-            <div className="banner-event-name" >
+      <div className="entire-event-view">
+        
+          <div className="image-content"> 
+          <div className='opacity-test'>
+            <img style={{zIndex: "999"}} src={this.state.event.image || building} className='background-image-events' />
+          </div>
+            
+            <div  className="banner-event-name" >
               <h1 className="event-name">
                 {this.state.event.name}
               </h1>
             </div>
-            <div className="banner-event-date">
+            <div  className="banner-event-date">
               <p className="event-date">
-                <div >{moment.tz(this.state.event.date, "America/Denver").format("LL")}</div>
+					  <div >{moment.tz(this.state.event.date, "America/Denver").format("LL")}</div>
               </p>
             </div>
             <div className="clock-comp" >
 
-              <Clock
-                deadline={this.state.event.date}
-              />
+            <Clock
+              deadline={this.state.event.date}
+            />
             </div>
-            {this.props.auth.user ?
+              {this.props.auth.user ?
               <div>
               {this.state.joined ?
                 <Button
@@ -169,80 +167,78 @@ class EventView extends React.Component {
                 >
                 Leave Event
                 </Button>
-                  :
-                  <Button
-                    color="blue"
-                    className="join-event-button"
-                    onClick={this.joinEvent}
-                  >
-                    Join Event
+                :
+                <Button
+                color="blue"
+                className="join-event-button"
+                onClick={this.joinEvent}
+                >
+                  Join Event
               </Button>
-                }
+              }
               </div>
               :
               null
             }
-          </div>
-
-
-
-          {/* <br />
-        <br /> */}
-          <div >
-            <Container style={{ padding: '2em 0em', }}>
-              <Grid columns={2}>
-                <Grid.Column width={12}>
-                  <Header >WHAT'S NEW?</Header>
-                  {this.props.auth.user ?
-                    <CommentForm event={this.state.event} addComment={this.addComment} />
-                    :
-                    null
-                  }
-                  <br />
-                  <Segment basic>
-                    <Card.Group>
-                      {this.listPosts()}
-                    </Card.Group>
-                  </Segment>
-                </Grid.Column>
-                <Grid.Column width={3} >
-                  <Segment basic>{this.state.event.description}</Segment>
-                  <GoingList users={this.state.eventUsers} />
-                  {this.props.auth.user ?
-
-                    <Segment basic >
-                      <Button
-                        as={Link}
-                        to={`/events/${this.state.event.id}/edit`}
-                        inverted color="blue"
-                        fluid
-                      >
-                        Edit Event
-              </Button>
-                      <br />
-                      <Button
-                        onClick={() => this.deleteEvent()}
-                        inverted color="red"
-                        fluid
-                      >
-                        Delete Event
-              </Button>
-                    </Segment>
-                    :
-                    null
-
-                  }
-                </Grid.Column>
-              </Grid>
-            </Container>
-          </div>
-          <br />
         </div>
-      </EventPageElm>
+        
+        
+
+        {/* <br />
+        <br /> */}
+        <div >
+          <Container style={{ padding: '2em 0em', }}>
+            <Grid columns={2}>
+              <Grid.Column width={12}>
+                <Header >WHAT'S NEW?</Header>
+                {this.props.auth.user ? 
+                <CommentForm event={this.state.event} addComment={this.addComment}/>
+                  :
+                  null
+                }
+                <br />
+                <Segment basic>
+                  <Card.Group>
+                    {this.listPosts()}
+                  </Card.Group>
+                </Segment>
+              </Grid.Column>
+              <Grid.Column width={3} >
+                <Segment basic>{this.state.event.description}</Segment>
+                <GoingList users={this.state.eventUsers} />
+                {this.props.auth.user ? 
+                
+                <Segment basic >
+                  <Button
+                    as={Link}
+                    to={`/events/${this.state.event.id}/edit`}
+                    inverted color="blue"
+                    fluid
+                    >
+                    Edit Event
+              </Button>
+                  <br />
+                  <Button
+                    onClick={() => this.deleteEvent()}
+                    inverted color="red"
+                    fluid
+                    >
+                    Delete Event
+              </Button>
+                </Segment>
+                :
+                null 
+                
+                }
+              </Grid.Column>
+            </Grid>
+          </Container>
+        </div>
+        <br />
+      </div>
     )
   }
 };
-
 const ConnectedEventView = (props) => (
   <AuthConsumer>
     {auth =>
@@ -250,42 +246,4 @@ const ConnectedEventView = (props) => (
     }
   </AuthConsumer>
 )
-
-const slideInLeft = keyframes`
-  from {
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-    visibility: visible;
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-`;
-
-const slideOutLeft = keyframes`
-  from {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    visibility: hidden;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-  }
-`;
-
-const Page = styled.div``;
-
-const EventPageElm = styled(Page)`
-  &.page-enter {
-    animation: ${slideInLeft} 0.2s forwards;
-  }
-  &.page-exit {
-    animation: ${slideOutLeft} 0.2s forwards;
-  }
-`;
-
 export default ConnectedEventView;
