@@ -35,7 +35,7 @@ class NavBar extends React.Component {
                 {this.props.location.pathname.match(/.events.[0-9]{1,}$/) ?
               <>
               <Header as="h4">
-              <Icon className="icon" color="grey" onClick={ () => this.setState({showSearchModal: true}) } name="search" style={{paddingTop: "10px",}}/>
+              <Icon className="my-icon"  onClick={ () => this.setState({showSearchModal: true}) } name="search" style={{paddingTop: "10px",}}/>
               </Header>
               <Button  color="grey" style={{opacity: "0.9"}} onClick={ () => this.setState({showEventModal: true})}>Create New Event</Button>
               </>
