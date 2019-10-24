@@ -19,11 +19,10 @@ const UpcomingSearch = ({ event, history, onHide, clearEvents }) => {
 
   return (
     <Card onClick={handleClick} style={{ width: "213px", height: "120px" }} className="bg-dark text-white">
-      <MyCardImage src={event.image || party} alt="event location" />
+      <MyCardImage src={event.event_image || party} alt="event location" />
       <Card.ImgOverlay>
-        <Card.Title>{event.name || event.event_name}</Card.Title>
+        <Card.Title><h2>{event.name || event.event_name}</h2></Card.Title>
         <br />
-        <Card.Text>{moment(event.date).format("ll, h:mm a")}</Card.Text>
       </Card.ImgOverlay>
     </Card>
   );

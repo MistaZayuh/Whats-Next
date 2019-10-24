@@ -27,6 +27,7 @@ class EventFormModal extends React.Component {
       data.append('file', file)
       axios.post(`/api/events?date=${date}&name=${name}&location=${location}&description=${description}`, data)
         .then(res => {
+          this.setState({date: "", name: "", location: "", description: "", file: ""})
           axios.post(`/api/users/${user.id}/invitations`, {accepted: true, organizer: true, event_id: res.data.id})
           history.push(`/events/${res.data.id}`)
           history.push(`/refresh`)

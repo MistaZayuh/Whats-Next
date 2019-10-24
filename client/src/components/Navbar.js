@@ -11,6 +11,7 @@ import Search from "./Search";
 import SearchBarModal from './Searchbarmodal';
 import "../styles/Navbar.css";
 
+const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
 class NavBar extends React.Component {
   state = { showEventModal: false, showSearchModal: false, };
@@ -51,7 +52,7 @@ class NavBar extends React.Component {
             </>
             }
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Image  src={ user.image } roundedCircle />
+            <Image  src={ user.image || defaultImage } roundedCircle />
             <Header.Content>
               <Dropdown>
                 <Dropdown.Menu>
