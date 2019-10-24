@@ -3,7 +3,7 @@ import axios from "axios";
 import Dropzone from "react-dropzone";
 import styles from "styled-components";
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Form, Header, Button, Container } from "semantic-ui-react";
+import { Form, Header, Container } from "semantic-ui-react";
 import { Image, } from "react-bootstrap";
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';

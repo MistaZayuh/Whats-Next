@@ -1,8 +1,7 @@
-import React, { useEffect, } from "react";
+import React from "react";
 import moment from "moment";
-import { Header, Card, CardGroup, CardDeck, } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link, } from "react-router-dom";
-import building from "../images/building.jpeg";
 import party from "../images/party.jpg";
 import styled from "styled-components";
 

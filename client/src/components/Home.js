@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import axios from "axios";
 import WhatsNext from "./WhatsNext";
 import Upcoming from "./Upcoming";
 import { Link, } from "react-router-dom";
 import { AuthConsumer } from "../providers/AuthProvider";
 import { Header, Container, } from 'semantic-ui-react';
-import { CardGroup, CardDeck } from 'react-bootstrap';
+import { CardDeck } from 'react-bootstrap';
 import "../styles/Home.css";
-import Moment from "react-moment"
 
 class Home extends React.Component {
   state = { events: null, nextEvent: {}, };

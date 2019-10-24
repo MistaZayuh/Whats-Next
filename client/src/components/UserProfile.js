@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Grid, Image, Header, Button, Segment, Container } from 'semantic-ui-react';
+import { Grid, Image, Header, Button, Container } from 'semantic-ui-react';
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 

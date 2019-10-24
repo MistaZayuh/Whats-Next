@@ -1,11 +1,9 @@
 import React from "react";
 import axios from "axios";
-import Moment from "react-moment";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import building from "../images/building.jpeg";
 import { AuthConsumer, } from "../providers/AuthProvider";
-import styled from "styled-components";
 import { Grid, Segment, Button, Container, Card, Image, Header } from "semantic-ui-react";
 import "../styles/EventView.css";
 import CommentForm from "./CommentForm";
@@ -26,12 +24,11 @@ class EventView extends React.Component {
     axios.get(`/api/specific_event?specificeventid=${id}`)
     .then(res => {
         this.setState({ event: res.data[0] })
-        var eventInfo = res.data
         axios.get(`/api/specific_event_users?specificeventid=${res.data[0].id}`)
         .then(res => {
             this.setState({ eventUsers: res.data })
             res.data.filter(u => {
-              if (u.user_id == user.id) {
+              if (u.user_id === user.id) {
                 this.setState({ joined: true })
               }
             })
@@ -57,7 +54,7 @@ class EventView extends React.Component {
 
   joinEvent = () => {
     const { auth: { user } } = this.props
-    const { event, joined, eventUsers } = this.state;
+    const { event, eventUsers } = this.state;
     axios.post(`/api/events/${event.id}/invitations`, { user_id: user.id, event_id: event.id, accepted: true })
       .then(res => {
         this.setState({ joined: true, eventUsers: [{ ...res.data, image: user.image, name: user.name }, ...eventUsers] })
@@ -68,7 +65,7 @@ class EventView extends React.Component {
   };
 
   leaveEvent = () => {
-    const { event, joined, eventUsers } = this.state;
+    const { event, eventUsers } = this.state;
     var invite = eventUsers.filter(u => {
       if (u.user_id === this.props.auth.user.id) {
         return { ...u }
@@ -111,7 +108,7 @@ class EventView extends React.Component {
     return ( 
       this.state.comments.map(c => (
 
-      <Card fluid>
+      <Card key={`${c.id}`} fluid>
         <Card.Content>
           <Image
             floated='left'
@@ -137,7 +134,7 @@ class EventView extends React.Component {
         
           <div className="image-content"> 
           <div className='opacity-test'>
-            <img style={{zIndex: "999"}} src={this.state.event.image || building} className='background-image-events' />
+            <img style={{zIndex: "999"}} src={this.state.event.image || building} className='background-image-events' alt="ImageForEvent" />
           </div>
             
             <div  className="banner-event-name" >
