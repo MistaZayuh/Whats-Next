@@ -46,6 +46,8 @@
     justify-content: center;
     max-width: 705px;
     width: 100%;
-    border: solid black
+    border: solid 1px rgb(204, 204, 204);
+    border-radius: 5px;
+    
 }
 

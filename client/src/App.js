@@ -13,7 +13,6 @@ import Refresh from "./components/Refresh";
 import UserProfile from './components/UserProfile';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Switch, Route, } from 'react-router-dom';
-import { Container, } from "semantic-ui-react";
 import "../src/App.css";
 
 const App = () => (
@@ -22,7 +21,6 @@ const App = () => (
     <NavBar />
   </div>
     <FetchUser>
-      {/* <Container> */}
         <Switch>
           <Route exact path="/" component={Explore} />
           <Route exact path="/login" component={Login} />
@@ -36,7 +34,6 @@ const App = () => (
           <ProtectedRoute exact path="/users/:id/edit" component={UserForm} />
           <Route component={NoMatch} />
         </Switch>
-      {/* </Container> */}
     </FetchUser>
   </>
 )

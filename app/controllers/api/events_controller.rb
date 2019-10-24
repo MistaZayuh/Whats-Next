@@ -71,7 +71,7 @@ class Api::EventsController < ApplicationController
   end
 
   def explore
-    render json: Event.explore(params[:specificuserid])
+    render json: Event.explore(params[:page])
   end
 
   private

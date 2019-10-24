@@ -90,6 +90,10 @@
     position: relative;
   }
 
-
+ .entire-event-view {
+     position: absolute;
+     top: 0 !important;
+     width: 100%;
+ }
 
   
