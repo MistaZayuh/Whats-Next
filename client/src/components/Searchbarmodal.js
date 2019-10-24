@@ -13,6 +13,7 @@ class SearchBarModal extends React.Component {
     axios.get(`/api/event_search?search=${search}`)
       .then(res => {
         this.setState({ events: res.data, })
+debugger
       })
       .catch(err => {
         console.log(err)
