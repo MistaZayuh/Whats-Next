@@ -57,6 +57,7 @@ const ConnectedWhatsNext = (props) => (
 )
 
 const MyCardImage = styled(Card.Img)`
+    
     width: 650px;
     height: 200px;
     filter: blur(2.5px) brightness(60%);

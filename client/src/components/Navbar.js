@@ -3,6 +3,7 @@ import { AuthConsumer, } from "../providers/AuthProvider";
 import { Menu, Icon, Dropdown, Header, Button, } from 'semantic-ui-react';
 import { Link, withRouter, } from 'react-router-dom';
 import logo from "../images/logo.png";
+import logo_w from "../images/logo_w.png";
 import { Nav, Navbar, Image, Modal, } from "react-bootstrap";
 import EventFormModal from "./EventFormModal";
 import axios from 'axios';
@@ -27,13 +28,28 @@ class NavBar extends React.Component {
     
         if (user) {
       return (
-        <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px" }} position='right'>
+        <Menu.Menu style={{ paddingTop: "10px", paddingRight: "25px", paddingBottom: "10px", zIndex: "999", }} position='right'>
           <Header as='h4'>
             <Menu.Item>
+              
+                {this.props.location.pathname.match(/.events.[0-9]{1,}$/) ?
+              <>
               <Header as="h4">
-              <Icon onClick={ () => this.setState({showSearchModal: true}) } name="search" style={{paddingTop: "10px"}}/>
+              <Icon className="icon" color="grey" onClick={ () => this.setState({showSearchModal: true}) } name="search" style={{paddingTop: "10px",}}/>
               </Header>
+              <Button  color="grey" style={{opacity: "0.9"}} onClick={ () => this.setState({showEventModal: true})}>Create New Event</Button>
+              </>
+              :
+              <>
+              <Header as="h4">
+
+              <Icon color="black" onClick={ () => this.setState({showSearchModal: true}) } name="search" style={{paddingTop: "10px"}}/>
+              </Header>
+              
               <Button  color="blue" onClick={ () => this.setState({showEventModal: true})}>Create New Event</Button>
+
+            </>
+            }
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <Image  src={ user.image } roundedCircle />
             <Header.Content>
@@ -52,7 +68,7 @@ class NavBar extends React.Component {
       )
     } else {
       return (
-        <Menu.Menu position='right'>
+        <Menu.Menu style={{zIndex: "999"}} position='right'>
           <Link to='/login'>
             <Menu.Item
               id='login'
@@ -77,16 +93,15 @@ class NavBar extends React.Component {
     let searchModalClose = () => this.setState({ showSearchModal: false, })
     return (
       <>
-        <Menu secondary>
-          {this.props.auth.user ?
-          <Link to='/dashboard'>
-            <Image style={{width: "100px", height: "80px", paddingLeft: "25px" }} src={logo} />
+        <Menu style={{zIndex: "999"}} secondary>
+          <Link style={{zIndex: "999"}} to='/dashboard'>
+            {this.props.location.pathname.match(/.events.[0-9]{1,}$/) ?
+            <Image style={{ zIndex: "1000", width: "100px", height: "80px", paddingLeft: "25px" }} src={logo_w} />
+            :
+            <Image style={{ zIndex: "1000", width: "100px", height: "80px", paddingLeft: "25px" }} src={logo} />
+          }
           </Link>
-          :
-          <Link to='/'>
-            <Image style={{width: "100px", height: "80px", paddingLeft: "25px" }} src={logo} />
-          </Link>
-        }
+        
             { this.rightNavItems() }
         </Menu>
         <EventFormModal
