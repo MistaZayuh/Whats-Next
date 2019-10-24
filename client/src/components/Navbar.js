@@ -94,7 +94,7 @@ class NavBar extends React.Component {
     return (
       <>
         <Menu style={{zIndex: "999"}} secondary>
-          <Link style={{zIndex: "999"}} to='/dashboard'>
+          <Link style={{zIndex: "999"}} to='/'>
             {this.props.location.pathname.match(/.events.[0-9]{1,}$/) ?
             <Image style={{ zIndex: "1000", width: "100px", height: "80px", paddingLeft: "25px" }} src={logo_w} />
             :

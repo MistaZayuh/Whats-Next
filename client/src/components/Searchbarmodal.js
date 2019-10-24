@@ -19,9 +19,9 @@ class SearchBarModal extends React.Component {
       })
   };
 
-  eventSelected = (e) => {
-    this.setState({ events: [], })
-  }
+  // eventSelected = (e) => {
+  //   this.setState({events: []})
+  // }
 
   clearSearchState = () => {
     this.setState({events: []})
@@ -45,7 +45,7 @@ class SearchBarModal extends React.Component {
               <CardDeck>
                   {events.map(e => (
                     <div>
-                      <UpcomingSearch key={e.id} event={e} onHide={this.props.onHide} clearEvents={(e) => this.eventSelected(e)} />
+                      <UpcomingSearch key={e.id} event={e} onHide={this.props.onHide} />
                       <br/>
                     </div>
                   ))}
