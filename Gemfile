@@ -25,3 +25,8 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
 end
+
+# This was added to host on heroku -Isaiah
+group :production do
+  gem 'rails_12factor'
+end
