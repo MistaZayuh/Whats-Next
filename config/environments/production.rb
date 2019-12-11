@@ -16,6 +16,7 @@ Rails.application.configure do
 
   # I have added this to use live compiling for hosting on heroku -Isaiah
   config.assets.compile = true
+  config.public_file_server.enabled = true
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
